@@ -1,0 +1,97 @@
+stages:
+  - clang-format
+  - build_linux
+  - build_windows
+  - build_macOS
+#   - unit-tests
+
+
+image: unityci/editor:ubuntu-2021.3.16f1-base-1
+
+build_linux:
+  stage: build_linux
+  retry:
+    max: 2
+    when: runner_system_failure
+  before_script:
+    - apt-get -qq update && apt-get -qq install zip
+    - echo "$UNITY_CERT" > ./Unity_v2020.x.ulf
+    - unity-editor -quit -batchmode -quit -manualLicenseFile ./Unity_v2020.x.ulf || true
+  script:
+    - mkdir -p $CI_PROJECT_DIR/linux_build
+    - unity-editor  -quit -batchmode -projectPath $CI_PROJECT_DIR -buildLinux64Player $CI_PROJECT_DIR/linux_build/build.x86_64
+    - zip -r linux_build.zip $CI_PROJECT_DIR/linux_build/
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/linux_build/
+    expire_in: 1 week
+
+build_windows:
+  image:  unityci/editor:ubuntu-2021.3.16f1-windows-mono-1
+  stage: build_windows
+  retry:
+    max: 2
+    when: runner_system_failure
+  before_script:
+    - apt-get -qq update && apt-get -qq install zip
+    - echo "$UNITY_CERT" > ./Unity_v2020.x.ulf
+    - unity-editor  -quit -batchmode -quit -manualLicenseFile ./Unity_v2020.x.ulf || true
+  script:
+    - mkdir -p $CI_PROJECT_DIR/windows_build
+    - unity-editor -quit -batchmode -projectPath $CI_PROJECT_DIR -buildWindows64Player $CI_PROJECT_DIR/windows_build/build.exe
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/windows_build/
+    expire_in: 1 week
+
+# build_macOS:
+#   image:  unityci/editor:ubuntu-2021.3.16f1-mac-mono-1
+#   stage: build_macOS
+#   retry:
+#     max: 2
+#     when: runner_system_failure
+#   before_script:
+#     - apt-get -qq update && apt-get -qq install zip
+#     - echo "$UNITY_CERT" > ./Unity_v2020.x.ulf
+#     - unity-editor -nographics -quit -batchmode -quit -manualLicenseFile ./Unity_v2020.x.ulf || true
+#   script:
+#     - mkdir -p $CI_PROJECT_DIR/mac_build
+#     - unity-editor -nographics -quit -batchmode -projectPath $CI_PROJECT_DIR -buildOSXUniversalPlayer $CI_PROJECT_DIR/mac_build/build.app
+#   artifacts:
+#     paths:
+#       - $CI_PROJECT_DIR/mac_build/
+#     expire_in: 1 week
+
+# unit-tests:
+#   stage: unit-tests
+#   retry:
+#     max: 2
+#     when: runner_system_failure
+#   before_script:
+#     - apt-get -qq update && apt-get -qq install xsltproc
+#     - echo "$UNITY_CERT" > ./Unity_v2020.x.ulf
+#     - unity-editor -nographics -quit -batchmode -quit -manualLicenseFile ./Unity_v2020.x.ulf || true
+#   script:
+#     - unity-editor -runTests -nographics -batchmode -projectPath $CI_PROJECT_DIR -testPlatform PlayMode -testResults $CI_PROJECT_DIR/results.txt
+#   after_script:
+#     # Grab nunit to junit converter of github all credit goes to @pavio-liapota for this converter
+#     - wget https://raw.githubusercontent.com/nunit/nunit-transforms/master/nunit3-junit/nunit3-junit.xslt
+#     - xsltproc -o $CI_PROJECT_DIR/junit.xml nunit3-junit.xslt $CI_PROJECT_DIR/results.txt | true
+#   artifacts:
+#     when: always
+#     paths:
+#       - $CI_PROJECT_DIR/junit.xml
+#     reports:
+#       junit: junit.xml
+
+#clang-format:
+#  image: ubuntu:latest
+#  retry:
+#    max: 2
+#    when: runner_system_failure
+#  before_script: 
+#    - apt-get -qq update && apt-get -qq install clang-format-14
+#  stage: clang-format
+#  needs: []
+#  script:
+#    - clang-format-14 -i --dry-run `find -type f -name "*.cs" | grep -v Library` -Werror -style=file
