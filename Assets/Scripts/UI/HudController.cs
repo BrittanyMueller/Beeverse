@@ -7,11 +7,14 @@ public class HudController : MonoBehaviour {
 
   public GameObject menu;
   public GameObject credits;
+  public GameObject gameOver;
+
   public GameState state;
   // Start is called before the first frame update
   void Start() {
     menu.SetActive(false);
     credits.SetActive(false);
+    gameOver.SetActive(false);
   }
 
   public void Pause() {
@@ -31,4 +34,11 @@ public class HudController : MonoBehaviour {
   public void CloseCredits() { credits.SetActive(false); }
 
   public void Save() { state.Save(); }
+
+  // Game is over display screen and hide other GUIs
+  public void GameOver() {
+    credits.SetActive(false);
+    menu.SetActive(false);
+    gameOver.SetActive(true);
+  }
 }

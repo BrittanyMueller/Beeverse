@@ -4,46 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public struct BeeResources {
-  public int honey;
-  public int beeswax;
-  public int royalJelly;
-  public int nectar;
-  public int pollen;
-}
-
-public struct TimeTracker {
-  public int day;
-  public int hour;
-  public int minute;
-
-  public TimeTracker(int d, int h, int m) {
-    day = d;
-    hour = h;
-    minute = m;
-  }
-
-  public void AddMinutes(int delta) {
-    if (minute + delta > 60) {
-      minute = (minute + delta) % 60;
-
-      if (hour == 23) {
-        day++;
-        hour = 0;
-      } else {
-        hour++;
-      }
-    } else {
-      minute += delta;
-    }
-  }
-
-  public override string ToString() {
-    return "Day: " + day.ToString() + " " + hour.ToString().PadLeft(2, '0') +
-           ":" + minute.ToString().PadLeft(2, '0');
-    ;
-  }
-}
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
 
@@ -52,12 +13,18 @@ public class GameState : MonoBehaviour {
     get { return _currentTime; }
   }
 
-  private List<Bee> _bees = new List<Bee>();
+  public List<Bee> _bees = new List<Bee>();
   private QueenBee _queen;
+
+  public List<Honeycomb> _honeycombs = new List<Honeycomb>();
 
   // Controllers for GUIs
   public LogController logController;
   public ResourceController resourceController;
+
+  public HudController hudController;
+
+  public GameOverController gameOverController;
   public DayController dayController;
 
   private BeeResources resources;
@@ -68,7 +35,7 @@ public class GameState : MonoBehaviour {
   private int _day;
 
   // Game config settings
-  public int minutesPreSecond = 5;
+  public static int minutesPreSecond = 5;
 
   // This timer will be used to
   // update the clock every second
@@ -84,6 +51,11 @@ public class GameState : MonoBehaviour {
   }
   private bool _paused;
 
+  // stats for gameover screen
+  private int _totalBees;
+  private int _totalQueens;
+  private BeeResources _totalResources;
+
   // Start is called before the first frame update
   void Start() {
     _paused = false;
@@ -94,6 +66,8 @@ public class GameState : MonoBehaviour {
     _currentTime = new TimeTracker(1, 0, 0);
     _day = 0;
 
+    // Set default resources count
+    // todo tweak
     resources = new BeeResources();
     resources.beeswax = 123;
     resources.honey = 321;
@@ -102,7 +76,10 @@ public class GameState : MonoBehaviour {
     resources.royalJelly = 5;
     resourceController.UpdateResources(resources);
 
-    // Create the queen bee
+    // set init totals
+    _totalResources = resources;
+    _totalBees = _bees.Count;
+    _totalQueens = 1;
   }
 
   // Update is called once per frame
@@ -113,17 +90,44 @@ public class GameState : MonoBehaviour {
       _currentTime.AddMinutes(minutesPreSecond);
       // Update game UI with new time
       dayController.UpdateDate(_currentTime.ToString());
+
+      // Update all bees that time has passed
+      foreach (Bee bee in _bees) {
+        bee.UpdateTimeTick(minutesPreSecond);
+      }
     }
 
+    // Notify the logs a day has passed
     if (_day != _currentTime.day) {
       _day += 1;
       UpdateLog("Day " + _day.ToString());
       UpdateLog("> I heard you like jazz");
     }
 
-    if (_bees.Count == 0) {
-      // Big up lose game menu
+    // Remove all bees that have died
+    foreach (Bee bee in _bees) {
+      if (bee.isDead) {
+        StartCoroutine(RemoveBee(bee));
+        UpdateLog(">" + bee.beeName + " has died. rest in Bees");
+      }
     }
+    _bees.RemoveAll(bee => bee.isDead);
+
+    // Bring up Lose Menu
+    if (_bees.Count == 0) {
+      gameOverController.SetTotalBees(_totalBees);
+      gameOverController.SetTotalQueen(_totalQueens);
+      gameOverController.SetTotalResources(_totalResources);
+      gameOverController.SetTotalHoneycombs(_honeycombs.Count);
+      gameOverController.SetTotalDays(_currentTime.day);
+
+      hudController.GameOver();
+    }
+  }
+
+  IEnumerator RemoveBee(Bee bee) {
+    yield return new WaitForSeconds(10);
+    Destroy(bee.gameObject);
   }
 
   /****************************
@@ -131,9 +135,19 @@ public class GameState : MonoBehaviour {
    *****************************/
 
   // Tell everyone who cares the game is no longer paused
-  private void NotifyPausedChanged() {}
+  private void NotifyPausedChanged() {
+
+    if (_paused) {
+      Time.timeScale = 0;
+    } else {
+      Time.timeScale = 1;
+    }
+  }
 
   public void UpdateLog(String update) { logController.UpdateLog(update); }
 
   public void Save() { Debug.Log("Your game is saved.. jk not impl yet"); }
+
+  // Restarts the game into its default state
+  public void Restart() { SceneManager.LoadScene("SampleScene"); }
 }
