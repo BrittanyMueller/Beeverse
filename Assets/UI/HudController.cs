@@ -13,6 +13,7 @@ public class HudController : MonoBehaviour
     void Start()
     {
         menu.SetActive(false);
+        credits.SetActive(false);
     }
 
     // Update is called once per frame
