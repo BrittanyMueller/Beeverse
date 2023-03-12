@@ -4,12 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DayController : MonoBehaviour
-{
-    public TMP_Text Day;
+public class DayController : MonoBehaviour {
+  public TMP_Text Day;
 
-
-    public void UpdateDate(string newDate) {
-        Day.text = newDate;
-    }
+  public void UpdateDate(string newDate) { Day.text = newDate; }
 }
