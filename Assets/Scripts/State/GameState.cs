@@ -4,23 +4,72 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+public struct BeeResources {
+    public int honey;
+    public int beeswax;
+    public int royalJelly;
+    public int nectar;
+    public int pollen;
+}
+
+public struct TimeTracker {
+    public int day;
+    public int hour;
+    public int minute;
+
+    public TimeTracker( int d, int h, int m) {
+        day = d;
+        hour = h;
+        minute = m;
+    }
+
+    public void AddMinutes(int delta) {
+        if (minute + delta > 60) {
+            minute = (minute + delta) % 60;
+
+            if (hour == 23) {
+                day++;
+                hour = 0;
+            } else {
+                hour++;
+            }
+        } else {
+            minute += delta;
+        }
+    }
+
+    public override string ToString() {
+        return "Day: " + day.ToString() + " " + hour.ToString().PadLeft(2, '0') + ":" + minute.ToString().PadLeft(2, '0');;
+    }
+}
+
 public class GameState : MonoBehaviour
 {
 
-    private DateTime _currentTime;
-    public DateTime CurrentTime { get { return _currentTime; }}
+    private TimeTracker _currentTime;
+    public TimeTracker CurrentTime { get { return _currentTime; }}
 
-    
+    private List<Bee> _bees = new List<Bee>();
+    private QueenBee _queen;
 
+    // Controllers for GUIs
     public LogController logController;
+    public ResourceController resourceController;
+    public DayController dayController;
+
+    private BeeResources resources;
+
+    public int Day {
+        get { return _day; }
+    }
+    private int _day;
 
     // Game config settings
     public int minutesPreSecond = 5;
 
-
-
-    // todo remove
-    int previousSecond = 0;
+    // This timer will be used to 
+    // update the clock every second
+    private double _secondTimer;
 
     public bool Paused {
         get { return _paused; }
@@ -31,27 +80,45 @@ public class GameState : MonoBehaviour
         }
     }
     private bool _paused;
-    //todo add readonly property
 
 
     // Start is called before the first frame update
     void Start()
     {
         _paused = false;
-        _currentTime = new DateTime();
-        previousSecond = _currentTime.Minute;
+
+
+        _secondTimer = 1;
+
+        // Might change when saving comes in
+        _currentTime = new TimeTracker(1, 0 ,0);
+        _day = 0;
+
+        // Create the queen bee
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        _currentTime = _currentTime.AddMinutes(minutesPreSecond * Time.deltaTime);
+        _secondTimer -= Time.deltaTime;
+        if (_secondTimer <= 0 ){
+            _secondTimer = 1;
+            _currentTime.AddMinutes(minutesPreSecond);
+            // Update game UI with new time
+            dayController.UpdateDate(_currentTime.ToString());
 
-        if (previousSecond != _currentTime.Minute) {
-            UpdateLog(_currentTime.Minute.ToString());
-            previousSecond = _currentTime.Minute;
+        }
+
+        if (_day != _currentTime.day) {
+            _day += 1;
+            UpdateLog("Day " + _day.ToString());
+            UpdateLog("> I heard you like jazz");
         }
     
+        if (_bees.Count == 0) {
+            // Big up lose game menu
+        }
 
     }
 
