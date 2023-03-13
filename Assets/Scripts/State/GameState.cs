@@ -120,7 +120,7 @@ public class GameState : MonoBehaviour {
       gameOverController.SetTotalResources(_totalResources);
       gameOverController.SetTotalHoneycombs(_honeycombs.Count);
       gameOverController.SetTotalDays(_currentTime.day);
-
+      Paused = true;
       hudController.GameOver();
     }
   }

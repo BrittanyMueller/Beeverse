@@ -718,10 +718,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bees:
   - {fileID: 6384706251511933665}
+  _honeycombs: []
   logController: {fileID: 186268378}
   resourceController: {fileID: 517461030}
-  hudController: {fileID: 0}
-  gameOverController: {fileID: 0}
+  hudController: {fileID: 163843272}
+  gameOverController: {fileID: 1564348772}
   dayController: {fileID: 17496240}
 --- !u!4 &123721734
 Transform:
@@ -769,7 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 1550756687}
   credits: {fileID: 1595790757}
-  gameOver: {fileID: 0}
+  gameOver: {fileID: 1564348768}
   state: {fileID: 123721733}
 --- !u!4 &163843273
 Transform:
@@ -2949,13 +2950,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 123721732}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 123721733}
+        m_TargetAssemblyTypeName: GameState, Assembly-CSharp
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5311,8 +5312,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 148.64459, y: -60}
-  m_SizeDelta: {x: 235.2893, y: 50}
+  m_AnchoredPosition: {x: 156.09515, y: -60}
+  m_SizeDelta: {x: 250.1904, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1134371329
 MonoBehaviour:
@@ -5397,7 +5398,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -46.626587, w: 0}
+  m_margin: {x: 0, y: 0, z: 1.2386475, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6802,15 +6803,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888a7bf8d5194d45b80478cb36efd32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalBeesText: {fileID: 0}
-  totalQueensText: {fileID: 0}
-  totalDaysText: {fileID: 0}
-  totalHoneyText: {fileID: 0}
-  totalBeeswaxText: {fileID: 0}
-  totalRoyalJellyText: {fileID: 0}
-  totalPollenText: {fileID: 0}
-  totalNectarText: {fileID: 0}
-  totalHoneycombsText: {fileID: 0}
+  totalBeesText: {fileID: 228959186}
+  totalQueensText: {fileID: 649513838}
+  totalDaysText: {fileID: 1912982958}
+  totalHoneyText: {fileID: 761997435}
+  totalBeeswaxText: {fileID: 122482064}
+  totalRoyalJellyText: {fileID: 1560639070}
+  totalPollenText: {fileID: 1712956480}
+  totalNectarText: {fileID: 274237441}
+  totalHoneycombsText: {fileID: 114886128}
 --- !u!1 &1592979649
 GameObject:
   m_ObjectHideFlags: 0
