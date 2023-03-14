@@ -1,43 +1,45 @@
 public struct TimeTracker {
-  public int day;
-  public int hour;
-  public int minute;
+
+  public int day {
+    get { return _day; }
+  }
+  public int hour {
+    get { return _hour; }
+  }
+  public int minute {
+    get { return _minute; }
+  }
+  public int totalTime {
+    get { return _totalMinute; }
+  }
+
+  // Keep track of time cached after every change
+  private int _day;
+  private int _hour;
+  private int _minute;
+
+  // Keeps total time
+  private int _totalMinute;
 
   public TimeTracker(int d, int h, int m) {
-    day = d;
-    hour = h;
-    minute = m;
+    _totalMinute = m + 60 * h + d * 60 * 24;
+    CalcTimes();
   }
 
   public void AddMinutes(int delta) {
-    if (minute + delta > 60) {
-      minute = (minute + delta) % 60;
-
-      if (hour == 23) {
-        day++;
-        hour = 0;
-      } else {
-        hour++;
-      }
-    } else {
-      minute += delta;
-    }
+    _totalMinute += delta;
+    CalcTimes();
   }
 
   public void SubMinutes(int delta) {
-    if (minute - delta < 0) {
-      minute = (60 + minute - delta);
+    _totalMinute -= delta;
+    CalcTimes();
+  }
 
-      if (hour == 0) {
-        day--;
-        hour = 23;
-
-      } else {
-        hour--;
-      }
-    } else {
-      minute -= delta;
-    }
+  private void CalcTimes() {
+    _day = _totalMinute / 24 / 60;
+    _hour = (_totalMinute - day * 24 * 60) / 60;
+    _minute = _totalMinute - hour * 60 - day * 24 * 60;
   }
 
   public override string ToString() {

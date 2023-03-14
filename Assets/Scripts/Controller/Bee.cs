@@ -42,7 +42,7 @@ public class Bee : MonoBehaviour {
   public void UpdateTimeTick(int minutes) {
     _lifeSpan.SubMinutes(minutes);
 
-    if (_lifeSpan.day < 0 && !isDead) {
+    if (_lifeSpan.totalTime <= 0 && !isDead) {
       Die();
       isDead = true;
     }

@@ -21,11 +21,10 @@ public class GameState : MonoBehaviour {
   // Controllers for GUIs
   public LogController logController;
   public ResourceController resourceController;
-
   public HudController hudController;
-
   public GameOverController gameOverController;
   public DayController dayController;
+  public DebugController debugController;
 
   private BeeResources resources;
 
@@ -122,6 +121,10 @@ public class GameState : MonoBehaviour {
       gameOverController.SetTotalDays(_currentTime.day);
       Paused = true;
       hudController.GameOver();
+    }
+
+    if (Input.GetKeyDown(KeyCode.F1)) {
+      debugController.toggle();
     }
   }
 
