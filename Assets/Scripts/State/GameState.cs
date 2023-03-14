@@ -14,6 +14,7 @@ public class GameState : MonoBehaviour {
   }
 
   public List<Bee> _bees = new List<Bee>();
+  private List<Bee> _deadBees = new List<Bee>();
   private QueenBee _queen;
 
   public List<Honeycomb> _honeycombs = new List<Honeycomb>();
@@ -110,18 +111,11 @@ public class GameState : MonoBehaviour {
         UpdateLog(">" + bee.beeName + " has died. rest in Bees");
       }
     }
-    _bees.RemoveAll(bee => bee.isDead);
+    _bees.RemoveAll(bee {
+      _deadBees.Add(bee);
+      return bee.isDead;
+    });
 
-    // Bring up Lose Menu
-    if (_bees.Count == 0) {
-      gameOverController.SetTotalBees(_totalBees);
-      gameOverController.SetTotalQueen(_totalQueens);
-      gameOverController.SetTotalResources(_totalResources);
-      gameOverController.SetTotalHoneycombs(_honeycombs.Count);
-      gameOverController.SetTotalDays(_currentTime.day);
-      Paused = true;
-      hudController.GameOver();
-    }
 
     if (Input.GetKeyDown(KeyCode.F1)) {
       debugController.toggle();
@@ -131,6 +125,18 @@ public class GameState : MonoBehaviour {
   IEnumerator RemoveBee(Bee bee) {
     yield return new WaitForSeconds(10);
     Destroy(bee.gameObject);
+
+    _deadBees.Remove(bee);
+    // Bring up Lose Menu
+    if (_bees.Count == 0 && _deadBees.count == 0) {
+      gameOverController.SetTotalBees(_totalBees);
+      gameOverController.SetTotalQueen(_totalQueens);
+      gameOverController.SetTotalResources(_totalResources);
+      gameOverController.SetTotalHoneycombs(_honeycombs.Count);
+      gameOverController.SetTotalDays(_currentTime.day);
+      Paused = true;
+      hudController.GameOver();
+    }
   }
 
   /****************************

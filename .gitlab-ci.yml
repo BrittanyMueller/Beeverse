@@ -1,3 +1,7 @@
+
+variables:
+  - GIT_CLEAN_FLAGS: none
+
 stages:
   - clang-format
   - build_linux
