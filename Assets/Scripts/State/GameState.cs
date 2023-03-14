@@ -111,7 +111,7 @@ public class GameState : MonoBehaviour {
         UpdateLog(">" + bee.beeName + " has died. rest in Bees");
       }
     }
-    _bees.RemoveAll(bee {
+    _bees.RemoveAll((Bee bee)  => {
       _deadBees.Add(bee);
       return bee.isDead;
     });
@@ -128,7 +128,7 @@ public class GameState : MonoBehaviour {
 
     _deadBees.Remove(bee);
     // Bring up Lose Menu
-    if (_bees.Count == 0 && _deadBees.count == 0) {
+    if (_bees.Count == 0 && _deadBees.Count == 0) {
       gameOverController.SetTotalBees(_totalBees);
       gameOverController.SetTotalQueen(_totalQueens);
       gameOverController.SetTotalResources(_totalResources);
