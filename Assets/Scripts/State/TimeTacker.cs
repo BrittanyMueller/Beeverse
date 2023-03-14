@@ -1,4 +1,4 @@
-public struct TimeTracker {
+public class TimeTracker {
 
   public int day {
     get { return _day; }
@@ -38,8 +38,8 @@ public struct TimeTracker {
 
   private void CalcTimes() {
     _day = _totalMinute / 24 / 60;
-    _hour = (_totalMinute - day * 24 * 60) / 60;
-    _minute = _totalMinute - hour * 60 - day * 24 * 60;
+    _hour = (_totalMinute - _day * 24 * 60) / 60;
+    _minute = _totalMinute - _hour * 60 - _day * 24 * 60;
   }
 
   public override string ToString() {
