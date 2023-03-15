@@ -158,5 +158,9 @@ public class GameState : MonoBehaviour {
   public void Save() { Debug.Log("Your game is saved.. jk not impl yet"); }
 
   // Restarts the game into its default state
-  public void Restart() { SceneManager.LoadScene("SampleScene"); }
+  public void Restart()
+  {
+    Paused = false;
+    SceneManager.LoadScene("SampleScene");
+  }
 }
