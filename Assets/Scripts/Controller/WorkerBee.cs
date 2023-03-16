@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class WorkerBee : Bee {
   // Start is called before the first frame update
-  protected override void Start() {
-    base.Start();
-  }
+  protected override void Start() { base.Start(); }
 
   // Update is called once per frame
-  protected void Update() {  }
+  protected void Update() {}
 }

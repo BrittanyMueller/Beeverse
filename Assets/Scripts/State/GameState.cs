@@ -111,13 +111,14 @@ public class GameState : MonoBehaviour {
         UpdateLog(">" + bee.beeName + " has died. rest in Bees");
       }
     }
-    _bees.RemoveAll((Bee bee)  => {
-      if (bee.isDead) _deadBees++;
+    _bees.RemoveAll((Bee bee) => {
+      if (bee.isDead)
+        _deadBees++;
       return bee.isDead;
     });
 
-        // Bring up Lose Menu
-    if (_bees.Count == 0  && _deadBees == 0) {
+    // Bring up Lose Menu
+    if (_bees.Count == 0 && _deadBees == 0) {
       gameOverController.SetTotalBees(_totalBees);
       gameOverController.SetTotalQueen(_totalQueens);
       gameOverController.SetTotalResources(_totalResources);
@@ -126,9 +127,6 @@ public class GameState : MonoBehaviour {
       Paused = true;
       hudController.GameOver();
     }
-
-
-    
   }
 
   void Update() {
@@ -162,9 +160,8 @@ public class GameState : MonoBehaviour {
   public void Save() { Debug.Log("Your game is saved.. jk not impl yet"); }
 
   // Restarts the game into its default state
-  public void Restart()
-  {
+  public void Restart() {
     Paused = false;
-    SceneManager.LoadScene("SampleScene");
+    SceneManager.LoadScene("Beeverse");
   }
 }
