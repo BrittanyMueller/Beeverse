@@ -128,6 +128,10 @@ public class GameState : MonoBehaviour {
     }
 
 
+    
+  }
+
+  void Update() {
     if (Input.GetKeyDown(KeyCode.F1)) {
       debugController.toggle();
     }
