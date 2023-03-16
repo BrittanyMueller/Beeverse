@@ -101,7 +101,7 @@ public class GameState : MonoBehaviour {
     if (_day != _currentTime.day) {
       _day += 1;
       UpdateLog("Day " + _day.ToString());
-      UpdateLog("> I heard you like jazz");
+      UpdateLog("> " + BeeStuff.GetRandomPun());
     }
 
     // Remove all bees that have died
