@@ -23,12 +23,17 @@ build_linux:
     - unity-editor -quit -batchmode -quit -manualLicenseFile ./Unity_v2020.x.ulf || true
   script:
     - mkdir -p $CI_PROJECT_DIR/linux_build
-    - unity-editor  -quit -batchmode -projectPath $CI_PROJECT_DIR -buildLinux64Player $CI_PROJECT_DIR/linux_build/build.x86_64
+    - unity-editor  -quit -batchmode -projectPath $CI_PROJECT_DIR -buildLinux64Player $CI_PROJECT_DIR/linux_build/build.x86_64 -logFile debug/log.txt
     - zip -r linux_build.zip $CI_PROJECT_DIR/linux_build/
   artifacts:
     paths:
       - $CI_PROJECT_DIR/linux_build/
     expire_in: 1 week
+  # Enable for debug
+  # artifacts:
+  #   when: on_failure
+  #   paths:
+  #     - debug/
 
 build_windows:
   image:  unityci/editor:ubuntu-2021.3.16f1-windows-mono-1
