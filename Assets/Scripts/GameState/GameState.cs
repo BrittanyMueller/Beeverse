@@ -13,7 +13,7 @@ public class GameState : MonoBehaviour {
     get { return _currentTime; }
   }
 
-  public List<Bee> _bees = new List<Bee>();
+  public List<WorkerBee> _bees;
   private int _deadBees = 0;
   private QueenBee _queen;
 
@@ -80,7 +80,27 @@ public class GameState : MonoBehaviour {
     _totalResources = resources;
     _totalBees = _bees.Count;
     _totalQueens = 1;
+
+    // Set task to queen honeycomb for bees
+    StartCoroutine(TestBeeTask());
   }
+
+  IEnumerator TestBeeTask() {
+    // Set first task
+    yield return new WaitForSeconds(5);
+    _bees[0].Task = new WorkerBeeTask("Queen bee", _honeycombs[0].workSpots[0].position);
+    _bees[1].Task = new WorkerBeeTask("Queen bee", _honeycombs[0].workSpots[1].position);
+    
+    // Work for a bit then set new task for bee 0
+    yield return new WaitForSeconds(10);
+    _bees[0].Task = new WorkerBeeTask("Queen bee", _honeycombs[10].workSpots[0].position);
+    
+    // Work for a bit then set new task for bee 1
+    yield return new WaitForSeconds(5);
+    _bees[1].Task = new WorkerBeeTask("Queen bee", _honeycombs[6].workSpots[0].position);
+  }
+  
+  
 
   // Update is called once per frame
   void FixedUpdate() {
@@ -111,7 +131,7 @@ public class GameState : MonoBehaviour {
         UpdateLog(">" + bee.beeName + " has died. rest in Bees");
       }
     }
-    _bees.RemoveAll((Bee bee) => {
+    _bees.RemoveAll((WorkerBee bee) => {
       if (bee.isDead)
         _deadBees++;
       return bee.isDead;
