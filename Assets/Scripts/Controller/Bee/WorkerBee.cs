@@ -26,12 +26,26 @@ public class WorkerBee : Bee {
 
   // Target where the bee should move to
   public WorkerBeeTask _task = null;
+
+  // TODO cleanup
   public WorkerBeeTask Task {
     get { return _task; }
     set {
       // set only if it already had a task
-      if (_task != null)
+      if (_task != null) {
+
         taskChanged = true;
+        
+        // remove from old task
+        switch (_task.taskType) {
+        case WorkerBeeTask.TaskType.Forager:
+          // set old flower spot to null
+          flower.bees[_task.workerSpotIndex] = null;
+          flower = null;
+          break;
+        }
+      }
+
       _task = value;
     }
   }
@@ -134,13 +148,12 @@ public class WorkerBee : Bee {
     // Make sure we are touching the floor
     if (!controller.isGrounded)
       controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
-    
-    switch(_task.taskType) {
-      case WorkerBeeTask.TaskType.Forager:
-        _state.AddPollen(flower.PollenPerSecond * Time.deltaTime);
-        _state.AddNectar(flower.NectarPerSecond * Time.deltaTime);
-      break;
 
+    switch (_task.taskType) {
+    case WorkerBeeTask.TaskType.Forager:
+      _state.AddPollen(flower.PollenPerSecond * Time.deltaTime);
+      _state.AddNectar(flower.NectarPerSecond * Time.deltaTime);
+      break;
     }
   }
 
@@ -153,8 +166,10 @@ public class WorkerBee : Bee {
     controller.Move(new Vector3(0, flySpeed * Time.deltaTime, 0));
   }
 
-  public void ChangeState(WorkerBeeState newState) { currentState = newState;
-  Debug.Log(currentState.GetType().Name); }
+  public void ChangeState(WorkerBeeState newState) {
+    currentState = newState;
+    Debug.Log(currentState.GetType().Name);
+  }
 
   /** Movement helpers */
   public void RotateToTask(bool rotateDown = false) {

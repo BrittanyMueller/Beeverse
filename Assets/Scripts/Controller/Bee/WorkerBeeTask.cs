@@ -14,8 +14,12 @@ public class WorkerBeeTask {
   public TaskType taskType;
   public Vector3 taskLocation;
 
-  public WorkerBeeTask(TaskType task, Vector3 location) {
+  // the spot they currently hold in the int array
+  public int workerSpotIndex;
+
+  public WorkerBeeTask(TaskType task, Vector3 location, int index) {
     this.taskType = task;
     taskLocation = location;
+    workerSpotIndex = index;
   }
 }

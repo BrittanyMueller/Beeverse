@@ -34,23 +34,21 @@ public class FlowerUIController : MonoBehaviour {
       children.ForEach(child => Destroy(child));
     }
 
-    int index = 0;
-    // readd list
-    foreach (WorkerBee bee in _curPatch.bees) {
-
+    for (int index = 0; index < _curPatch.bees.Count; index++) {
       GameObject obj =
           Instantiate(beeSlot, new Vector3(0, 0, 0), Quaternion.identity);
       obj.transform.SetParent(beeList.transform);
 
-      // set info
+      // set info about the bee. If the spot is empty just make the text <EMPTY>
       obj.GetComponentsInChildren<TMP_Text>()[0].text =
-          (bee != null) ? bee.beeName : "<EMPTY>";
-      // set onclick
+          (_curPatch.bees[index] != null) ? _curPatch.bees[index].beeName
+                                          : "<EMPTY>";
+
+      // set onclick with the index of the bee so we can backtrack which bee was
+      // chosen Need a tmp variable because c# sucks
+      int tmpIndex = index;
       obj.GetComponentsInChildren<Button>()[0].onClick.AddListener(
-          () => {
-            int newIndex = index;
-            SelectBee(_curPatch.bees.IndexOf(bee));
-    });
+          () => { SelectBee(tmpIndex); });
     }
 
     gameObject.SetActive(true);

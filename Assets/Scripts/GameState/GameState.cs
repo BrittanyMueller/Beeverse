@@ -83,10 +83,7 @@ public class GameState : MonoBehaviour {
     _totalResources = resources;
     _totalBees = _bees.Count;
     _totalQueens = 1;
-
   }
-
-  
 
   // Update is called once per frame
   void FixedUpdate() {
@@ -175,13 +172,8 @@ public class GameState : MonoBehaviour {
     SceneManager.LoadScene("Beeverse");
   }
 
-
   /** Functions for setting resources */
-  public void AddPollen(float pollen) {
-    resources.pollen += pollen;
-  }
+  public void AddPollen(float pollen) { resources.pollen += pollen; }
 
-  public void AddNectar(float nectar) {
-    resources.nectar += nectar;
-  }
+  public void AddNectar(float nectar) { resources.nectar += nectar; }
 }
