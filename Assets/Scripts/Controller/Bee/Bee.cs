@@ -16,6 +16,10 @@ public class Bee : MonoBehaviour {
   public bool IsDead {
     get { return _lifeSpan.totalTime <= 0; }
   }
+
+  public int AgeInDays {
+    get { return lifeSpanInDays - _lifeSpan.day; }
+  }
   public int lifeSpanInDays;
 
   // Status of the bee needed for gamestate

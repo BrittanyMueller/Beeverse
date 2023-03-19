@@ -16,7 +16,6 @@ public class WorkerBee : Bee {
   public GameObject _rightEyeDead;
   public GameObject _frown;
 
-
   // Movement variables
   private float _rotationSpeed = 1f;
   private float flySpeed = 10f;
@@ -32,7 +31,6 @@ public class WorkerBee : Bee {
       if (_task != null)
         taskChanged = true;
       _task = value;
-
     }
   }
   public bool taskChanged = false;
@@ -69,10 +67,7 @@ public class WorkerBee : Bee {
   }
 
   // Update is called once per frame
-  protected void Update() {
-    currentState.Execute(this);
-
-  }
+  protected void Update() { currentState.Execute(this); }
 
   /** States*/
   public void Die() {
@@ -92,13 +87,13 @@ public class WorkerBee : Bee {
       _leftEyeDead.SetActive(true);
       _rightEyeDead.SetActive(true);
     } else {
-      controller.Move(new Vector3(0,-0.1f, 0));
+      controller.Move(new Vector3(0, -0.1f, 0));
     }
   }
 
-  public void Idle() { 
+  public void Idle() {
     _anim.speed = 1f;
-    _anim.SetBool("Flying", true); 
+    _anim.SetBool("Flying", true);
   }
 
   public void TravelToTask() {
@@ -110,19 +105,18 @@ public class WorkerBee : Bee {
     Vector3 forwardVec = transform.forward;
     taskBeeVec.y = 0;
     forwardVec.y = 0;
-    if ((Vector3.Angle(taskBeeVec, forwardVec) <
-         10)) {
-      controller.Move(transform.TransformDirection(Vector3.forward) * flySpeed * Time.deltaTime);
+    if ((Vector3.Angle(taskBeeVec, forwardVec) < 10)) {
+      controller.Move(transform.TransformDirection(Vector3.forward) * flySpeed *
+                      Time.deltaTime);
     }
   }
 
   public void LandAtTask() {
     RotateToTask(true);
     _anim.speed = 0.5f;
-    
+
     // fly straight down
-    controller.Move( new Vector3(0, -flySpeed * Time.deltaTime,0));
-    
+    controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
   }
 
   public void Work() {
@@ -131,9 +125,8 @@ public class WorkerBee : Bee {
     _anim.SetBool("Working", true);
 
     // Make sure we are touching the floor
-    if(!controller.isGrounded)
-      controller.Move( new Vector3(0, -flySpeed * Time.deltaTime,0));
-
+    if (!controller.isGrounded)
+      controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
   }
 
   public void TakeOff() {
@@ -141,9 +134,8 @@ public class WorkerBee : Bee {
     _anim.SetBool("Flying", true);
     _anim.SetBool("Working", false);
 
-
     // fly straight up
-    controller.Move( new Vector3(0, flySpeed * Time.deltaTime,0));
+    controller.Move(new Vector3(0, flySpeed * Time.deltaTime, 0));
   }
 
   public void ChangeState(WorkerBeeState newState) { currentState = newState; }
