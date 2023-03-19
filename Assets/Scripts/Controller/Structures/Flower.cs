@@ -9,6 +9,10 @@ public class Flower : MonoBehaviour {
 
   public FlowerUIController _controller;
 
+  public float NectarPerSecond = 1;
+  public float PollenPerSecond = 1;
+
+
   // Start is called before the first frame update
   void Start() {
     foreach (var _ in flowerLocations) {
@@ -27,11 +31,14 @@ public class Flower : MonoBehaviour {
   public void SetWorker(WorkerBee bee, int index) {
     var oldBee = bees[index];
     if (oldBee != null) {
-        bee.Task = null;
       // tell be to drop task
+        oldBee.Task = null;
+        oldBee.flower = null;
     }
 
     bees[index] = bee;
+
+    bee.flower = this;
 
     bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.Forager,
                                  flowerLocations[index].position);

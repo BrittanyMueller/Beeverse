@@ -133,6 +133,8 @@ public class GameState : MonoBehaviour {
       Paused = true;
       hudController.GameOver();
     }
+
+    resourceController.UpdateResources(resources);
   }
 
   void Update() {
@@ -171,5 +173,15 @@ public class GameState : MonoBehaviour {
   public void Restart() {
     Paused = false;
     SceneManager.LoadScene("Beeverse");
+  }
+
+
+  /** Functions for setting resources */
+  public void AddPollen(float pollen) {
+    resources.pollen += pollen;
+  }
+
+  public void AddNectar(float nectar) {
+    resources.nectar += nectar;
   }
 }

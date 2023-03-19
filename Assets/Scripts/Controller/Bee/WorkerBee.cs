@@ -22,6 +22,8 @@ public class WorkerBee : Bee {
   public float flyThreshold = 10f;
   private Vector3 curForward;
 
+  private GameState _state;
+
   // Target where the bee should move to
   public WorkerBeeTask _task = null;
   public WorkerBeeTask Task {
@@ -48,7 +50,7 @@ public class WorkerBee : Bee {
   public bool hasLanded {
     get {
       var distance = Task.taskLocation - transform.position;
-      return distance.sqrMagnitude < 10; // basically on task
+      return distance.sqrMagnitude < 20; // basically on task
     }
   }
 
@@ -58,11 +60,16 @@ public class WorkerBee : Bee {
     }
   }
 
+  // Objects for job
+  public Flower flower;
+
   // Start is called before the first frame update
   protected override void Start() {
     base.Start();
     _anim = gameObject.GetComponentsInChildren<Animator>()[0];
     controller = gameObject.GetComponent<CharacterController>();
+    _state = GameObject.Find("GameState").GetComponent<GameState>();
+
     ChangeState(new WorkerBeeIdleState());
   }
 
@@ -127,6 +134,14 @@ public class WorkerBee : Bee {
     // Make sure we are touching the floor
     if (!controller.isGrounded)
       controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
+    
+    switch(_task.taskType) {
+      case WorkerBeeTask.TaskType.Forager:
+        _state.AddPollen(flower.PollenPerSecond * Time.deltaTime);
+        _state.AddNectar(flower.NectarPerSecond * Time.deltaTime);
+      break;
+
+    }
   }
 
   public void TakeOff() {
@@ -138,7 +153,8 @@ public class WorkerBee : Bee {
     controller.Move(new Vector3(0, flySpeed * Time.deltaTime, 0));
   }
 
-  public void ChangeState(WorkerBeeState newState) { currentState = newState; }
+  public void ChangeState(WorkerBeeState newState) { currentState = newState;
+  Debug.Log(currentState.GetType().Name); }
 
   /** Movement helpers */
   public void RotateToTask(bool rotateDown = false) {

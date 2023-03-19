@@ -47,7 +47,10 @@ public class FlowerUIController : MonoBehaviour {
           (bee != null) ? bee.beeName : "<EMPTY>";
       // set onclick
       obj.GetComponentsInChildren<Button>()[0].onClick.AddListener(
-          () => SelectBee(index));
+          () => {
+            int newIndex = index;
+            SelectBee(_curPatch.bees.IndexOf(bee));
+    });
     }
 
     gameObject.SetActive(true);
@@ -59,6 +62,7 @@ public class FlowerUIController : MonoBehaviour {
   }
 
   public void SelectBee(int index) {
+    Debug.Log(index);
     // Open up the select bee menu given the index
     // and a references to this so it can return
     selectBee.Show(index, (WorkerBee bee) => {
