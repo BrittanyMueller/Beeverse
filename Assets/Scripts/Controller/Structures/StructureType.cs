@@ -4,6 +4,6 @@
         HoneyFactory,
         BeeswaxFactory,
         RoyalJellyFactory,
-        Nursary,
+        Nursery,
         Building
     }

@@ -32,6 +32,9 @@ public class GameState : MonoBehaviour {
   public DebugController debugController;
 
   private BeeResources resources;
+  
+  // generator to create honeycombs
+  public HoneycombGenerator honeycombGenerator;
 
   public int Day {
     get { return _day; }
@@ -170,6 +173,13 @@ public class GameState : MonoBehaviour {
   public void Restart() {
     Paused = false;
     SceneManager.LoadScene("Beeverse");
+  }
+  
+  public void CreateHoneycomb(Vector3 pos, Honeycomb.HoneycombType type) {
+    // Double check you can afford it TODO
+    honeycombGenerator.CreateHoneycomb(pos, type);
+    honeycombGenerator.HideBuildingHints();
+    
   }
 
   /** Functions for setting resources */

@@ -99,6 +99,9 @@ MonoBehaviour:
   - {fileID: 4771240711733357035}
   - {fileID: 6452925643731612516}
   - {fileID: 716040794834973063}
+  type: 0
+  built: 0
+  buildProgress: 0
 --- !u!1 &5450449051212269317
 GameObject:
   m_ObjectHideFlags: 0

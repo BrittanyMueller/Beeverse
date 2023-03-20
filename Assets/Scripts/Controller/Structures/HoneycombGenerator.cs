@@ -5,12 +5,19 @@ using UnityEngine;
 public class HoneycombGenerator : MonoBehaviour {
 
   public GameObject honeycomb;
+  public GameObject honeycombHint;
   public GameState state;
 
   // Special bool that is used to autogenerate honeycombs
   // if it is in the menu
   public bool inMenu = false;
   private List<GameObject> _menuGeneratedHoneycombs = new List<GameObject>();
+  
+  // Holds object generated from showing hints
+  // they should be created with CreateHoneycombHint and removed
+  // with RemoveHoneycombHint. don't edit manually
+  private List<GameObject> _honeycombHintObjects = new List<GameObject>();
+
 
   private float _verticalOffset;
   private float _horizontalOffset;
@@ -42,7 +49,7 @@ public class HoneycombGenerator : MonoBehaviour {
     var rand = new System.Random();
     while (true) {
       yield return new WaitForSeconds(1);
-      CreateHoneycomb(openList[rand.Next(0, openList.Count)]);
+      CreateHoneycomb(openList[rand.Next(0, openList.Count)], Honeycomb.HoneycombType.QueenNest);
     }
   }
 
@@ -77,8 +84,7 @@ public class HoneycombGenerator : MonoBehaviour {
     }
   }
 
-  private void CreateHoneycomb(Vector3 offset) { // take type of honeycombs
-    var pos = honeycomb.transform.position;
+  public void CreateHoneycomb(Vector3 offset, Honeycomb.HoneycombType type) { // take type of honeycombs
     GameObject newHoneycomb =
         Instantiate(honeycomb, offset, honeycomb.transform.rotation);
     GenerateAvailablePositions(offset);
@@ -89,7 +95,6 @@ public class HoneycombGenerator : MonoBehaviour {
     // else add it to the gamestate
     if (inMenu) {
       _menuGeneratedHoneycombs.Add(newHoneycomb);
-
       if (_menuGeneratedHoneycombs.Count > 100) {
         // reset everything after 100 have been generated
         openList.Clear();
@@ -101,7 +106,24 @@ public class HoneycombGenerator : MonoBehaviour {
         }
       }
     } else {
-      state._honeycombs.Add(newHoneycomb.GetComponent<Honeycomb>());
+        state._honeycombs.Add(newHoneycomb.GetComponent<Honeycomb>());
     }
+  }
+
+  public void ShowBuildingHints(int type) {
+      foreach (var pos in openList) {
+          GameObject hintObj = Instantiate(honeycombHint, pos, honeycomb.transform.rotation);
+          HoneycombHint hint = hintObj.GetComponent<HoneycombHint>();
+          hint.state = state;
+          hint.type = (Honeycomb.HoneycombType)type;
+          _honeycombHintObjects.Add(hintObj);
+      }
+  }
+
+  public void HideBuildingHints() {
+      while (_honeycombHintObjects.Count != 0) {
+          Destroy(_honeycombHintObjects[0]);
+          _honeycombHintObjects.RemoveAt(0);
+      }
   }
 }
