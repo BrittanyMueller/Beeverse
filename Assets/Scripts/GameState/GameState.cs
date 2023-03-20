@@ -15,9 +15,13 @@ public class GameState : MonoBehaviour {
 
   public List<WorkerBee> _bees;
   private int _deadBees = 0;
-  private QueenBee _queen;
+  public QueenBee _queen;
 
   public List<Honeycomb> _honeycombs = new List<Honeycomb>();
+  // Queen honeycomb will always be the first one generated
+  public Honeycomb QueenHoneycomb {
+    get { return _honeycombs[0]; }
+  }
 
   // Controllers for GUIs
   public LogController logController;
@@ -67,40 +71,19 @@ public class GameState : MonoBehaviour {
     _day = 0;
 
     // Set default resources count
-    // todo tweak
     resources = new BeeResources();
-    resources.beeswax = 123;
-    resources.honey = 321;
-    resources.nectar = 500;
-    resources.pollen = 500;
-    resources.royalJelly = 5;
+    resources.beeswax = 0;
+    resources.honey = 0;
+    resources.nectar = 0;
+    resources.pollen = 0;
+    resources.royalJelly = 0;
     resourceController.UpdateResources(resources);
 
     // set init totals
     _totalResources = resources;
     _totalBees = _bees.Count;
     _totalQueens = 1;
-
-    // Set task to queen honeycomb for bees
-    StartCoroutine(TestBeeTask());
   }
-
-  IEnumerator TestBeeTask() {
-    // Set first task
-    yield return new WaitForSeconds(5);
-    _bees[0].Task = new WorkerBeeTask("Queen bee", _honeycombs[0].workSpots[0].position);
-    _bees[1].Task = new WorkerBeeTask("Queen bee", _honeycombs[0].workSpots[1].position);
-    
-    // Work for a bit then set new task for bee 0
-    yield return new WaitForSeconds(10);
-    _bees[0].Task = new WorkerBeeTask("Queen bee", _honeycombs[10].workSpots[0].position);
-    
-    // Work for a bit then set new task for bee 1
-    yield return new WaitForSeconds(5);
-    _bees[1].Task = new WorkerBeeTask("Queen bee", _honeycombs[6].workSpots[0].position);
-  }
-  
-  
 
   // Update is called once per frame
   void FixedUpdate() {
@@ -147,6 +130,8 @@ public class GameState : MonoBehaviour {
       Paused = true;
       hudController.GameOver();
     }
+
+    resourceController.UpdateResources(resources);
   }
 
   void Update() {
@@ -175,6 +160,8 @@ public class GameState : MonoBehaviour {
     }
   }
 
+  // Update the log with information
+
   public void UpdateLog(String update) { logController.UpdateLog(update); }
 
   public void Save() { Debug.Log("Your game is saved.. jk not impl yet"); }
@@ -184,4 +171,9 @@ public class GameState : MonoBehaviour {
     Paused = false;
     SceneManager.LoadScene("Beeverse");
   }
+
+  /** Functions for setting resources */
+  public void AddPollen(float pollen) { resources.pollen += pollen; }
+
+  public void AddNectar(float nectar) { resources.nectar += nectar; }
 }

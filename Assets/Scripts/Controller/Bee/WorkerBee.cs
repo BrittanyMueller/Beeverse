@@ -16,23 +16,61 @@ public class WorkerBee : Bee {
   public GameObject _rightEyeDead;
   public GameObject _frown;
 
-
   // Movement variables
   private float _rotationSpeed = 1f;
   private float flySpeed = 10f;
   public float flyThreshold = 10f;
   private Vector3 curForward;
 
+  private GameState _state;
+
   // Target where the bee should move to
   public WorkerBeeTask _task = null;
+
+  public string jobTitle {
+    get {
+      if (_task == null) {
+        return "Bum";
+      }
+
+      switch (_task.taskType) {
+        case WorkerBeeTask.TaskType.Builder:
+          return "Builder";
+        case WorkerBeeTask.TaskType.Forager:
+          return "Forager";
+        case WorkerBeeTask.TaskType.Nurse:
+          return "Nurse";
+        case WorkerBeeTask.TaskType.BeeswaxFactory:
+          return "Beeswax Engineer";
+        case WorkerBeeTask.TaskType.RoyalJellyFactory:
+          return "Royal Jelly Tech";
+        case WorkerBeeTask.TaskType.HoneyFactory:
+          return "Honey Enjoyer";
+      }
+
+      return "NULL";
+    }
+  }
+  // TODO cleanup
   public WorkerBeeTask Task {
     get { return _task; }
     set {
       // set only if it already had a task
-      if (_task != null)
-        taskChanged = true;
-      _task = value;
+      if (_task != null) {
 
+        taskChanged = true;
+        
+        // remove from old task
+        switch (_task.taskType) {
+        case WorkerBeeTask.TaskType.Forager:
+          // set old flower spot to null
+          flower.bees[_task.workerSpotIndex] = null;
+          flower = null;
+          break;
+        }
+      }
+
+      _task = value;
     }
   }
   public bool taskChanged = false;
@@ -50,7 +88,7 @@ public class WorkerBee : Bee {
   public bool hasLanded {
     get {
       var distance = Task.taskLocation - transform.position;
-      return distance.sqrMagnitude < 10; // basically on task
+      return distance.sqrMagnitude < 20; // basically on task
     }
   }
 
@@ -60,19 +98,21 @@ public class WorkerBee : Bee {
     }
   }
 
+  // Objects for job
+  public Flower flower;
+
   // Start is called before the first frame update
   protected override void Start() {
     base.Start();
     _anim = gameObject.GetComponentsInChildren<Animator>()[0];
     controller = gameObject.GetComponent<CharacterController>();
+    _state = GameObject.Find("GameState").GetComponent<GameState>();
+
     ChangeState(new WorkerBeeIdleState());
   }
 
   // Update is called once per frame
-  protected void Update() {
-    currentState.Execute(this);
-
-  }
+  protected void Update() { currentState.Execute(this); }
 
   /** States*/
   public void Die() {
@@ -92,13 +132,13 @@ public class WorkerBee : Bee {
       _leftEyeDead.SetActive(true);
       _rightEyeDead.SetActive(true);
     } else {
-      controller.Move(new Vector3(0,-0.1f, 0));
+      controller.Move(new Vector3(0, -0.1f, 0));
     }
   }
 
-  public void Idle() { 
+  public void Idle() {
     _anim.speed = 1f;
-    _anim.SetBool("Flying", true); 
+    _anim.SetBool("Flying", true);
   }
 
   public void TravelToTask() {
@@ -110,19 +150,18 @@ public class WorkerBee : Bee {
     Vector3 forwardVec = transform.forward;
     taskBeeVec.y = 0;
     forwardVec.y = 0;
-    if ((Vector3.Angle(taskBeeVec, forwardVec) <
-         10)) {
-      controller.Move(transform.TransformDirection(Vector3.forward) * flySpeed * Time.deltaTime);
+    if ((Vector3.Angle(taskBeeVec, forwardVec) < 10)) {
+      controller.Move(transform.TransformDirection(Vector3.forward) * flySpeed *
+                      Time.deltaTime);
     }
   }
 
   public void LandAtTask() {
     RotateToTask(true);
     _anim.speed = 0.5f;
-    
+
     // fly straight down
-    controller.Move( new Vector3(0, -flySpeed * Time.deltaTime,0));
-    
+    controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
   }
 
   public void Work() {
@@ -131,9 +170,15 @@ public class WorkerBee : Bee {
     _anim.SetBool("Working", true);
 
     // Make sure we are touching the floor
-    if(!controller.isGrounded)
-      controller.Move( new Vector3(0, -flySpeed * Time.deltaTime,0));
+    if (!controller.isGrounded)
+      controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
 
+    switch (_task.taskType) {
+    case WorkerBeeTask.TaskType.Forager:
+      _state.AddPollen(flower.PollenPerSecond * Time.deltaTime);
+      _state.AddNectar(flower.NectarPerSecond * Time.deltaTime);
+      break;
+    }
   }
 
   public void TakeOff() {
@@ -141,12 +186,14 @@ public class WorkerBee : Bee {
     _anim.SetBool("Flying", true);
     _anim.SetBool("Working", false);
 
-
     // fly straight up
-    controller.Move( new Vector3(0, flySpeed * Time.deltaTime,0));
+    controller.Move(new Vector3(0, flySpeed * Time.deltaTime, 0));
   }
 
-  public void ChangeState(WorkerBeeState newState) { currentState = newState; }
+  public void ChangeState(WorkerBeeState newState) {
+    currentState = newState;
+    Debug.Log(currentState.GetType().Name);
+  }
 
   /** Movement helpers */
   public void RotateToTask(bool rotateDown = false) {

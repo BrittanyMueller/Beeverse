@@ -12,10 +12,10 @@ public class ResourceController : MonoBehaviour {
   public TMP_Text beeswaxText;
 
   public void UpdateResources(BeeResources resources) {
-    honeyText.text = resources.honey.ToString();
-    nectarText.text = resources.nectar.ToString();
-    royalJellyText.text = resources.royalJelly.ToString();
-    pollenText.text = resources.pollen.ToString();
-    beeswaxText.text = resources.beeswax.ToString();
+    honeyText.text = ((int)resources.honey).ToString();
+    nectarText.text = ((int)resources.nectar).ToString();
+    royalJellyText.text = ((int)resources.royalJelly).ToString();
+    pollenText.text = ((int)resources.pollen).ToString();
+    beeswaxText.text = ((int)resources.beeswax).ToString();
   }
 }
