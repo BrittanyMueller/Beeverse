@@ -10,6 +10,7 @@ public class FlowerUIController : MonoBehaviour {
   public GameState state;
   public SelectBee selectBee;
   public GameObject beeSlot;
+  public HudController hudController;
 
   public GameObject beeList;
 
@@ -17,12 +18,14 @@ public class FlowerUIController : MonoBehaviour {
 
   // todo link to a flower patch
 
-  void Start() { gameObject.SetActive(false); }
+  void Start() { hudController.CloseStructureMenu(); }
 
   // Update is called once per frame
   void Update() {}
 
   public void Show(Flower patch) {
+    // enable the structure menu so we can display ontop of it
+    hudController.OpenStructureMenu(StructureType.Flower);
 
     _curPatch = patch;
     // create ui
@@ -57,6 +60,7 @@ public class FlowerUIController : MonoBehaviour {
   public void Hide() {
     _curPatch = null;
     gameObject.SetActive(false);
+    selectBee.Hide();
   }
 
   public void SelectBee(int index) {
@@ -65,7 +69,7 @@ public class FlowerUIController : MonoBehaviour {
     // and a references to this so it can return
     selectBee.Show(index, (WorkerBee bee) => {
       _curPatch.SetWorker(bee, index);
-      Hide();
+      hudController.CloseStructureMenu();
     });
   }
 }

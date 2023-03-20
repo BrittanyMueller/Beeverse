@@ -18,6 +18,11 @@ public class SelectBee : MonoBehaviour {
     gameObject.SetActive(false);
   }
 
+  /**
+   * Shows A list of current bees that can be used for the job
+   * If a bee is selected then the callback will be triggered with the chosen
+   * bee as the arg.
+   */
   public void Show(int index, Action<WorkerBee> callback) {
 
     // Clear the current list
@@ -50,7 +55,10 @@ public class SelectBee : MonoBehaviour {
     gameObject.SetActive(true);
   }
 
-  void Hide() {
+  /**
+   * Hides the Select BeeScreen
+   */
+  public void Hide() {
     // Clear the current list
     {
       var children = new List<GameObject>();

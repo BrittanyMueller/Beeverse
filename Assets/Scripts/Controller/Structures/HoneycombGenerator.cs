@@ -29,8 +29,10 @@ public class HoneycombGenerator : MonoBehaviour {
     closedList.Add(honeycomb.transform.position);
     GenerateAvailablePositions(honeycomb.transform.position);
     Debug.Log(honeycomb.transform.position.x);
-    // test generation
-    StartCoroutine(RandomGeneration());
+    
+    // Only randomly generate if we are in the menu
+    if (inMenu)
+        StartCoroutine(RandomGeneration());
   }
 
   // Update is called once per frame

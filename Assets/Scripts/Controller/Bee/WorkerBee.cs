@@ -27,6 +27,30 @@ public class WorkerBee : Bee {
   // Target where the bee should move to
   public WorkerBeeTask _task = null;
 
+  public string jobTitle {
+    get {
+      if (_task == null) {
+        return "Bum";
+      }
+
+      switch (_task.taskType) {
+        case WorkerBeeTask.TaskType.Builder:
+          return "Builder";
+        case WorkerBeeTask.TaskType.Forager:
+          return "Forager";
+        case WorkerBeeTask.TaskType.Nurse:
+          return "Nurse";
+        case WorkerBeeTask.TaskType.BeeswaxFactory:
+          return "Beeswax Engineer";
+        case WorkerBeeTask.TaskType.RoyalJellyFactory:
+          return "Royal Jelly Tech";
+        case WorkerBeeTask.TaskType.HoneyFactory:
+          return "Honey Enjoyer";
+      }
+
+      return "NULL";
+    }
+  }
   // TODO cleanup
   public WorkerBeeTask Task {
     get { return _task; }

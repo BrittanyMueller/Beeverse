@@ -17,6 +17,7 @@ public class Bee : MonoBehaviour {
     get { return _lifeSpan.totalTime <= 0; }
   }
 
+  //
   public int AgeInDays {
     get { return lifeSpanInDays - _lifeSpan.day; }
   }
