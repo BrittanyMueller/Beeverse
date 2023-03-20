@@ -1028,14 +1028,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1846134022}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1846134023}
+        m_TargetAssemblyTypeName: HoneycombGenerator, Assembly-CSharp
+        m_MethodName: ShowBuildingHints
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1216,6 +1216,7 @@ MonoBehaviour:
   gameOverController: {fileID: 1564348772}
   dayController: {fileID: 17496240}
   debugController: {fileID: 679277946}
+  honeycombGenerator: {fileID: 1846134023}
 --- !u!4 &123721734
 Transform:
   m_ObjectHideFlags: 0
@@ -9937,7 +9938,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1846134023}
+        m_TargetAssemblyTypeName: HoneycombGenerator, Assembly-CSharp
+        m_MethodName: ShowBuildingHints
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1254549933
 GameObject:
   m_ObjectHideFlags: 0
@@ -10774,7 +10787,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1846134023}
+        m_TargetAssemblyTypeName: HoneycombGenerator, Assembly-CSharp
+        m_MethodName: ShowBuildingHints
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1496505226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12558,13 +12583,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1846134022}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1846134023}
+        m_TargetAssemblyTypeName: HoneycombGenerator, Assembly-CSharp
+        m_MethodName: ShowBuildingHints
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -13446,6 +13471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   honeycomb: {fileID: 240825072}
+  honeycombHint: {fileID: 5043637336267196514, guid: 3aec6f447f5b32643a5cfd344e3a1b1e, type: 3}
   state: {fileID: 123721733}
   inMenu: 0
   openList: []
