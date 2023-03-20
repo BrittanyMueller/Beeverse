@@ -67,7 +67,7 @@ public class HoneycombGenerator : MonoBehaviour {
       new(position.x + _verticalOffset / 2, position.y,
           position.z - _horizontalOffset), // Above to left space
       new(position.x - _verticalOffset / 2, position.y,
-          position.z + _horizontalOffset), // Below to left space
+          position.z - _horizontalOffset), // Below to left space
     };
 
     foreach (var space in possibleSpaces) {
@@ -111,6 +111,7 @@ public class HoneycombGenerator : MonoBehaviour {
   }
 
   public void ShowBuildingHints(int type) {
+      if (_honeycombHintObjects.Count != 0) return;
       foreach (var pos in openList) {
           GameObject hintObj = Instantiate(honeycombHint, pos, honeycomb.transform.rotation);
           HoneycombHint hint = hintObj.GetComponent<HoneycombHint>();
