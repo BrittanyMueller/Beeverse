@@ -8,11 +8,11 @@ public class HudController : MonoBehaviour {
   public GameObject menu;
   public GameObject credits;
   public GameObject gameOver;
-  
+
   // Menus for structures
   public GameObject structureMenu;
   public FlowerUIController flowerMenu;
-  
+  public BuildingUIController buildingMenu;
 
   public GameState state;
   // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class HudController : MonoBehaviour {
     menu.SetActive(false);
     credits.SetActive(false);
     gameOver.SetActive(false);
+    CloseStructureMenu();
   }
 
   public void Pause() {
@@ -37,10 +38,21 @@ public class HudController : MonoBehaviour {
     flowerMenu.Hide();
   }
 
-  public void OpenStructureMenu(StructureType type) {
+  public void OpenStructureMenu(StructureType type, MonoBehaviour structure) {
     // Hide all children
+    flowerMenu.Hide();
+    buildingMenu.Hide();
+
+    // Open the correct menu
+    switch(type) {
+      case StructureType.Flower:
+        flowerMenu.Show((Flower)structure);
+        break;
+      case StructureType.Building:
+        buildingMenu.Show((Honeycomb)structure);
+        break;
+    }
     
-    if (type != StructureType.Flower) flowerMenu.Hide();
     structureMenu.SetActive(true);
   }
   public void Exit() { Application.Quit(); }

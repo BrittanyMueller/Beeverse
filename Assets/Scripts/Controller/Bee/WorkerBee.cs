@@ -32,20 +32,19 @@ public class WorkerBee : Bee {
       if (_task == null) {
         return "Bum";
       }
-
       switch (_task.taskType) {
-        case WorkerBeeTask.TaskType.Builder:
-          return "Builder";
-        case WorkerBeeTask.TaskType.Forager:
-          return "Forager";
-        case WorkerBeeTask.TaskType.Nurse:
-          return "Nurse";
-        case WorkerBeeTask.TaskType.BeeswaxFactory:
-          return "Beeswax Engineer";
-        case WorkerBeeTask.TaskType.RoyalJellyFactory:
-          return "Royal Jelly Tech";
-        case WorkerBeeTask.TaskType.HoneyFactory:
-          return "Honey Enjoyer";
+      case WorkerBeeTask.TaskType.Builder:
+        return "Builder";
+      case WorkerBeeTask.TaskType.Forager:
+        return "Forager";
+      case WorkerBeeTask.TaskType.Nurse:
+        return "Nurse";
+      case WorkerBeeTask.TaskType.BeeswaxFactory:
+        return "Beeswax Engineer";
+      case WorkerBeeTask.TaskType.RoyalJellyFactory:
+        return "Royal Jelly Tech";
+      case WorkerBeeTask.TaskType.HoneyFactory:
+        return "Honey Enjoyer";
       }
 
       return "NULL";
@@ -59,7 +58,6 @@ public class WorkerBee : Bee {
       if (_task != null) {
 
         taskChanged = true;
-        
         // remove from old task
         switch (_task.taskType) {
         case WorkerBeeTask.TaskType.Forager:
@@ -100,6 +98,7 @@ public class WorkerBee : Bee {
 
   // Objects for job
   public Flower flower;
+  public Honeycomb honeycomb;
 
   // Start is called before the first frame update
   protected override void Start() {
@@ -177,6 +176,9 @@ public class WorkerBee : Bee {
     case WorkerBeeTask.TaskType.Forager:
       _state.AddPollen(flower.PollenPerSecond * Time.deltaTime);
       _state.AddNectar(flower.NectarPerSecond * Time.deltaTime);
+      break;
+    case WorkerBeeTask.TaskType.Builder:
+      honeycomb.buildProgress += honeycomb.buildSpeedPerSecond * Time.deltaTime;
       break;
     }
   }

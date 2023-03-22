@@ -9,12 +9,9 @@ public class SelectBee : MonoBehaviour {
 
   public GameObject beeDetails;
 
-  // Finds
-  private GameObject beeList;
+  public GameObject beeList;
 
   void Start() {
-    // get the list of bees element so we can access it
-    beeList = GameObject.Find("BeeSelectBeeList");
     gameObject.SetActive(false);
   }
 

@@ -7,7 +7,7 @@ public class Flower : MonoBehaviour {
   public List<Transform> flowerLocations;
   public List<WorkerBee> bees;
 
-  public FlowerUIController _controller;
+  private HudController _controller;
 
   public float NectarPerSecond = 1;
   public float PollenPerSecond = 1;
@@ -17,14 +17,13 @@ public class Flower : MonoBehaviour {
     foreach (var _ in flowerLocations) {
       bees.Add(null);
     }
+    _controller = GameObject.Find("HudController").GetComponent<HudController>();
   }
 
-  // Update is called once per frame
-  void Update() {}
 
   void OnMouseDown() {
-    // todo close all other menus
-    _controller.Show(this);
+    _controller.OpenStructureMenu(StructureType.Flower, this);
+
   }
 
   public void SetWorker(WorkerBee bee, int index) {

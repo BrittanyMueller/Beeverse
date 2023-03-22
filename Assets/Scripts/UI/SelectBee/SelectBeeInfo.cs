@@ -15,7 +15,8 @@ public class SelectBeeInfo : MonoBehaviour,
   void Start() {
 
     gameObject.GetComponentsInChildren<TMP_Text>()[0].text =
-        bee.beeName + " - " + bee.lifeSpanInDays + " Days" + "\n" + bee.jobTitle;
+        bee.beeName + " - " + bee.lifeSpanInDays + " Days" + "\n" +
+        bee.jobTitle;
   }
 
   // Update is called once per frame
