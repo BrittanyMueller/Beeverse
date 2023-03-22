@@ -6,6 +6,10 @@ public class HoneycombGenerator : MonoBehaviour {
 
   public GameObject honeycomb;
   public GameObject honeycombHint;
+  public GameObject broodNest;
+  public GameObject honeyFactory;
+  public GameObject beeswaxFactory;
+  public GameObject royalJellyFactory;
   public GameState state;
 
   // Special bool that is used to autogenerate honeycombs
@@ -85,8 +89,28 @@ public class HoneycombGenerator : MonoBehaviour {
   }
 
   public void CreateHoneycomb(Vector3 offset, Honeycomb.HoneycombType type) { // take type of honeycombs
-    GameObject newHoneycomb =
-        Instantiate(honeycomb, offset, honeycomb.transform.rotation);
+      GameObject newHoneycomb = null;
+
+      switch (type) {
+          case Honeycomb.HoneycombType.BeeswaxFactory:
+              newHoneycomb = Instantiate(beeswaxFactory, offset, honeycomb.transform.rotation);
+              break;
+          case Honeycomb.HoneycombType.BroodNest:
+              newHoneycomb = Instantiate(broodNest, offset, honeycomb.transform.rotation);
+              break;
+          case Honeycomb.HoneycombType.QueenNest:
+              newHoneycomb = Instantiate(honeycomb, offset, honeycomb.transform.rotation);
+              break;
+          case Honeycomb.HoneycombType.RoyalJellyFactory:
+              newHoneycomb = Instantiate(royalJellyFactory, offset, honeycomb.transform.rotation);
+              break;
+          case Honeycomb.HoneycombType.HoneyFactory:
+              newHoneycomb = Instantiate(honeyFactory, offset, honeycomb.transform.rotation);
+              break;
+
+
+
+      }
     GenerateAvailablePositions(offset);
     closedList.Add(offset);
     openList.Remove(offset);

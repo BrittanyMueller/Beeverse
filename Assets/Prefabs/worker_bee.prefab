@@ -57,6 +57,8 @@ MonoBehaviour:
   _rightEyeDead: {fileID: 4369063405378765579}
   _frown: {fileID: 3647022775959571038}
   flyThreshold: 0
+  taskChanged: 0
+  flower: {fileID: 0}
 --- !u!143 &1440963622582564879
 CharacterController:
   m_ObjectHideFlags: 0
