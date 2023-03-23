@@ -57,7 +57,8 @@ MonoBehaviour:
   - {fileID: 2942807990425248762}
   - {fileID: 575163133296419780}
   bees: []
-  _controller: {fileID: 0}
+  NectarPerSecond: 1
+  PollenPerSecond: 1
 --- !u!65 &6301513657778299025
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66,11 +67,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6498913162981554431}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 21.041174, y: 0.6365156, z: 21.30001}
-  m_Center: {x: 0, y: -1.3453383, z: 0}
+  m_Size: {x: 21.041174, y: 4.7105393, z: 21.30001}
+  m_Center: {x: 0, y: 0.691673, z: 0}
 --- !u!1001 &1616155837102907003
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
-public class FlowerUIController : MonoBehaviour {
-  // Start is called before the first frame update
+public class StructureUIController : MonoBehaviour {
 
+  // common components for StructureUIControllers
   public GameState state;
   public SelectBee selectBee;
   public GameObject beeSlot;
+  public GameObject beeList;
   public HudController hudController;
 
-  public GameObject beeList;
+  // Callback which will be used when a bee is selected
+  // which should be implemented by the child class
 
-  private Flower _curPatch;
+  protected Action<WorkerBee, int> selectBeeCallback;
 
-  // todo link to a flower patch
+  // Each child is expected to implement a show and hide function
+  public virtual void Hide() {
+    selectBee.Hide();
+    gameObject.SetActive(false);
+  }
 
-  void Start() { hudController.CloseStructureMenu(); }
-
-  // Update is called once per frame
-  void Update() {}
-
-  public void Show(Flower patch) {
-    // enable the structure menu so we can display ontop of it
-    hudController.OpenStructureMenu(StructureType.Flower);
-
-    _curPatch = patch;
+  protected void Show(List<WorkerBee> bees) {
     // create ui
     // Clear the current list
     {
@@ -37,15 +35,14 @@ public class FlowerUIController : MonoBehaviour {
       children.ForEach(child => Destroy(child));
     }
 
-    for (int index = 0; index < _curPatch.bees.Count; index++) {
+    for (int index = 0; index < bees.Count; index++) {
       GameObject obj =
           Instantiate(beeSlot, new Vector3(0, 0, 0), Quaternion.identity);
       obj.transform.SetParent(beeList.transform);
 
       // set info about the bee. If the spot is empty just make the text <EMPTY>
       obj.GetComponentsInChildren<TMP_Text>()[0].text =
-          (_curPatch.bees[index] != null) ? _curPatch.bees[index].beeName
-                                          : "<EMPTY>";
+          (bees[index] != null) ? bees[index].beeName : "<EMPTY>";
 
       // set onclick with the index of the bee so we can backtrack which bee was
       // chosen Need a tmp variable because c# sucks
@@ -57,18 +54,15 @@ public class FlowerUIController : MonoBehaviour {
     gameObject.SetActive(true);
   }
 
-  public void Hide() {
-    _curPatch = null;
-    gameObject.SetActive(false);
-    selectBee.Hide();
-  }
-
   public void SelectBee(int index) {
-    Debug.Log(index);
     // Open up the select bee menu given the index
     // and a references to this so it can return
     selectBee.Show(index, (WorkerBee bee) => {
-      _curPatch.SetWorker(bee, index);
+      if (selectBeeCallback != null) {
+        selectBeeCallback(bee, index);
+      } else {
+        Debug.Log("ERROR: SelectBee callback not set");
+      }
       hudController.CloseStructureMenu();
     });
   }

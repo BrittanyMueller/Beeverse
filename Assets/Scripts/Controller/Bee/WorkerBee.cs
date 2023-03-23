@@ -25,27 +25,26 @@ public class WorkerBee : Bee {
   private GameState _state;
 
   // Target where the bee should move to
-  public WorkerBeeTask _task = null;
+  private WorkerBeeTask _task = null;
 
   public string jobTitle {
     get {
       if (_task == null) {
         return "Bum";
       }
-
       switch (_task.taskType) {
-        case WorkerBeeTask.TaskType.Builder:
-          return "Builder";
-        case WorkerBeeTask.TaskType.Forager:
-          return "Forager";
-        case WorkerBeeTask.TaskType.Nurse:
-          return "Nurse";
-        case WorkerBeeTask.TaskType.BeeswaxFactory:
-          return "Beeswax Engineer";
-        case WorkerBeeTask.TaskType.RoyalJellyFactory:
-          return "Royal Jelly Tech";
-        case WorkerBeeTask.TaskType.HoneyFactory:
-          return "Honey Enjoyer";
+      case WorkerBeeTask.TaskType.Builder:
+        return "Builder";
+      case WorkerBeeTask.TaskType.Forager:
+        return "Forager";
+      case WorkerBeeTask.TaskType.Nurse:
+        return "Nurse";
+      case WorkerBeeTask.TaskType.BeeswaxFactory:
+        return "Beeswax Engineer";
+      case WorkerBeeTask.TaskType.RoyalJellyFactory:
+        return "Royal Jelly Tech";
+      case WorkerBeeTask.TaskType.HoneyFactory:
+        return "Honey Enjoyer";
       }
 
       return "NULL";
@@ -59,13 +58,17 @@ public class WorkerBee : Bee {
       if (_task != null) {
 
         taskChanged = true;
-        
         // remove from old task
         switch (_task.taskType) {
         case WorkerBeeTask.TaskType.Forager:
           // set old flower spot to null
           flower.bees[_task.workerSpotIndex] = null;
           flower = null;
+          break;
+        default:
+          // set old flower spot to null
+          honeycomb.bees[_task.workerSpotIndex] = null;
+          honeycomb = null;
           break;
         }
       }
@@ -100,6 +103,7 @@ public class WorkerBee : Bee {
 
   // Objects for job
   public Flower flower;
+  public Honeycomb honeycomb;
 
   // Start is called before the first frame update
   protected override void Start() {
@@ -157,7 +161,7 @@ public class WorkerBee : Bee {
   }
 
   public void LandAtTask() {
-    RotateToTask(true);
+    RotateToTask();
     _anim.speed = 0.5f;
 
     // fly straight down
@@ -178,7 +182,20 @@ public class WorkerBee : Bee {
       _state.AddPollen(flower.PollenPerSecond * Time.deltaTime);
       _state.AddNectar(flower.NectarPerSecond * Time.deltaTime);
       break;
+    case WorkerBeeTask.TaskType.Builder:
+      honeycomb.buildProgress += honeycomb.buildSpeedPerSecond * Time.deltaTime;
+      // honeycomb finished building change job
+      if (honeycomb.built) {
+        _task.taskType = _task.HoneycombTypeAsTaskType(honeycomb.type);
+      }
+      break;
+    case WorkerBeeTask.TaskType.HoneyFactory:
+      _state.AddHoney(((HoneyFactory)honeycomb).HoneyPerSecond *
+                      Time.deltaTime);
+      break;
     }
+
+    RotateToJobTarget();
   }
 
   public void TakeOff() {
@@ -196,7 +213,7 @@ public class WorkerBee : Bee {
   }
 
   /** Movement helpers */
-  public void RotateToTask(bool rotateDown = false) {
+  public void RotateToTask() {
     float singleStep = _rotationSpeed * Time.deltaTime;
     Vector3 taskBeeVec = Task.taskLocation - transform.position;
     Vector3 forwardsVec = transform.forward;
@@ -209,6 +226,27 @@ public class WorkerBee : Bee {
     // https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
     var newDirection =
         Vector3.RotateTowards(transform.forward, taskBeeVec, singleStep, 0f);
+    transform.rotation = Quaternion.LookRotation(newDirection);
+  }
+
+  // Makes the bee look in the correct direciton when working
+  public void RotateToJobTarget() {
+    // no targetLocation ignore
+    if (Task.targetLocation.x == 0 && Task.targetLocation.y == 0)
+      return;
+
+    float singleStep = _rotationSpeed * Time.deltaTime;
+    Vector3 targetBeeVec = Task.targetLocation - transform.position;
+    Vector3 forwardsVec = transform.forward;
+
+    // only want to rotate on the xz axis
+    targetBeeVec.y = 0;
+    targetBeeVec.y = 0;
+
+    // based off of
+    // https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
+    var newDirection =
+        Vector3.RotateTowards(transform.forward, targetBeeVec, singleStep, 0f);
     transform.rotation = Quaternion.LookRotation(newDirection);
   }
 }

@@ -2,12 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Honeycomb class will be responsible for any common behaviour
+ * between the different types of honeycombs but will not
+ * implement any behaviour specific to honeycombs
+ * This includes onMouseDown() events as well as any specific UI
+ * or update calls with the exception of the build Menu
+ */
 public class Honeycomb : MonoBehaviour {
 
   // honeycomb type num todo
   public List<Transform> workSpots;
+  public List<WorkerBee> bees;
 
-  public enum HoneycombType:int {
+  // The structure in the center to show the hive type.
+  // after it is built
+  public GameObject structure;
+
+  public enum HoneycombType : int {
     HoneyFactory,
     BeeswaxFactory,
     RoyalJellyFactory,
@@ -16,12 +28,72 @@ public class Honeycomb : MonoBehaviour {
   }
 
   public HoneycombType type;
-  public bool built;
-  public float buildProgress;
+  public string Name;
+  public bool built {
+    get { return _buildProgress >= 1; }
+  }
+
+  public float buildProgress {
+    get { return _buildProgress; }
+    set {
+      _buildProgress = value;
+      if (built) {
+        ShowStructure();
+      }
+    }
+  }
+  private float _buildProgress = 0.0f;
+
+  // TODO maybe this should be faster
+  public float buildSpeedPerSecond = 0.1f;
+
+  protected HudController _hudController;
 
   // Start is called before the first frame update
-  void Start() {}
+  void Start() {
+    foreach (var _ in workSpots) {
+      bees.Add(null);
+    }
 
-  // Update is called once per frame
-  void Update() {}
+    // find the builderController in the scene
+    _hudController =
+        GameObject.Find("HudController").GetComponent<HudController>();
+
+    if (structure != null) {
+      structure.SetActive(false);
+    }
+  }
+
+  public virtual void SetWorker(WorkerBee bee, int index) {
+
+    var oldBee = bees[index];
+    if (oldBee != null) {
+      oldBee.Task = null;
+      oldBee.honeycomb = null;
+    }
+    bees[index] = bee;
+    bee.honeycomb = this;
+
+    // if the structure isn't built yet force them to be a builder
+    if (!built) {
+      bee.Task.taskType = WorkerBeeTask.TaskType.Builder;
+    }
+  }
+
+  public bool OpenBuildController() {
+    if (!built) {
+      _hudController.OpenStructureMenu(StructureType.Building, this);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public void ShowStructure() {
+    if (structure != null) {
+      structure.SetActive(true);
+    }
+
+    // reset workers
+  }
 }

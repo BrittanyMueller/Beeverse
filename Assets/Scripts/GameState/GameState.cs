@@ -32,7 +32,7 @@ public class GameState : MonoBehaviour {
   public DebugController debugController;
 
   private BeeResources resources;
-  
+
   // generator to create honeycombs
   public HoneycombGenerator honeycombGenerator;
 
@@ -174,16 +174,26 @@ public class GameState : MonoBehaviour {
     Paused = false;
     SceneManager.LoadScene("Beeverse");
   }
-  
+
   public void CreateHoneycomb(Vector3 pos, Honeycomb.HoneycombType type) {
     // Double check you can afford it TODO
     honeycombGenerator.CreateHoneycomb(pos, type);
     honeycombGenerator.HideBuildingHints();
-    
   }
 
   /** Functions for setting resources */
-  public void AddPollen(float pollen) { resources.pollen += pollen; }
+  public void AddPollen(float pollen) {
+    resources.pollen += pollen;
+    _totalResources.pollen += pollen;
+  }
 
-  public void AddNectar(float nectar) { resources.nectar += nectar; }
+  public void AddNectar(float nectar) {
+    resources.nectar += nectar;
+    _totalResources.nectar += nectar;
+  }
+
+  public void AddHoney(float honey) {
+    resources.honey += honey;
+    _totalResources.honey += honey;
+  }
 }
