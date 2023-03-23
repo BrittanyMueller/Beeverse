@@ -77,7 +77,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3054491460844203275}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8531157, y: 0.049142566, z: 0.985036}
@@ -99,9 +99,11 @@ MonoBehaviour:
   - {fileID: 4771240711733357035}
   - {fileID: 6452925643731612516}
   - {fileID: 716040794834973063}
+  bees: []
+  structure: {fileID: 0}
   type: 0
-  built: 0
-  buildProgress: 0
+  Name: 
+  buildSpeedPerSecond: 0.1
 --- !u!1 &5450449051212269317
 GameObject:
   m_ObjectHideFlags: 0
