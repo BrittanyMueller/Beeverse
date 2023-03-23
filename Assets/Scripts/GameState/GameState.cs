@@ -191,4 +191,9 @@ public class GameState : MonoBehaviour {
     resources.nectar += nectar;
     _totalResources.nectar += nectar;
   }
+
+  public void AddHoney(float honey) {
+    resources.honey += honey;
+    _totalResources.honey += honey;
+  }
 }

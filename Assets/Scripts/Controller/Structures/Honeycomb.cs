@@ -19,7 +19,6 @@ public class Honeycomb : MonoBehaviour {
   // after it is built
   public GameObject structure;
 
-
   public enum HoneycombType : int {
     HoneyFactory,
     BeeswaxFactory,
@@ -35,9 +34,7 @@ public class Honeycomb : MonoBehaviour {
   }
 
   public float buildProgress {
-    get {
-      return _buildProgress;
-    }
+    get { return _buildProgress; }
     set {
       _buildProgress = value;
       if (built) {
@@ -59,13 +56,16 @@ public class Honeycomb : MonoBehaviour {
     }
 
     // find the builderController in the scene
-    _hudController = GameObject.Find("HudController").GetComponent<HudController>();
+    _hudController =
+        GameObject.Find("HudController").GetComponent<HudController>();
+
+    if (structure != null) {
+      structure.SetActive(false);
+    }
   }
 
-
-
   public virtual void SetWorker(WorkerBee bee, int index) {
-    
+
     var oldBee = bees[index];
     if (oldBee != null) {
       oldBee.Task = null;
@@ -74,14 +74,10 @@ public class Honeycomb : MonoBehaviour {
     bees[index] = bee;
     bee.honeycomb = this;
 
-    // reset the bee task without trigging job change
-    bee._task = null;
-
     // if the structure isn't built yet force them to be a builder
     if (!built) {
-        bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.Builder,
-                                    workSpots[index].position, index);
-    } 
+      bee.Task.taskType = WorkerBeeTask.TaskType.Builder;
+    }
   }
 
   public bool OpenBuildController() {
@@ -94,8 +90,10 @@ public class Honeycomb : MonoBehaviour {
   }
 
   public void ShowStructure() {
-    if(structure != null) {
+    if (structure != null) {
       structure.SetActive(true);
     }
+
+    // reset workers
   }
 }

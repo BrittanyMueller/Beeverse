@@ -22,10 +22,7 @@ public class SelectBeeInfo : MonoBehaviour,
   // Update is called once per frame
   void Update() {}
 
-  public void OnPointerEnter(PointerEventData eventData) {
-    // sow info
-    Debug.Log("Mouse enter " + bee.beeName);
-  }
+  public void OnPointerEnter(PointerEventData eventData) {}
 
   public void OnPointerExit(PointerEventData eventData) {
     // disable bee info ui

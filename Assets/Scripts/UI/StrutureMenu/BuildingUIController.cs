@@ -23,8 +23,14 @@ public class BuildingUIController : StructureUIController {
    * @param progress a percent as a float which should be clamped 0-1
    */
   void updateProgress(float progress) {
-    progressBar.sizeDelta = new Vector2(progressBarLimit.sizeDelta.x * progress,
-                                        progressBarLimit.sizeDelta.y);
+    var oldPos = progressBar.anchoredPosition;
+    progressBar.SetInsetAndSizeFromParentEdge(
+        RectTransform.Edge.Left, 0, progressBarLimit.sizeDelta.x * (progress));
+    // progressBar.(RectTransform.Axis.Horizontal,
+    //                                       progressBarLimit.sizeDelta.x *
+    //                                           (progress));
+    progressBar.ForceUpdateRectTransforms();
+    // progressBar.anchoredPosition = oldPos;
   }
 
   public void Show(Honeycomb honeycomb) {

@@ -21,8 +21,8 @@ public class StructureUIController : MonoBehaviour {
 
   // Each child is expected to implement a show and hide function
   public virtual void Hide() {
-    gameObject.SetActive(false);
     selectBee.Hide();
+    gameObject.SetActive(false);
   }
 
   protected void Show(List<WorkerBee> bees) {

@@ -36,6 +36,7 @@ public class HudController : MonoBehaviour {
   public void CloseStructureMenu() {
     structureMenu.SetActive(false);
     flowerMenu.Hide();
+    buildingMenu.Hide();
   }
 
   public void OpenStructureMenu(StructureType type, MonoBehaviour structure) {
@@ -44,15 +45,15 @@ public class HudController : MonoBehaviour {
     buildingMenu.Hide();
 
     // Open the correct menu
-    switch(type) {
-      case StructureType.Flower:
-        flowerMenu.Show((Flower)structure);
-        break;
-      case StructureType.Building:
-        buildingMenu.Show((Honeycomb)structure);
-        break;
+    switch (type) {
+    case StructureType.Flower:
+      flowerMenu.Show((Flower)structure);
+      break;
+    case StructureType.Building:
+      buildingMenu.Show((Honeycomb)structure);
+      break;
     }
-    
+
     structureMenu.SetActive(true);
   }
   public void Exit() { Application.Quit(); }

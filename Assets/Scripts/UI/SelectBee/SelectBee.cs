@@ -11,9 +11,7 @@ public class SelectBee : MonoBehaviour {
 
   public GameObject beeList;
 
-  void Start() {
-    gameObject.SetActive(false);
-  }
+  void Start() {}
 
   /**
    * Shows A list of current bees that can be used for the job

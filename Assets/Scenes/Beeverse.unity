@@ -6331,7 +6331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1633109550728195741, guid: a6abe74e2d699872b91264657daba04e, type: 3}
       propertyPath: beeName
-      value: Bubmles
+      value: Bumbles
       objectReference: {fileID: 0}
     - target: {fileID: 7922973935274048038, guid: a6abe74e2d699872b91264657daba04e, type: 3}
       propertyPath: m_RootOrder
@@ -7598,10 +7598,10 @@ RectTransform:
   m_Father: {fileID: 1887249384}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8728, y: -0.0019}
-  m_SizeDelta: {x: 237.5049, y: 21.3878}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 123.6973, y: -14.0019}
+  m_SizeDelta: {x: 237.1539, y: 21.387802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &757278059
 GameObject:
@@ -7636,10 +7636,10 @@ RectTransform:
   m_Father: {fileID: 735301604}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -106.26214, y: 0.21877}
-  m_SizeDelta: {x: 24.9757, y: 20.9503}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 119.12502, y: 0.21877}
+  m_SizeDelta: {x: 237.75003, y: 20.9503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &757278061
 MonoBehaviour:

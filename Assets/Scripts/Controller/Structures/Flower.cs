@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Flower : MonoBehaviour {
 
@@ -17,13 +18,15 @@ public class Flower : MonoBehaviour {
     foreach (var _ in flowerLocations) {
       bees.Add(null);
     }
-    _controller = GameObject.Find("HudController").GetComponent<HudController>();
+    _controller =
+        GameObject.Find("HudController").GetComponent<HudController>();
   }
 
-
   void OnMouseDown() {
-    _controller.OpenStructureMenu(StructureType.Flower, this);
-
+    // make sure UI isn't on UI
+    if (!EventSystem.current.IsPointerOverGameObject()) {
+      _controller.OpenStructureMenu(StructureType.Flower, this);
+    }
   }
 
   public void SetWorker(WorkerBee bee, int index) {

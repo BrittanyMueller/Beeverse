@@ -1,25 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class HoneyFactory : Honeycomb
-{
+public class HoneyFactory : Honeycomb {
+
+  public float HoneyPerSecond = 1f;
 
   void OnMouseDown() {
-    if(!OpenBuildController()) {
-        _hudController.OpenStructureMenu(StructureType.HoneyFactory, this);
+    // make sure UI isn't on UI
+    if (EventSystem.current.IsPointerOverGameObject())
+      return;
+    if (!OpenBuildController()) {
+      _hudController.OpenStructureMenu(StructureType.HoneyFactory, this);
     }
   }
 
   public override void SetWorker(WorkerBee bee, int index) {
-    base.SetWorker(bee,index);
-    
-    // Check if parent gave them a task
-    if(!bee.hasTask) {
-        bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.HoneyFactory,
-                                    workSpots[index].position, index);
-    }
 
+    bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.HoneyFactory,
+                                 workSpots[index].position, index,
+                                 structure.transform.position);
+
+    // Check if parent wants to change the task
+    base.SetWorker(bee, index);
   }
-
 }
