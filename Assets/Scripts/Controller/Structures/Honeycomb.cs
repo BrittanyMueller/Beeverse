@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /**
  * Honeycomb class will be responsible for any common behaviour
@@ -11,7 +12,6 @@ using UnityEngine;
  */
 public class Honeycomb : MonoBehaviour {
 
-  // honeycomb type num todo
   public List<Transform> workSpots;
   public List<WorkerBee> bees;
 
@@ -19,16 +19,26 @@ public class Honeycomb : MonoBehaviour {
   // after it is built
   public GameObject structure;
 
-  public enum HoneycombType : int {
-    HoneyFactory,
-    BeeswaxFactory,
-    RoyalJellyFactory,
-    BroodNest,
-    QueenNest
+  public StructureType honeycombType;
+  public string Name {
+    get {
+      switch (honeycombType) {
+      case StructureType.HoneyFactory:
+        return "Honey Factory";
+      case StructureType.BeeswaxFactory:
+        return "Beeswax Factory";
+      case StructureType.RoyalJellyFactory:
+        return "Royal Jelly Factory";
+      case StructureType.BroodNest:
+        return "Brood Nest";
+      case StructureType.QueenNest:
+        return "Queen Nest";
+      default:
+        return "INVALID NAME";
+      }
+    }
   }
 
-  public HoneycombType type;
-  public string Name;
   public bool built {
     get { return _buildProgress >= 1; }
   }
@@ -43,8 +53,6 @@ public class Honeycomb : MonoBehaviour {
     }
   }
   private float _buildProgress = 0.0f;
-
-  // TODO maybe this should be faster
   public float buildSpeedPerSecond = 0.1f;
 
   protected HudController _hudController;
@@ -59,12 +67,20 @@ public class Honeycomb : MonoBehaviour {
     _hudController =
         GameObject.Find("HudController").GetComponent<HudController>();
 
+    // Structures should start unbuilt so hide
+    // the structure if it exists
     if (structure != null) {
       structure.SetActive(false);
     }
   }
 
-  public virtual void SetWorker(WorkerBee bee, int index) {
+  /**
+   * Sets the works to a specific spot in the honeycomb
+   * this will also check if the structure is built
+   * and if it isn't it will automatilly set them
+   * as a builder
+   */
+  public void SetWorker(WorkerBee bee, int index) {
 
     var oldBee = bees[index];
     if (oldBee != null) {
@@ -74,26 +90,47 @@ public class Honeycomb : MonoBehaviour {
     bees[index] = bee;
     bee.honeycomb = this;
 
-    // if the structure isn't built yet force them to be a builder
-    if (!built) {
-      bee.Task.taskType = WorkerBeeTask.TaskType.Builder;
+    // Set Their task to the honeycomb
+    bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.Builder,
+                                 workSpots[index].position, index,
+                                 structure.transform.position);
+
+    // If the honeycomb is already built update their role
+    if (built) {
+      bee.Task.taskType = WorkerBeeTask.StructureTypeAsTaskType(honeycombType);
     }
   }
 
-  public bool OpenBuildController() {
-    if (!built) {
-      _hudController.OpenStructureMenu(StructureType.Building, this);
-      return true;
-    } else {
-      return false;
+  public void RemoveWorker(int index) {
+    if (bees[index]) {
+      bees[index].Task = null;
     }
   }
 
+  /**
+   * Called when construction is finished to
+   * created the centre structure
+   */
   public void ShowStructure() {
     if (structure != null) {
       structure.SetActive(true);
     }
+  }
 
-    // reset workers
+  /**
+   * Opens the controller for the honeycomb if the honeycomb isn't built
+   * yet it will instead open the building menu
+   */
+  void OnMouseDown() {
+    // make sure UI isn't on UI
+    if (EventSystem.current.IsPointerOverGameObject())
+      return;
+
+    // check to see if the structure is built
+    if (!built) {
+      _hudController.OpenStructureMenu(StructureType.Building, this);
+    } else {
+      _hudController.OpenStructureMenu(honeycombType, this);
+    }
   }
 }

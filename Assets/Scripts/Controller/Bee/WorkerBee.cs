@@ -22,6 +22,10 @@ public class WorkerBee : Bee {
   public float flyThreshold = 10f;
   private Vector3 curForward;
 
+  // used to keep track of work progress
+  private bool workTimerSet = false;
+  private int workTimer;
+
   private GameState _state;
 
   // Target where the bee should move to
@@ -118,6 +122,14 @@ public class WorkerBee : Bee {
   // Update is called once per frame
   protected void Update() { currentState.Execute(this); }
 
+  public override void UpdateTimeTick(int minutes) {
+    base.UpdateTimeTick(minutes);
+
+    // decrement the work timer if it is set
+    if (workTimerSet) {
+      workTimer -= minutes;
+    }
+  }
   /** States*/
   public void Die() {
     if (!isDead) {
@@ -156,7 +168,7 @@ public class WorkerBee : Bee {
     forwardVec.y = 0;
     if ((Vector3.Angle(taskBeeVec, forwardVec) < 10)) {
       controller.Move(transform.TransformDirection(Vector3.forward) * flySpeed *
-                      Time.deltaTime);
+                      Time.deltaTime * GameState.minutesPreSecond/5 );
     }
   }
 
@@ -165,7 +177,7 @@ public class WorkerBee : Bee {
     _anim.speed = 0.5f;
 
     // fly straight down
-    controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
+    controller.Move(new Vector3(0, -flySpeed * Time.deltaTime * GameState.minutesPreSecond/5, 0));
   }
 
   public void Work() {
@@ -179,19 +191,45 @@ public class WorkerBee : Bee {
 
     switch (_task.taskType) {
     case WorkerBeeTask.TaskType.Forager:
-      _state.AddPollen(flower.PollenPerSecond * Time.deltaTime);
-      _state.AddNectar(flower.NectarPerSecond * Time.deltaTime);
+
+      if (workTimerSet) { // currently working see if we are done
+        if (workTimer <= 0) {
+          _state.AddPollen(flower.PollenPerSecond);
+          _state.AddNectar(flower.NectarPerSecond);
+          workTimerSet = false;
+        }
+      }
+
+      if (!workTimerSet) {
+        // start working
+        workTimerSet = true;
+        workTimer = 5; // todo change to value from flower
+      }
       break;
     case WorkerBeeTask.TaskType.Builder:
-      honeycomb.buildProgress += honeycomb.buildSpeedPerSecond * Time.deltaTime;
+      honeycomb.buildProgress += honeycomb.buildSpeedPerSecond * Time.deltaTime * GameState.minutesPreSecond/5;
       // honeycomb finished building change job
       if (honeycomb.built) {
-        _task.taskType = _task.HoneycombTypeAsTaskType(honeycomb.type);
+        _task.taskType =
+            WorkerBeeTask.StructureTypeAsTaskType(honeycomb.honeycombType);
       }
       break;
     case WorkerBeeTask.TaskType.HoneyFactory:
-      _state.AddHoney(((HoneyFactory)honeycomb).HoneyPerSecond *
-                      Time.deltaTime);
+    case WorkerBeeTask.TaskType.BeeswaxFactory:
+    case WorkerBeeTask.TaskType.RoyalJellyFactory:
+
+      if (workTimerSet) { // currently working see if we are done
+        if (workTimer <= 0) {
+          ((HoneycombFactory)honeycomb).AddResource(_state);
+          workTimerSet = false;
+        }
+      }
+      if (!workTimerSet) {
+        // see if we can afford to start working
+        ((HoneycombFactory)honeycomb).ConsumeResources(_state);
+        workTimer = ((HoneycombFactory)honeycomb).conversionTimeMinutes;
+        workTimerSet = true;
+      }
       break;
     }
 
@@ -204,7 +242,7 @@ public class WorkerBee : Bee {
     _anim.SetBool("Working", false);
 
     // fly straight up
-    controller.Move(new Vector3(0, flySpeed * Time.deltaTime, 0));
+    controller.Move(new Vector3(0, flySpeed * Time.deltaTime * GameState.minutesPreSecond/5 , 0));
   }
 
   public void ChangeState(WorkerBeeState newState) {
@@ -214,7 +252,7 @@ public class WorkerBee : Bee {
 
   /** Movement helpers */
   public void RotateToTask() {
-    float singleStep = _rotationSpeed * Time.deltaTime;
+    float singleStep = _rotationSpeed * Time.deltaTime * GameState.minutesPreSecond/5;
     Vector3 taskBeeVec = Task.taskLocation - transform.position;
     Vector3 forwardsVec = transform.forward;
 
@@ -235,7 +273,7 @@ public class WorkerBee : Bee {
     if (Task.targetLocation.x == 0 && Task.targetLocation.y == 0)
       return;
 
-    float singleStep = _rotationSpeed * Time.deltaTime;
+    float singleStep = _rotationSpeed * Time.deltaTime * GameState.minutesPreSecond/5;
     Vector3 targetBeeVec = Task.targetLocation - transform.position;
     Vector3 forwardsVec = transform.forward;
 
@@ -248,5 +286,14 @@ public class WorkerBee : Bee {
     var newDirection =
         Vector3.RotateTowards(transform.forward, targetBeeVec, singleStep, 0f);
     transform.rotation = Quaternion.LookRotation(newDirection);
+  }
+
+  /**
+   * This should be done when the state transitions
+   * from work to any other state
+   */
+  public void ResetWorkTimer() {
+    workTimerSet = false;
+    workTimer = 0;
   }
 }

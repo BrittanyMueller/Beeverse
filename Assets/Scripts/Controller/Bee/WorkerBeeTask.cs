@@ -37,16 +37,18 @@ public class WorkerBeeTask {
     workerSpotIndex = index;
   }
 
-  public TaskType HoneycombTypeAsTaskType(Honeycomb.HoneycombType type) {
+  public static TaskType StructureTypeAsTaskType(StructureType type) {
     switch (type) {
-    case Honeycomb.HoneycombType.HoneyFactory:
+    case StructureType.HoneyFactory:
       return TaskType.HoneyFactory;
-    case Honeycomb.HoneycombType.RoyalJellyFactory:
+    case StructureType.RoyalJellyFactory:
       return TaskType.RoyalJellyFactory;
-    case Honeycomb.HoneycombType.BeeswaxFactory:
+    case StructureType.BeeswaxFactory:
       return TaskType.BeeswaxFactory;
-    case Honeycomb.HoneycombType.BroodNest:
+    case StructureType.BroodNest:
       return TaskType.Nurse;
+    case StructureType.Flower:
+      return TaskType.Forager;
     }
     return TaskType.Builder;
   }

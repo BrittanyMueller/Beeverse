@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HoneycombHint : MonoBehaviour {
 
-  public Honeycomb.HoneycombType type;
+  public StructureType type;
   public GameState state;
   void OnMouseDown() { state.CreateHoneycomb(transform.position, type); }
 }

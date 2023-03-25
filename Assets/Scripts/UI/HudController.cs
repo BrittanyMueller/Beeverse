@@ -13,6 +13,13 @@ public class HudController : MonoBehaviour {
   public GameObject structureMenu;
   public FlowerUIController flowerMenu;
   public BuildingUIController buildingMenu;
+  public FactoryUIController factoryMenu;
+
+  public List<Button> createHoneycombButtons;
+  private Button createHoneyFactory;
+  private Button createBeeswaxFactory;
+  private Button createRoyalJellyFactory;
+  private Button createBroodNest;
 
   public GameState state;
   // Start is called before the first frame update
@@ -21,6 +28,32 @@ public class HudController : MonoBehaviour {
     credits.SetActive(false);
     gameOver.SetActive(false);
     CloseStructureMenu();
+
+    foreach (Button button in createHoneycombButtons) {
+      if (button.gameObject.name == "HoneyFactory") {
+        createHoneyFactory = button;
+      } else if (button.gameObject.name == "BeeswaxFactory") {
+        createBeeswaxFactory = button;
+      } else if (button.gameObject.name == "RoyalJellyFactory") {
+        createRoyalJellyFactory = button;
+      } else if (button.gameObject.name == "BroodNest") {
+        createBroodNest = button;
+      }
+    }
+  }
+
+  void Update() {
+
+    // disable and enable buttons
+    createHoneyFactory.interactable =
+        (state.pollenCount >= 100 && state.nectarCount >= 50);
+    createBeeswaxFactory.interactable =
+        (state.honeyCount >= 100 && state.nectarCount >= 50);
+    createRoyalJellyFactory.interactable =
+        (state.honeyCount >= 100 && state.beeswaxCount >= 100);
+    createBroodNest.interactable =
+        (state.beeswaxCount >= 100 && state.honeyCount >= 50 &&
+         state.royalJellyCount >= 10);
   }
 
   public void Pause() {
@@ -37,12 +70,14 @@ public class HudController : MonoBehaviour {
     structureMenu.SetActive(false);
     flowerMenu.Hide();
     buildingMenu.Hide();
+    factoryMenu.Hide();
   }
 
   public void OpenStructureMenu(StructureType type, MonoBehaviour structure) {
     // Hide all children
     flowerMenu.Hide();
     buildingMenu.Hide();
+    factoryMenu.Hide();
 
     // Open the correct menu
     switch (type) {
@@ -51,6 +86,11 @@ public class HudController : MonoBehaviour {
       break;
     case StructureType.Building:
       buildingMenu.Show((Honeycomb)structure);
+      break;
+    case StructureType.HoneyFactory:
+    case StructureType.BeeswaxFactory:
+    case StructureType.RoyalJellyFactory:
+      factoryMenu.Show((HoneycombFactory)structure);
       break;
     }
 

@@ -101,8 +101,7 @@ MonoBehaviour:
   - {fileID: 716040794834973063}
   bees: []
   structure: {fileID: 0}
-  type: 0
-  Name: 
+  honeycombType: 6
   buildSpeedPerSecond: 0.1
 --- !u!1 &5450449051212269317
 GameObject:

@@ -8,6 +8,8 @@ public class WorkerBeeTravelState : WorkerBeeState {
       bee.ChangeState(new WorkerBeeDieState());
     } else if (bee.hasTask && bee.atTask) {
       bee.ChangeState(new WorkerBeeLandingState());
+    } else if (!bee.hasTask) {
+      bee.ChangeState(new WorkerBeeIdleState());
 
     } else {
       bee.TravelToTask();

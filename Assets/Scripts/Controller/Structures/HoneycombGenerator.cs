@@ -53,7 +53,7 @@ public class HoneycombGenerator : MonoBehaviour {
     while (true) {
       yield return new WaitForSeconds(1);
       CreateHoneycomb(openList[rand.Next(0, openList.Count)],
-                      Honeycomb.HoneycombType.QueenNest);
+                      StructureType.QueenNest);
     }
   }
 
@@ -88,29 +88,28 @@ public class HoneycombGenerator : MonoBehaviour {
     }
   }
 
-  public void
-  CreateHoneycomb(Vector3 offset,
-                  Honeycomb.HoneycombType type) { // take type of honeycombs
+  public void CreateHoneycomb(Vector3 offset,
+                              StructureType type) { // take type of honeycombs
     GameObject newHoneycomb = null;
 
     switch (type) {
-    case Honeycomb.HoneycombType.BeeswaxFactory:
+    case StructureType.BeeswaxFactory:
       newHoneycomb =
           Instantiate(beeswaxFactory, offset, honeycomb.transform.rotation);
       break;
-    case Honeycomb.HoneycombType.BroodNest:
+    case StructureType.BroodNest:
       newHoneycomb =
           Instantiate(broodNest, offset, honeycomb.transform.rotation);
       break;
-    case Honeycomb.HoneycombType.QueenNest:
+    case StructureType.QueenNest:
       newHoneycomb =
           Instantiate(honeycomb, offset, honeycomb.transform.rotation);
       break;
-    case Honeycomb.HoneycombType.RoyalJellyFactory:
+    case StructureType.RoyalJellyFactory:
       newHoneycomb =
           Instantiate(royalJellyFactory, offset, honeycomb.transform.rotation);
       break;
-    case Honeycomb.HoneycombType.HoneyFactory:
+    case StructureType.HoneyFactory:
       newHoneycomb =
           Instantiate(honeyFactory, offset, honeycomb.transform.rotation);
       break;
@@ -141,12 +140,41 @@ public class HoneycombGenerator : MonoBehaviour {
   public void ShowBuildingHints(int type) {
     if (_honeycombHintObjects.Count != 0)
       return;
+
+    BeeResources res = new BeeResources();
+    switch ((StructureType)type) {
+    case StructureType.HoneyFactory:
+      res.pollen = 100;
+      res.nectar = 50;
+      break;
+
+    case StructureType.BeeswaxFactory:
+      res.honey = 100;
+      res.nectar = 50;
+      break;
+
+    case StructureType.RoyalJellyFactory:
+      res.honey = 100;
+      res.beeswax = 100;
+      break;
+
+    case StructureType.BroodNest:
+      res.beeswax = 100;
+      res.honey = 50;
+      res.royalJelly = 10;
+      break;
+    }
+
+    // make sure we can consume these resources
+    if (!state.ConsumeResources(res))
+      return;
+
     foreach (var pos in openList) {
       GameObject hintObj =
           Instantiate(honeycombHint, pos, honeycomb.transform.rotation);
       HoneycombHint hint = hintObj.GetComponent<HoneycombHint>();
       hint.state = state;
-      hint.type = (Honeycomb.HoneycombType)type;
+      hint.type = (StructureType)type;
       _honeycombHintObjects.Add(hintObj);
     }
   }

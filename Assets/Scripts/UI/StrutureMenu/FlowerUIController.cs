@@ -17,6 +17,7 @@ public class FlowerUIController : StructureUIController {
     // set flower patch and callback
     _curPatch = patch;
     selectBeeCallback = _curPatch.SetWorker;
+    removeBeeCallback = _curPatch.RemoveWorker;
 
     // Set text for resource collection speeds
     npsText.text = ((int)_curPatch.NectarPerSecond).ToString();
