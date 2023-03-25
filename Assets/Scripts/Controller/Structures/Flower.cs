@@ -40,4 +40,6 @@ public class Flower : MonoBehaviour {
                                  flowerLocations[index].position, index);
     bee.flower = this;
   }
+
+  public void RemoveWorker(int index) { bees[index].Task = null; }
 }

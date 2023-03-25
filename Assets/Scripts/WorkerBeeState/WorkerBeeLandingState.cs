@@ -11,7 +11,7 @@ public class WorkerBeeLandingState : WorkerBeeState {
     } else if (bee.hasTask && bee.hasLanded) {
       bee.ChangeState(new WorkerBeeWorkingState());
     } else if (!bee.hasTask) {
-      bee.ChangeState(new WorkerBeeIdleState());
+      bee.ChangeState(new WorkerBeeTakeOffState());
     } else {
       bee.LandAtTask();
     }

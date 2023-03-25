@@ -32,6 +32,21 @@ public class GameState : MonoBehaviour {
   public DebugController debugController;
 
   private BeeResources resources;
+  public float honeyCount {
+    get { return resources.honey; }
+  }
+  public float nectarCount {
+    get { return resources.nectar; }
+  }
+  public float beeswaxCount {
+    get { return resources.beeswax; }
+  }
+  public float pollenCount {
+    get { return resources.pollen; }
+  }
+  public float royalJellyCount {
+    get { return resources.royalJelly; }
+  }
 
   // generator to create honeycombs
   public HoneycombGenerator honeycombGenerator;
@@ -175,8 +190,7 @@ public class GameState : MonoBehaviour {
     SceneManager.LoadScene("Beeverse");
   }
 
-  public void CreateHoneycomb(Vector3 pos, Honeycomb.HoneycombType type) {
-    // Double check you can afford it TODO
+  public void CreateHoneycomb(Vector3 pos, StructureType type) {
     honeycombGenerator.CreateHoneycomb(pos, type);
     honeycombGenerator.HideBuildingHints();
   }
@@ -195,5 +209,38 @@ public class GameState : MonoBehaviour {
   public void AddHoney(float honey) {
     resources.honey += honey;
     _totalResources.honey += honey;
+  }
+
+  public void AddRoyalJelly(float royalJelly) {
+    resources.royalJelly += royalJelly;
+    _totalResources.royalJelly += royalJelly;
+  }
+
+  public void AddBeeswax(float beeswax) {
+    resources.beeswax += beeswax;
+    _totalResources.beeswax += beeswax;
+  }
+
+  public bool ConsumeResources(BeeResources consume) {
+
+    // test if we can consume the resources
+    if (consume.beeswax > resources.beeswax)
+      return false;
+    if (consume.honey > resources.honey)
+      return false;
+    if (consume.royalJelly > resources.royalJelly)
+      return false;
+    if (consume.nectar > resources.nectar)
+      return false;
+    if (consume.pollen > resources.pollen)
+      return false;
+
+    // consume the resources.
+    resources.beeswax -= consume.beeswax;
+    resources.honey -= consume.honey;
+    resources.royalJelly -= consume.royalJelly;
+    resources.nectar -= consume.nectar;
+    resources.pollen -= consume.pollen;
+    return true;
   }
 }

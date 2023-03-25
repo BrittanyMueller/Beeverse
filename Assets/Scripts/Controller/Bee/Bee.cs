@@ -26,8 +26,6 @@ public class Bee : MonoBehaviour {
   // Status of the bee needed for gamestate
   public bool isDead;
 
-  // todo add role
-
   // Start is called before the first frame update
   protected virtual void Start() {
     _lifeSpan = new TimeTracker(lifeSpanInDays, 0, 0);
@@ -36,5 +34,7 @@ public class Bee : MonoBehaviour {
   // Update is called once per frame
   protected virtual void FixedUpdate() {}
 
-  public void UpdateTimeTick(int minutes) { _lifeSpan.SubMinutes(minutes); }
+  public virtual void UpdateTimeTick(int minutes) {
+    _lifeSpan.SubMinutes(minutes);
+  }
 }

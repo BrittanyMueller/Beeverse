@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5157782245190883717}
-  - component: {fileID: 6002940776277234737}
   - component: {fileID: 3158186212387149482}
+  - component: {fileID: 3792524874474630624}
   m_Layer: 0
   m_Name: royalJellyFactory
   m_TagString: Untagged
@@ -38,29 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6002940776277234737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4201602195237462010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd069d6f0ca8e5c499218d7878c8862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  workSpots:
-  - {fileID: 3236818005862230172}
-  - {fileID: 8057398673168545465}
-  - {fileID: 8508842725322472708}
-  - {fileID: 4488422060468281763}
-  bees: []
-  structure: {fileID: 613341536872685055}
-  type: 2
-  Name: Jelly Factory
-  buildSpeedPerSecond: 0.1
-  RoyalJellyPerSecond: 1
 --- !u!65 &3158186212387149482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74,6 +51,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7887817, y: 0.25889042, z: 0.49410385}
   m_Center: {x: -0.0022469328, y: 0.1054727, z: -0.000933342}
+--- !u!114 &3792524874474630624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201602195237462010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279c8a2c688f9b6fb2b9cd80984e383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workSpots:
+  - {fileID: 3236818005862230172}
+  - {fileID: 8057398673168545465}
+  - {fileID: 8508842725322472708}
+  - {fileID: 4488422060468281763}
+  bees: []
+  structure: {fileID: 613341536872685055}
+  honeycombType: 3
+  buildSpeedPerSecond: 0.01
+  inResources: 0000000004000000
+  inResourcesConversionRate: 030000000a000000
+  outResource: 3
+  conversionTimeMinutes: 60
 --- !u!1 &5494943278872787043
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5494943278872787043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31}
+  m_LocalPosition: {x: 0, y: 0, z: 0.214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,7 +131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8007135674930794897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.261, y: 0, z: 0.199}
+  m_LocalPosition: {x: 0.232, y: 0, z: 0.068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8526503099841175087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.341, y: 0, z: 0.201}
+  m_LocalPosition: {x: -0.277, y: 0, z: 0.073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -191,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9025034652525599782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.043, y: 0, z: -0.3}
+  m_LocalPosition: {x: -0.008, y: 0, z: -0.316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

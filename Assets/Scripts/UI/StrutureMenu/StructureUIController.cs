@@ -14,10 +14,11 @@ public class StructureUIController : MonoBehaviour {
   public GameObject beeList;
   public HudController hudController;
 
-  // Callback which will be used when a bee is selected
+  // Callbacks which will be used when a bee is selected
   // which should be implemented by the child class
 
   protected Action<WorkerBee, int> selectBeeCallback;
+  protected Action<int> removeBeeCallback;
 
   // Each child is expected to implement a show and hide function
   public virtual void Hide() {
@@ -35,20 +36,47 @@ public class StructureUIController : MonoBehaviour {
       children.ForEach(child => Destroy(child));
     }
 
+    // add worker bees to the top of the list
     for (int index = 0; index < bees.Count; index++) {
+      if (bees[index] == null)
+        continue;
       GameObject obj =
           Instantiate(beeSlot, new Vector3(0, 0, 0), Quaternion.identity);
       obj.transform.SetParent(beeList.transform);
 
-      // set info about the bee. If the spot is empty just make the text <EMPTY>
-      obj.GetComponentsInChildren<TMP_Text>()[0].text =
-          (bees[index] != null) ? bees[index].beeName : "<EMPTY>";
+      // set info about the bee.
+      obj.GetComponentsInChildren<TMP_Text>()[0].text = bees[index].beeName;
 
       // set onclick with the index of the bee so we can backtrack which bee was
       // chosen Need a tmp variable because c# sucks
       int tmpIndex = index;
       obj.GetComponentsInChildren<Button>()[0].onClick.AddListener(
           () => { SelectBee(tmpIndex); });
+
+      // callback for close button
+      obj.GetComponentsInChildren<Button>()[1].onClick.AddListener(
+          () => { RemoveBee(tmpIndex); });
+    }
+
+    // add empty spots to the bottom
+    for (int index = 0; index < bees.Count; index++) {
+      if (bees[index] != null)
+        continue;
+      GameObject obj =
+          Instantiate(beeSlot, new Vector3(0, 0, 0), Quaternion.identity);
+      obj.transform.SetParent(beeList.transform);
+
+      // set info about the bee. If the spot is empty just make the text <EMPTY>
+      obj.GetComponentsInChildren<TMP_Text>()[0].text = "<EMPTY>";
+
+      // set onclick with the index of the bee so we can backtrack which bee was
+      // chosen Need a tmp variable because c# sucks
+      int tmpIndex = index;
+      obj.GetComponentsInChildren<Button>()[0].onClick.AddListener(
+          () => { SelectBee(tmpIndex); });
+
+      // disable the button no bee is assigned
+      obj.GetComponentsInChildren<Button>()[1].gameObject.SetActive(false);
     }
 
     gameObject.SetActive(true);
@@ -65,5 +93,15 @@ public class StructureUIController : MonoBehaviour {
       }
       hudController.CloseStructureMenu();
     });
+  }
+
+  public void RemoveBee(int index) {
+    // remove the bee with the given callback
+    if (removeBeeCallback != null) {
+      removeBeeCallback(index);
+    } else {
+      Debug.Log("ERROR: RemoveBee callback not set");
+    }
+    hudController.CloseStructureMenu();
   }
 }

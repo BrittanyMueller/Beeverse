@@ -26,11 +26,7 @@ public class BuildingUIController : StructureUIController {
     var oldPos = progressBar.anchoredPosition;
     progressBar.SetInsetAndSizeFromParentEdge(
         RectTransform.Edge.Left, 0, progressBarLimit.sizeDelta.x * (progress));
-    // progressBar.(RectTransform.Axis.Horizontal,
-    //                                       progressBarLimit.sizeDelta.x *
-    //                                           (progress));
     progressBar.ForceUpdateRectTransforms();
-    // progressBar.anchoredPosition = oldPos;
   }
 
   public void Show(Honeycomb honeycomb) {
@@ -40,6 +36,7 @@ public class BuildingUIController : StructureUIController {
 
     _honeycomb = honeycomb;
     selectBeeCallback = _honeycomb.SetWorker;
+    removeBeeCallback = _honeycomb.RemoveWorker;
 
     base.Show(honeycomb.bees);
   }

@@ -32,6 +32,9 @@ public class SelectBee : MonoBehaviour {
     var bees = GameObject.Find("GameState").GetComponent<GameState>()._bees;
 
     foreach (WorkerBee bee in bees) {
+      // if they have a task skip
+      if (bee.hasTask)
+        continue;
       GameObject obj =
           Instantiate(beeDetails, new Vector3(0, 0, 0), Quaternion.identity);
       obj.transform.SetParent(beeList.transform);

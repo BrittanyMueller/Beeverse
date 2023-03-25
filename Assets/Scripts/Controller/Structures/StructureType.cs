@@ -1,9 +1,10 @@
 ﻿
-public enum StructureType {
+public enum StructureType : int {
   Flower,
   HoneyFactory,
   BeeswaxFactory,
   RoyalJellyFactory,
-  Nursery,
-  Building
+  BroodNest,
+  Building,
+  QueenNest
 }
