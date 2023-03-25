@@ -82,7 +82,7 @@ public class GameState : MonoBehaviour {
   void Start() {
     _paused = false;
 
-    _secondTimer = 1;
+    _secondTimer = 1/minutesPreSecond;
 
     // Might change when saving comes in
     _currentTime = new TimeTracker(1, 0, 0);
@@ -107,14 +107,14 @@ public class GameState : MonoBehaviour {
   void FixedUpdate() {
     _secondTimer -= Time.deltaTime;
     if (_secondTimer <= 0) {
-      _secondTimer = 1;
-      _currentTime.AddMinutes(minutesPreSecond);
+      _secondTimer = 5.0f/minutesPreSecond;
+      _currentTime.AddMinutes(5);
       // Update game UI with new time
       dayController.UpdateDate(_currentTime.ToString());
 
       // Update all bees that time has passed
       foreach (Bee bee in _bees) {
-        bee.UpdateTimeTick(minutesPreSecond);
+        bee.UpdateTimeTick(5);
       }
     }
 

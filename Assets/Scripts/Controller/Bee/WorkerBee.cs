@@ -168,7 +168,7 @@ public class WorkerBee : Bee {
     forwardVec.y = 0;
     if ((Vector3.Angle(taskBeeVec, forwardVec) < 10)) {
       controller.Move(transform.TransformDirection(Vector3.forward) * flySpeed *
-                      Time.deltaTime);
+                      Time.deltaTime * GameState.minutesPreSecond/5 );
     }
   }
 
@@ -177,7 +177,7 @@ public class WorkerBee : Bee {
     _anim.speed = 0.5f;
 
     // fly straight down
-    controller.Move(new Vector3(0, -flySpeed * Time.deltaTime, 0));
+    controller.Move(new Vector3(0, -flySpeed * Time.deltaTime * GameState.minutesPreSecond/5, 0));
   }
 
   public void Work() {
@@ -207,7 +207,7 @@ public class WorkerBee : Bee {
       }
       break;
     case WorkerBeeTask.TaskType.Builder:
-      honeycomb.buildProgress += honeycomb.buildSpeedPerSecond * Time.deltaTime;
+      honeycomb.buildProgress += honeycomb.buildSpeedPerSecond * Time.deltaTime * GameState.minutesPreSecond/5;
       // honeycomb finished building change job
       if (honeycomb.built) {
         _task.taskType =
@@ -242,7 +242,7 @@ public class WorkerBee : Bee {
     _anim.SetBool("Working", false);
 
     // fly straight up
-    controller.Move(new Vector3(0, flySpeed * Time.deltaTime, 0));
+    controller.Move(new Vector3(0, flySpeed * Time.deltaTime * GameState.minutesPreSecond/5 , 0));
   }
 
   public void ChangeState(WorkerBeeState newState) {
@@ -252,7 +252,7 @@ public class WorkerBee : Bee {
 
   /** Movement helpers */
   public void RotateToTask() {
-    float singleStep = _rotationSpeed * Time.deltaTime;
+    float singleStep = _rotationSpeed * Time.deltaTime * GameState.minutesPreSecond/5;
     Vector3 taskBeeVec = Task.taskLocation - transform.position;
     Vector3 forwardsVec = transform.forward;
 
@@ -273,7 +273,7 @@ public class WorkerBee : Bee {
     if (Task.targetLocation.x == 0 && Task.targetLocation.y == 0)
       return;
 
-    float singleStep = _rotationSpeed * Time.deltaTime;
+    float singleStep = _rotationSpeed * Time.deltaTime * GameState.minutesPreSecond/5;
     Vector3 targetBeeVec = Task.targetLocation - transform.position;
     Vector3 forwardsVec = transform.forward;
 
