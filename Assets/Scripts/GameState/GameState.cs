@@ -17,6 +17,9 @@ public class GameState : MonoBehaviour {
   public QueenBee _queen;
 
   public List<Honeycomb> _honeycombs = new List<Honeycomb>();
+
+  public List<Transform> _idleLocations = new List<Transform>();
+
   // Queen honeycomb will always be the first one generated
   public Honeycomb QueenHoneycomb {
     get { return _honeycombs[0]; }
@@ -189,6 +192,26 @@ public class GameState : MonoBehaviour {
     SceneManager.LoadScene("Beeverse");
   }
 
+  /**
+   * Gets the current speed of the game assuming 5 minutes is 1x
+   */
+  public static float GetGameSpeed() { return GameState.minutesPreSecond / 5; }
+
+  /**
+   * Gets a random idle location for a bee to travel
+   * to when not doing anything.
+   */
+  public Transform GetIdleLocation() {
+    // Check to make _idle locations are set
+    if (_idleLocations.Count == 0)
+      return null;
+    var rand = new System.Random();
+    return _idleLocations[rand.Next(0, _idleLocations.Count)];
+  }
+
+  /**
+   * Creates a honeycomb at pos of a given type
+   */
   public void CreateHoneycomb(Vector3 pos, StructureType type) {
     honeycombGenerator.CreateHoneycomb(pos, type);
     honeycombGenerator.HideBuildingHints();
@@ -220,6 +243,12 @@ public class GameState : MonoBehaviour {
     _totalResources.beeswax += beeswax;
   }
 
+  /**
+   * Checks to see if we have enough resources and consumes them
+   * if we can.
+   * @returns true if the resources were consumed
+   * @returns false if the resources weren't consumed
+   */
   public bool ConsumeResources(BeeResources consume) {
 
     // test if we can consume the resources

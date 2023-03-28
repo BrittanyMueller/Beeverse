@@ -68,4 +68,34 @@ public class HoneycombFactory : Honeycomb {
     // return if the resources got consumed
     return state.ConsumeResources(res);
   }
+
+  public string CostToString() {
+    string str = "";
+
+    for (int i = 0;
+         i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
+
+      if (i != 0)
+        str += "\u27A0".ToString();
+
+      switch (inResources[i]) {
+      case BeeResources.Type.Beeswax:
+        str += inResourcesConversionRate[i].ToString() + " Beeswax";
+        break;
+      case BeeResources.Type.Honey:
+        str += inResourcesConversionRate[i].ToString() + " Honey";
+        break;
+      case BeeResources.Type.Nectar:
+        str += inResourcesConversionRate[i].ToString() + " Nectar";
+        break;
+      case BeeResources.Type.RoyalJelly:
+        str += inResourcesConversionRate[i].ToString() + " Royal Jelly";
+        break;
+      case BeeResources.Type.Pollen:
+        str += inResourcesConversionRate[i].ToString() + " Pollen";
+        break;
+      }
+    }
+    return str;
+  }
 }
