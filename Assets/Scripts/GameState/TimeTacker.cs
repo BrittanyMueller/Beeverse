@@ -1,3 +1,8 @@
+
+/**
+ * TimeTracker is used to hold the internal time of gameobject
+ * and state
+ */
 public class TimeTracker {
 
   public int day {

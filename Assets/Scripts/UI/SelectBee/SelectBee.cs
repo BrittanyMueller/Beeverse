@@ -7,11 +7,13 @@ using System;
 
 public class SelectBee : MonoBehaviour {
 
+  // Prefab containing details about the bee
+  // as well as a button which can be used to select the bee
   public GameObject beeDetails;
 
+  // Vertical layout group object that
+  // holds all the bees that can be selected
   public GameObject beeList;
-
-  void Start() {}
 
   /**
    * Shows A list of current bees that can be used for the job

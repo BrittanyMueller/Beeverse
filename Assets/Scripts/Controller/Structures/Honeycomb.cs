@@ -101,6 +101,9 @@ public class Honeycomb : MonoBehaviour {
     }
   }
 
+  /**
+   * Removes a worker from a current index if it exists
+   */
   public void RemoveWorker(int index) {
     if (bees[index]) {
       bees[index].Task = null;

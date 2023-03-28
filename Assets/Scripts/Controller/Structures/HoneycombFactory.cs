@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class HoneycombFactory : Honeycomb {
 
-  // Resources In  conversions
+  // Resources IO conversions
   public List<BeeResources.Type> inResources;
   public List<int> inResourcesConversionRate;
   public BeeResources.Type outResource;
+  // How long it takes to make one of the outResource
   public int conversionTimeMinutes;
 
+  /** Abstraction of adding the resource of any given honeycomb
+   * to the game state
+   */
   public void AddResource(GameState state) {
     switch (outResource) {
     case BeeResources.Type.Beeswax:
@@ -22,7 +26,6 @@ public class HoneycombFactory : Honeycomb {
       break;
     case BeeResources.Type.Nectar:
       state.AddNectar(1);
-
       break;
     case BeeResources.Type.Pollen:
       state.AddPollen(1);
@@ -40,7 +43,7 @@ public class HoneycombFactory : Honeycomb {
   public bool ConsumeResources(GameState state) {
     BeeResources res = new BeeResources();
 
-    // Calculate the needed resources and package it up for gamestate
+    // Calculate the needed resources and package it up for game state
     for (int i = 0;
          i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
       switch (inResources[i]) {

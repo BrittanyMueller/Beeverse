@@ -10,8 +10,7 @@ public class Flower : MonoBehaviour {
 
   private HudController _controller;
 
-  public float NectarPerSecond = 1;
-  public float PollenPerSecond = 1;
+  public int ConversionTimeMinutes = 5;
 
   // Start is called before the first frame update
   void Start() {

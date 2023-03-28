@@ -7,8 +7,7 @@ using TMPro;
 public class FlowerUIController : StructureUIController {
   // Start is called before the first frame update
 
-  public TMP_Text npsText;
-  public TMP_Text ppsText;
+  public TMP_Text conversionText;
 
   private Flower _curPatch;
 
@@ -20,8 +19,7 @@ public class FlowerUIController : StructureUIController {
     removeBeeCallback = _curPatch.RemoveWorker;
 
     // Set text for resource collection speeds
-    npsText.text = ((int)_curPatch.NectarPerSecond).ToString();
-    ppsText.text = ((int)_curPatch.PollenPerSecond).ToString();
+    conversionText.text = (_curPatch.ConversionTimeMinutes).ToString();
 
     base.Show(patch.bees);
   }
