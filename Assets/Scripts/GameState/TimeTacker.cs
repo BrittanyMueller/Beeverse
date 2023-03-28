@@ -48,7 +48,7 @@ public class TimeTracker {
   }
 
   public override string ToString() {
-    return "Day: " + day.ToString() + " " + hour.ToString().PadLeft(2, '0') +
+    return "Day " + day.ToString() + " " + hour.ToString().PadLeft(2, '0') +
            ":" + minute.ToString().PadLeft(2, '0');
     ;
   }
