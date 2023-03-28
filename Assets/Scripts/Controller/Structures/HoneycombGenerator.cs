@@ -15,6 +15,7 @@ public class HoneycombGenerator : MonoBehaviour {
   // Special bool that is used to autogenerate honeycombs
   // if it is in the menu
   public bool inMenu = false;
+
   private List<GameObject> _menuGeneratedHoneycombs = new List<GameObject>();
 
   // Holds object generated from showing hints
@@ -25,8 +26,8 @@ public class HoneycombGenerator : MonoBehaviour {
   private float _verticalOffset;
   private float _horizontalOffset;
 
-  public List<Vector3> openList = new List<Vector3>();
-  private List<Vector3> closedList = new List<Vector3>();
+  private List<Vector3> _openList = new List<Vector3>();
+  private List<Vector3> _closedList = new List<Vector3>();
 
   // Start is called before the first frame update
   void Start() {
@@ -36,9 +37,8 @@ public class HoneycombGenerator : MonoBehaviour {
         _verticalOffset / Mathf.Sqrt(3); // Calculate by special triangle
     _horizontalOffset = hexBase + (size.z - hexBase) / 2;
 
-    closedList.Add(honeycomb.transform.position);
+    _closedList.Add(honeycomb.transform.position);
     GenerateAvailablePositions(honeycomb.transform.position);
-    Debug.Log(honeycomb.transform.position.x);
 
     // Only randomly generate if we are in the menu
     if (inMenu)
@@ -52,7 +52,7 @@ public class HoneycombGenerator : MonoBehaviour {
     var rand = new System.Random();
     while (true) {
       yield return new WaitForSeconds(1);
-      CreateHoneycomb(openList[rand.Next(0, openList.Count)],
+      CreateHoneycomb(_openList[rand.Next(0, _openList.Count)],
                       StructureType.QueenNest);
     }
   }
@@ -77,13 +77,13 @@ public class HoneycombGenerator : MonoBehaviour {
     foreach (var space in possibleSpaces) {
       // Add new space to available list if not already found/used
       var existsInOpen =
-          openList.Exists((value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
-                                     Mathf.Abs(value.z - space.z) < 0.001);
-      var existsInClosed =
-          closedList.Exists((value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
-                                       Mathf.Abs(value.z - space.z) < 0.001);
+          _openList.Exists((value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
+                                      Mathf.Abs(value.z - space.z) < 0.001);
+      var existsInClosed = _closedList.Exists(
+          (value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
+                     Mathf.Abs(value.z - space.z) < 0.001);
       if (!existsInOpen && !existsInClosed) {
-        openList.Add(space);
+        _openList.Add(space);
       }
     }
   }
@@ -115,8 +115,8 @@ public class HoneycombGenerator : MonoBehaviour {
       break;
     }
     GenerateAvailablePositions(offset);
-    closedList.Add(offset);
-    openList.Remove(offset);
+    _closedList.Add(offset);
+    _openList.Remove(offset);
 
     // if we are in menu add it to the honeycomb list
     // else add it to the gamestate
@@ -124,8 +124,8 @@ public class HoneycombGenerator : MonoBehaviour {
       _menuGeneratedHoneycombs.Add(newHoneycomb);
       if (_menuGeneratedHoneycombs.Count > 100) {
         // reset everything after 100 have been generated
-        openList.Clear();
-        closedList.Clear();
+        _openList.Clear();
+        _closedList.Clear();
         GenerateAvailablePositions(honeycomb.transform.position);
         while (_menuGeneratedHoneycombs.Count != 0) {
           Destroy(_menuGeneratedHoneycombs[0]);
@@ -169,7 +169,7 @@ public class HoneycombGenerator : MonoBehaviour {
     if (!state.ConsumeResources(res))
       return;
 
-    foreach (var pos in openList) {
+    foreach (var pos in _openList) {
       GameObject hintObj =
           Instantiate(honeycombHint, pos, honeycomb.transform.rotation);
       HoneycombHint hint = hintObj.GetComponent<HoneycombHint>();

@@ -37,6 +37,10 @@ public class WorkerBeeTask {
     workerSpotIndex = index;
   }
 
+  /**
+   * Returns the correct tasked based on the structure they are working in
+   * if it is not valid structure Builder will be returned instead.
+   */
   public static TaskType StructureTypeAsTaskType(StructureType type) {
     switch (type) {
     case StructureType.HoneyFactory:

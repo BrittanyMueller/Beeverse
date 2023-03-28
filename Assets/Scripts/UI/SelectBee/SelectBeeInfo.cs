@@ -15,14 +15,12 @@ public class SelectBeeInfo : MonoBehaviour,
   void Start() {
 
     gameObject.GetComponentsInChildren<TMP_Text>()[0].text =
-        bee.beeName + " - " + bee.lifeSpanInDays + " Days" + "\n" +
-        bee.jobTitle;
+        bee.beeName + " - " + bee.AgeInDays + " Days" + "\n" + bee.jobTitle;
   }
 
-  // Update is called once per frame
-  void Update() {}
-
-  public void OnPointerEnter(PointerEventData eventData) {}
+  public void OnPointerEnter(PointerEventData eventData) {
+    // TODO BAM add bee info
+  }
 
   public void OnPointerExit(PointerEventData eventData) {
     // disable bee info ui

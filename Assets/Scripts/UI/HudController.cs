@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/** Responsible for controller what
+ * pops up and is closed for the UI of the
+ * entire application
+ */
 public class HudController : MonoBehaviour {
 
   public GameObject menu;

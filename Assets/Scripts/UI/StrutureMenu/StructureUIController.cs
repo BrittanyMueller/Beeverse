@@ -9,14 +9,23 @@ public class StructureUIController : MonoBehaviour {
 
   // common components for StructureUIControllers
   public GameState state;
-  public SelectBee selectBee;
-  public GameObject beeSlot;
-  public GameObject beeList;
   public HudController hudController;
+
+  // GameObject to the selectbee screen which
+  // can be used to select a given bee when the
+  // beeslot is pressed
+  public SelectBee selectBee;
+
+  // Prefab for a beeslot which can either be empty
+  // or contain a bee and its information
+  // and is used to assign bees to a task
+  public GameObject beeSlot;
+
+  // vertical group layout that contains all the bee slots
+  public GameObject beeList;
 
   // Callbacks which will be used when a bee is selected
   // which should be implemented by the child class
-
   protected Action<WorkerBee, int> selectBeeCallback;
   protected Action<int> removeBeeCallback;
 

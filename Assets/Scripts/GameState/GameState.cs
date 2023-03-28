@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
@@ -82,7 +81,7 @@ public class GameState : MonoBehaviour {
   void Start() {
     _paused = false;
 
-    _secondTimer = 1/minutesPreSecond;
+    _secondTimer = 1 / minutesPreSecond;
 
     // Might change when saving comes in
     _currentTime = new TimeTracker(1, 0, 0);
@@ -107,7 +106,7 @@ public class GameState : MonoBehaviour {
   void FixedUpdate() {
     _secondTimer -= Time.deltaTime;
     if (_secondTimer <= 0) {
-      _secondTimer = 5.0f/minutesPreSecond;
+      _secondTimer = 5.0f / minutesPreSecond;
       _currentTime.AddMinutes(5);
       // Update game UI with new time
       dayController.UpdateDate(_currentTime.ToString());
@@ -196,27 +195,27 @@ public class GameState : MonoBehaviour {
   }
 
   /** Functions for setting resources */
-  public void AddPollen(float pollen) {
+  public void AddPollen(int pollen) {
     resources.pollen += pollen;
     _totalResources.pollen += pollen;
   }
 
-  public void AddNectar(float nectar) {
+  public void AddNectar(int nectar) {
     resources.nectar += nectar;
     _totalResources.nectar += nectar;
   }
 
-  public void AddHoney(float honey) {
+  public void AddHoney(int honey) {
     resources.honey += honey;
     _totalResources.honey += honey;
   }
 
-  public void AddRoyalJelly(float royalJelly) {
+  public void AddRoyalJelly(int royalJelly) {
     resources.royalJelly += royalJelly;
     _totalResources.royalJelly += royalJelly;
   }
 
-  public void AddBeeswax(float beeswax) {
+  public void AddBeeswax(int beeswax) {
     resources.beeswax += beeswax;
     _totalResources.beeswax += beeswax;
   }
