@@ -57,8 +57,9 @@ MonoBehaviour:
   - {fileID: 2942807990425248762}
   - {fileID: 575163133296419780}
   bees: []
-  NectarPerSecond: 1
-  PollenPerSecond: 1
+  conversionTimeMinutes: 5
+  pollenCollectionRate: 1
+  nectarCollectionRate: 3
 --- !u!65 &6301513657778299025
 BoxCollider:
   m_ObjectHideFlags: 0

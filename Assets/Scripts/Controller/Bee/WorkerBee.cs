@@ -347,17 +347,18 @@ public class WorkerBee : Bee {
   }
 
   public void WorkAtFlower() {
+    // Check if we have finished working
     if (_workTimerSet &&
         _workTimer <= 0) { // currently working see if we are done
-      _state.AddPollen(1);
-      _state.AddNectar(1);
+      _state.AddPollen(flower.pollenCollectionRate);
+      _state.AddNectar(flower.nectarCollectionRate);
       _workTimerSet = false;
     }
 
+    // Start working
     if (!_workTimerSet) {
-      // start working
       _workTimerSet = true;
-      _workTimer = flower.ConversionTimeMinutes;
+      _workTimer = flower.conversionTimeMinutes;
     }
   }
 

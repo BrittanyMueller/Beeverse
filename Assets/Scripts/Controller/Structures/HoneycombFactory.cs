@@ -10,7 +10,9 @@ public class HoneycombFactory : Honeycomb {
   public List<BeeResources.Type> inResources;
   public List<int> inResourcesConversionRate;
   public BeeResources.Type outResource;
-  // How long it takes to make one of the outResource
+  public int outResourceCollectionRate = 1;
+
+  // How long it takes to make outResourceCollectionRate of the outResource
   public int conversionTimeMinutes;
 
   /** Abstraction of adding the resource of any given honeycomb
@@ -19,19 +21,19 @@ public class HoneycombFactory : Honeycomb {
   public void AddResource(GameState state) {
     switch (outResource) {
     case BeeResources.Type.Beeswax:
-      state.AddBeeswax(1);
+      state.AddBeeswax(outResourceCollectionRate);
       break;
     case BeeResources.Type.Honey:
-      state.AddHoney(1);
+      state.AddHoney(outResourceCollectionRate);
       break;
     case BeeResources.Type.Nectar:
-      state.AddNectar(1);
+      state.AddNectar(outResourceCollectionRate);
       break;
     case BeeResources.Type.Pollen:
-      state.AddPollen(1);
+      state.AddPollen(outResourceCollectionRate);
       break;
     case BeeResources.Type.RoyalJelly:
-      state.AddRoyalJelly(1);
+      state.AddRoyalJelly(outResourceCollectionRate);
       break;
     }
   }
@@ -78,27 +80,26 @@ public class HoneycombFactory : Honeycomb {
       if (i != 0)
         str += " + ";
 
-      str += ResourceToString(inResources[i], inResourcesConversionRate[i].ToString());
-      
+      str += ResourceToString(inResources[i],
+                              inResourcesConversionRate[i].ToString());
     }
     return str + " -> ".ToString() + " " + ResourceToString(outResource, "1");
   }
 
   private string ResourceToString(BeeResources.Type type, string amount) {
     switch (type) {
-      case BeeResources.Type.Beeswax:
-        return amount + " Beeswax";
-      case BeeResources.Type.Honey:
-        return amount + " Honey";
-      case BeeResources.Type.Nectar:
-        return amount + " Nectar";
-      case BeeResources.Type.RoyalJelly:
-        return amount + " Royal Jelly";
-      case BeeResources.Type.Pollen:
-        return amount + " Pollen";
-      default:
-        return "Unknown";
-      }
-
+    case BeeResources.Type.Beeswax:
+      return amount + " Beeswax";
+    case BeeResources.Type.Honey:
+      return amount + " Honey";
+    case BeeResources.Type.Nectar:
+      return amount + " Nectar";
+    case BeeResources.Type.RoyalJelly:
+      return amount + " Royal Jelly";
+    case BeeResources.Type.Pollen:
+      return amount + " Pollen";
+    default:
+      return "Unknown";
+    }
   }
 }

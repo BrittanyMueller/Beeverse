@@ -125,8 +125,9 @@ public class Honeycomb : MonoBehaviour {
    * yet it will instead open the building menu
    */
   void OnMouseDown() {
-    // make sure UI isn't on UI
-    if (EventSystem.current.IsPointerOverGameObject())
+    // make sure UI isn't on UI and this isn't the queen honeycomb
+    if (EventSystem.current.IsPointerOverGameObject() ||
+        honeycombType == StructureType.QueenNest)
       return;
 
     // check to see if the structure is built

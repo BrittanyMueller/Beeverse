@@ -34,7 +34,6 @@ public class GameState : MonoBehaviour {
   public HudController hudController;
   public GameOverController gameOverController;
   public DayController dayController;
-  public DebugController debugController;
 
   private BeeResources resources;
   public float honeyCount {
@@ -89,6 +88,8 @@ public class GameState : MonoBehaviour {
 
     _secondTimer = 1 / minutesPreSecond;
 
+    GameState.minutesPreSecond = 5;
+
     // Might change when saving comes in
     _currentTime = new TimeTracker(1, 0, 0);
     _day = 0;
@@ -97,8 +98,8 @@ public class GameState : MonoBehaviour {
     resources = new BeeResources();
     resources.beeswax = 0;
     resources.honey = 0;
-    resources.nectar = 0;
-    resources.pollen = 0;
+    resources.nectar = 50;
+    resources.pollen = 100;
     resources.royalJelly = 0;
     resourceController.UpdateResources(resources);
 
@@ -157,12 +158,6 @@ public class GameState : MonoBehaviour {
     resourceController.UpdateResources(resources);
   }
 
-  void Update() {
-    if (Input.GetKeyDown(KeyCode.F1)) {
-      debugController.toggle();
-    }
-  }
-
   IEnumerator RemoveBee(Bee bee) {
     yield return new WaitForSeconds(10);
     _deadBees--;
@@ -205,21 +200,15 @@ public class GameState : MonoBehaviour {
    * to when not doing anything.
    */
   public Vector3 GetIdleLocation() {
-    // if (idleArea == null) return new Vector3(0,0,0);
-
+    if (idleArea == null)
+      return new Vector3(0, 0, 0);
     var size = idleArea.size;
-
-    Debug.Log("x: " + size.x.ToString());
-    Debug.Log("z: " + size.z.ToString());
-    Debug.Log("pos x: " + idleArea.transform.position.x.ToString());
-    Debug.Log("pos y: " + idleArea.transform.position.z.ToString());
-
-    
-    
-
     // Calculates a point in the box collider for idle
-    // note uses -z because the gameobject will be at the top left of the idleArea
-    return idleArea.transform.position  + new Vector3(_rand.Next(0,(int)size.x), 0, -_rand.Next(0, (int)size.z));
+    // note uses -z because the game object will be at the top left of the
+    // idleArea
+    return idleArea.transform.position +
+           new Vector3(_rand.Next(0, (int)size.x), 0,
+                       -_rand.Next(0, (int)size.z));
   }
 
   /**
@@ -230,30 +219,43 @@ public class GameState : MonoBehaviour {
     honeycombGenerator.HideBuildingHints();
   }
 
-  /** Functions for setting resources */
+  /**
+   * Functions for setting resources
+   * resources will be capped at 9999
+   */
   public void AddPollen(int pollen) {
     resources.pollen += pollen;
     _totalResources.pollen += pollen;
+    if (resources.pollen > 9999)
+      resources.pollen = 9999;
   }
 
   public void AddNectar(int nectar) {
     resources.nectar += nectar;
     _totalResources.nectar += nectar;
+    if (resources.nectar > 9999)
+      resources.nectar = 9999;
   }
 
   public void AddHoney(int honey) {
     resources.honey += honey;
     _totalResources.honey += honey;
+    if (resources.honey > 9999)
+      resources.honey = 9999;
   }
 
   public void AddRoyalJelly(int royalJelly) {
     resources.royalJelly += royalJelly;
     _totalResources.royalJelly += royalJelly;
+    if (resources.royalJelly > 9999)
+      resources.royalJelly = 9999;
   }
 
   public void AddBeeswax(int beeswax) {
     resources.beeswax += beeswax;
     _totalResources.beeswax += beeswax;
+    if (resources.beeswax > 9999)
+      resources.beeswax = 9999;
   }
 
   /**
@@ -283,5 +285,15 @@ public class GameState : MonoBehaviour {
     resources.nectar -= consume.nectar;
     resources.pollen -= consume.pollen;
     return true;
+  }
+
+  /**
+   * Sets the run speed of the game in minutes
+   * 1x speed is 5 minutes
+   * 2x speed is 10 minutes
+   * 5x speed is 25 minutes
+   */
+  public void setGameSpeed(int minutes) {
+    GameState.minutesPreSecond = minutes;
   }
 }

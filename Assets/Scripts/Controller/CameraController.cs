@@ -69,7 +69,7 @@ public class CameraController : MonoBehaviour {
 
     // TODO adjust zoom amount based on current FOV (zoom feels slow when
     // near/at maxFOV)
-    
+
     // Disable zoom when scrolling UI elements
     if (EventSystem.current.IsPointerOverGameObject())
       return;
