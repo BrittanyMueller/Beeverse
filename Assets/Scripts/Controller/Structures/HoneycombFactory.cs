@@ -76,26 +76,29 @@ public class HoneycombFactory : Honeycomb {
          i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
 
       if (i != 0)
-        str += "\u27A0".ToString();
+        str += " + ";
 
-      switch (inResources[i]) {
-      case BeeResources.Type.Beeswax:
-        str += inResourcesConversionRate[i].ToString() + " Beeswax";
-        break;
-      case BeeResources.Type.Honey:
-        str += inResourcesConversionRate[i].ToString() + " Honey";
-        break;
-      case BeeResources.Type.Nectar:
-        str += inResourcesConversionRate[i].ToString() + " Nectar";
-        break;
-      case BeeResources.Type.RoyalJelly:
-        str += inResourcesConversionRate[i].ToString() + " Royal Jelly";
-        break;
-      case BeeResources.Type.Pollen:
-        str += inResourcesConversionRate[i].ToString() + " Pollen";
-        break;
-      }
+      str += ResourceToString(inResources[i], inResourcesConversionRate[i].ToString());
+      
     }
-    return str;
+    return str + " -> ".ToString() + " " + ResourceToString(outResource, "1");
+  }
+
+  private string ResourceToString(BeeResources.Type type, string amount) {
+    switch (type) {
+      case BeeResources.Type.Beeswax:
+        return amount + " Beeswax";
+      case BeeResources.Type.Honey:
+        return amount + " Honey";
+      case BeeResources.Type.Nectar:
+        return amount + " Nectar";
+      case BeeResources.Type.RoyalJelly:
+        return amount + " Royal Jelly";
+      case BeeResources.Type.Pollen:
+        return amount + " Pollen";
+      default:
+        return "Unknown";
+      }
+
   }
 }

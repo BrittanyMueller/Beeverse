@@ -17,7 +17,7 @@ public class WorkerBee : Bee {
   public bool inMenu = false;
 
   // location where the bee travels for idle animation;
-  private Transform _idleLocation = null;
+  private Vector3 _idleLocation;
   private float _idleFlyHeight = 30f;
 
   // Objects for Task
@@ -82,7 +82,7 @@ public class WorkerBee : Bee {
 
   public bool atIdleLocation {
     get {
-      var distance = _idleLocation.position - transform.position;
+      var distance = _idleLocation - transform.position;
       distance.y = 0;
       return distance.sqrMagnitude < 1; // 1cm
     }
@@ -91,7 +91,7 @@ public class WorkerBee : Bee {
   public bool hasLanded {
     get {
       var distance = Task.taskLocation - transform.position;
-      return distance.sqrMagnitude < 2; // basically on task
+      return distance.sqrMagnitude < 10; // basically on task
     }
   }
 
@@ -185,7 +185,7 @@ public class WorkerBee : Bee {
     // check if we have an idle location or if we are there
     // to see if we need a new location or if we should
     // keep traveling to it
-    if (_idleLocation == null || atIdleLocation) {
+    if (_idleLocation == Vector3.zero || atIdleLocation) {
       _idleLocation = _state.GetIdleLocation();
     } else {
       TravelToIdle();
@@ -194,11 +194,11 @@ public class WorkerBee : Bee {
 
   public void TravelToIdle() {
     // Make sure it is set
-    if (_idleLocation == null)
+    if (_idleLocation == Vector3.zero)
       return;
-    RotateTo(_idleLocation.position);
+    RotateTo(_idleLocation);
 
-    Vector3 taskBeeVec = _idleLocation.position - transform.position;
+    Vector3 taskBeeVec = _idleLocation - transform.position;
     Vector3 forwardVec = transform.forward;
     taskBeeVec.y = 0;
     forwardVec.y = 0;

@@ -16,9 +16,12 @@ public class GameState : MonoBehaviour {
   private int _deadBees = 0;
   public QueenBee _queen;
 
+  // Bounding box where bees are allowed to idle too.
+  public BoxCollider idleArea = null;
+
   public List<Honeycomb> _honeycombs = new List<Honeycomb>();
 
-  public List<Transform> _idleLocations = new List<Transform>();
+  private System.Random _rand = new System.Random();
 
   // Queen honeycomb will always be the first one generated
   public Honeycomb QueenHoneycomb {
@@ -201,12 +204,22 @@ public class GameState : MonoBehaviour {
    * Gets a random idle location for a bee to travel
    * to when not doing anything.
    */
-  public Transform GetIdleLocation() {
-    // Check to make _idle locations are set
-    if (_idleLocations.Count == 0)
-      return null;
-    var rand = new System.Random();
-    return _idleLocations[rand.Next(0, _idleLocations.Count)];
+  public Vector3 GetIdleLocation() {
+    // if (idleArea == null) return new Vector3(0,0,0);
+
+    var size = idleArea.size;
+
+    Debug.Log("x: " + size.x.ToString());
+    Debug.Log("z: " + size.z.ToString());
+    Debug.Log("pos x: " + idleArea.transform.position.x.ToString());
+    Debug.Log("pos y: " + idleArea.transform.position.z.ToString());
+
+    
+    
+
+    // Calculates a point in the box collider for idle
+    // note uses -z because the gameobject will be at the top left of the idleArea
+    return idleArea.transform.position  + new Vector3(_rand.Next(0,(int)size.x), 0, -_rand.Next(0, (int)size.z));
   }
 
   /**
