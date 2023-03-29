@@ -21,7 +21,7 @@ public class FactoryUIController : StructureUIController {
     // Set text for resource collection speeds
     factoryNameText.text = _curFactory.Name;
 
-    costText.text = "TODO set";
+    costText.text = _curFactory.CostToString();
     minutesPerResourceText.text = _curFactory.conversionTimeMinutes.ToString();
 
     // todo set production time text and cost text
