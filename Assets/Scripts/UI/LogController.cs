@@ -26,7 +26,8 @@ public class LogController : MonoBehaviour {
   }
 
   public void UpdateLog(String update) {
-    LogContent.text += "\n" + update;
+    // New line to setup for next update message
+    LogContent.text += update + "\n";
 
     var oldScroll = logScroll.verticalNormalizedPosition;
     StartCoroutine(ApplyScrollPosition(logScroll, oldScroll));

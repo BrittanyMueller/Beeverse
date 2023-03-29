@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour {
   // TODO create limits for x/z movement, rotate limits
@@ -72,6 +69,10 @@ public class CameraController : MonoBehaviour {
 
     // TODO adjust zoom amount based on current FOV (zoom feels slow when
     // near/at maxFOV)
+    
+    // Disable zoom when scrolling UI elements
+    if (EventSystem.current.IsPointerOverGameObject())
+      return;
 
     if (Input.mouseScrollDelta.y > 0) {
       // Positive scrolling forward (zoom in)
