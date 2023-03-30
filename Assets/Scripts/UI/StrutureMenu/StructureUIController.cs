@@ -30,6 +30,10 @@ public class StructureUIController : MonoBehaviour {
   protected Action<int> removeBeeCallback;
   protected Action refreshCallback;
 
+  private Sprite _beeSelfie;
+  private Sprite _beeShadow;
+  
+
   // Each child is expected to implement a show and hide function
   public virtual void Hide() {
     selectBee.Hide();
@@ -37,6 +41,12 @@ public class StructureUIController : MonoBehaviour {
   }
 
   protected void Show(List<WorkerBee> bees) {
+
+    if (_beeShadow == null) {
+      // Load images of bees for sprite swapping
+      _beeSelfie = Resources.Load<Sprite>("BeePics/beeSelfie_transparent");
+      _beeShadow = Resources.Load<Sprite>("BeePics/beeSelfie_shadow");
+    }
     // create ui
     // Clear the current list
     {
@@ -54,8 +64,10 @@ public class StructureUIController : MonoBehaviour {
           Instantiate(beeSlot, new Vector3(0, 0, 0), Quaternion.identity);
       obj.transform.SetParent(beeList.transform);
 
-      // set info about the bee.
+      // Set bee name and active profile pic
       obj.GetComponentsInChildren<TMP_Text>()[0].text = bees[index].beeName;
+      obj.transform.Find("Frame/BeeSelfie").GetComponent<Image>().sprite = _beeSelfie;
+      // obj.GetComponentsInChildren<Image>()[0].GetComponentsInChildren<Image>()[0].sprite = _beeSelfie;
 
       // set onclick with the index of the bee so we can backtrack which bee was
       // chosen Need a tmp variable because c# sucks
@@ -77,6 +89,8 @@ public class StructureUIController : MonoBehaviour {
       obj.transform.SetParent(beeList.transform);
 
       // set info about the bee. If the spot is empty just make the text <EMPTY>
+      // obj.GetComponentsInChildren<Image>()[0].sprite = _beeShadow;
+      obj.transform.Find("Frame/BeeSelfie").GetComponent<Image>().sprite = _beeShadow;
       obj.GetComponentsInChildren<TMP_Text>()[0].text = "<EMPTY>";
 
       // set onclick with the index of the bee so we can backtrack which bee was

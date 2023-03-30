@@ -97,7 +97,6 @@ public class HudController : MonoBehaviour {
       factoryMenu.Show((HoneycombFactory)structure);
       break;
     }
-
     structureMenu.SetActive(true);
   }
   public void Exit() { Application.Quit(); }
