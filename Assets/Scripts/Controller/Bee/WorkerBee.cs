@@ -74,7 +74,7 @@ public class WorkerBee : Bee {
     get {
       var distance = Task.taskLocation - transform.position;
       distance.y = 0;
-      return distance.sqrMagnitude < 1; // 2cm
+      return distance.sqrMagnitude < 0.5; // 2cm
     }
   }
 
