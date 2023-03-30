@@ -37,6 +37,7 @@ public class BuildingUIController : StructureUIController {
     _honeycomb = honeycomb;
     selectBeeCallback = _honeycomb.SetWorker;
     removeBeeCallback = _honeycomb.RemoveWorker;
+    refreshCallback = refresh;
 
     base.Show(honeycomb.bees);
   }
@@ -44,5 +45,9 @@ public class BuildingUIController : StructureUIController {
   public override void Hide() {
     base.Hide();
     _honeycomb = null;
+  }
+
+  public void refresh() {
+    Show(_honeycomb);
   }
 }
