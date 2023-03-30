@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dcea5123a39adcb42ac86bb5f759e682
+guid: 12ca9a9017e2b8246bc7b4b1eaabd6ed
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,13 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BabyQueenPillow
-    second: {fileID: 2100000, guid: affe8420ea98e6140b81dcb49af842a6, type: 2}
+      name: BabyPillow1
+    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BabyPillow2
+    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BabyPillow3
+    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BabyPillow4
+    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BabyPillow5
+    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: floor
-    second: {fileID: 2100000, guid: a812788786901384c9a28e208575af30, type: 2}
+    second: {fileID: 2100000, guid: 34f13a9d0c9a8234ea280783c8327c54, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
