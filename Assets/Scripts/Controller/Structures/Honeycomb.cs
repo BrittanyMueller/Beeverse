@@ -42,11 +42,14 @@ public class Honeycomb : MonoBehaviour {
     get { return _buildProgress >= 1; }
   }
 
+  public bool showedStructure = false;
+
   public float buildProgress {
     get { return _buildProgress; }
     set {
       _buildProgress = value;
-      if (built) {
+      if (built && !showedStructure) {
+        showedStructure = true;
         ShowStructure();
       }
     }
@@ -55,6 +58,7 @@ public class Honeycomb : MonoBehaviour {
   public float buildSpeedPerSecond = 0.1f;
 
   protected HudController _hudController;
+  protected GameState _state;
 
   // Start is called before the first frame update
   void Start() {
@@ -66,6 +70,10 @@ public class Honeycomb : MonoBehaviour {
     GameObject controller = GameObject.Find("HudController");
     if (controller != null) {
       _hudController = controller.GetComponent<HudController>();
+    }
+    GameObject stateObj = GameObject.Find("GameState");
+    if (stateObj != null) {
+      _state = stateObj.GetComponent<GameState>();
     }
 
     // Structures should start unbuilt so hide
@@ -118,7 +126,15 @@ public class Honeycomb : MonoBehaviour {
   public void ShowStructure() {
     if (structure != null) {
       structure.SetActive(true);
+      if (honeycombType == StructureType.BroodNest) {
+        // add the bee slots the the GameState so queen knows to lay eggs
+        foreach (Transform child in this.transform) {
+          if (child.tag == "BabySlot")
+            _state._beeEggSlots.Add(child.gameObject.GetComponent<BeeEggSlot>());
+        }
+      }
     }
+
   }
 
   /**

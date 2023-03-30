@@ -83,6 +83,10 @@ public class QueenBee : Bee {
   public void IdleState() {
     _anim.SetBool("Flying", false);
     _anim.SetBool("Idle", true);
+
+        // Make sure we are touching the floor
+    if (!_controller.isGrounded)
+      _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime, 0));
   }
 
   public void DieState() {
@@ -97,12 +101,15 @@ public class QueenBee : Bee {
 
   public void LayEggState() {
     // add egg to slot
-    Task._curSlot.hasEgg = true;
+    if (Task != null && Task._curSlot != null)
+      Task._curSlot.hasEgg = true;
   }
 
   public void TravelState() {
     _anim.speed = 1f;
     _anim.SetBool("Flying", true);
+    _anim.SetBool("Idle", false);
+
     RotateTo(Task.taskLocation);
 
     Vector3 taskBeeVec = Task.taskLocation - transform.position;
@@ -134,7 +141,7 @@ public class QueenBee : Bee {
   public void TakeOffState() {
     _anim.speed = 0.5f;
     _anim.SetBool("Flying", true);
-    _anim.SetBool("Working", false);
+    _anim.SetBool("Idle", false);
 
     // fly straight up
     _controller.Move(new Vector3(

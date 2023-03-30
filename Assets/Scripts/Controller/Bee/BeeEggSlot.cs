@@ -17,7 +17,7 @@ public class BeeEggSlot : MonoBehaviour {
       }
     }
   }
-  private bool _hasEgg;
+  private bool _hasEgg = false;
 
   public TimeTracker timeToHatch;
 }
