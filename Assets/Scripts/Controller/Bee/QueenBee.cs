@@ -106,7 +106,6 @@ public class QueenBee : Bee {
   }
 
   public void TravelState() {
-    _anim.speed = 1f;
     _anim.SetBool("Flying", true);
     _anim.SetBool("Idle", false);
 
@@ -131,7 +130,6 @@ public class QueenBee : Bee {
 
   public void LandState() {
     RotateTo(Task.taskLocation);
-    _anim.speed = 0.5f;
 
     // fly straight down
     _controller.Move(new Vector3(
@@ -139,7 +137,6 @@ public class QueenBee : Bee {
   }
 
   public void TakeOffState() {
-    _anim.speed = 0.5f;
     _anim.SetBool("Flying", true);
     _anim.SetBool("Idle", false);
 
