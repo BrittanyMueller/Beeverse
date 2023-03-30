@@ -61,7 +61,7 @@ public class GameState : MonoBehaviour {
   private int _day;
 
   // Game config settings
-  public static int minutesPreSecond = 5;
+  public static int minutesPerSecond = 5;
 
   // This timer will be used to
   // update the clock every second
@@ -86,9 +86,9 @@ public class GameState : MonoBehaviour {
   void Start() {
     _paused = false;
 
-    _secondTimer = 1 / minutesPreSecond;
+    _secondTimer = 1 / minutesPerSecond;
 
-    GameState.minutesPreSecond = 5;
+    GameState.minutesPerSecond = 5;
 
     // Might change when saving comes in
     _currentTime = new TimeTracker(1, 0, 0);
@@ -113,7 +113,7 @@ public class GameState : MonoBehaviour {
   void FixedUpdate() {
     _secondTimer -= Time.deltaTime;
     if (_secondTimer <= 0) {
-      _secondTimer = 5.0f / minutesPreSecond;
+      _secondTimer = 5.0f / minutesPerSecond;
       _currentTime.AddMinutes(5);
       // Update game UI with new time
       dayController.UpdateDate(_currentTime.ToString());
@@ -193,7 +193,7 @@ public class GameState : MonoBehaviour {
   /**
    * Gets the current speed of the game assuming 5 minutes is 1x
    */
-  public static float GetGameSpeed() { return GameState.minutesPreSecond / 5; }
+  public static float GetGameSpeed() { return GameState.minutesPerSecond / 5; }
 
   /**
    * Gets a random idle location for a bee to travel
@@ -294,6 +294,6 @@ public class GameState : MonoBehaviour {
    * 5x speed is 25 minutes
    */
   public void setGameSpeed(int minutes) {
-    GameState.minutesPreSecond = minutes;
+    GameState.minutesPerSecond = minutes;
   }
 }
