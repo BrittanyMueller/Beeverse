@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -62,10 +61,12 @@ public class Honeycomb : MonoBehaviour {
     foreach (var _ in workSpots) {
       bees.Add(null);
     }
-
-    // find the builderController in the scene
-    _hudController =
-        GameObject.Find("HudController").GetComponent<HudController>();
+    
+    // find the hudController in the scene
+    GameObject controller = GameObject.Find("HudController");
+    if (controller != null) {
+      _hudController = controller.GetComponent<HudController>();
+    }
 
     // Structures should start unbuilt so hide
     // the structure if it exists

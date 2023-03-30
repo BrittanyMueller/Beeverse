@@ -27,7 +27,7 @@ public class WorkerBee : Bee {
   private Animator _anim;
   private CharacterController _controller;
 
-  private WorkerBeeState _currentState;
+  private WorkerBeeState _currentState = new WorkerBeeIdleState();
   private GameState _state;
 
   // Movement variables
@@ -104,7 +104,7 @@ public class WorkerBee : Bee {
   public string jobTitle {
     get {
       if (_task == null) {
-        return "Bum";
+        return "Honey Enjoyer";
       }
       switch (_task.taskType) {
       case WorkerBeeTask.TaskType.Builder:
@@ -116,9 +116,9 @@ public class WorkerBee : Bee {
       case WorkerBeeTask.TaskType.BeeswaxFactory:
         return "Beeswax Engineer";
       case WorkerBeeTask.TaskType.RoyalJellyFactory:
-        return "Royal Jelly Tech";
+        return "Royal Jelly Architect";
       case WorkerBeeTask.TaskType.HoneyFactory:
-        return "Honey Enjoyer";
+        return "Honey Technician";
       }
 
       return "NULL";
@@ -130,8 +130,10 @@ public class WorkerBee : Bee {
     base.Start();
     _anim = gameObject.GetComponentsInChildren<Animator>()[0];
     _controller = gameObject.GetComponent<CharacterController>();
-    _state = GameObject.Find("GameState").GetComponent<GameState>();
-
+    GameObject state = GameObject.Find("GameState");
+    if (state != null) {
+      _state = GameObject.Find("GameState").GetComponent<GameState>();
+    }
     ChangeState(new WorkerBeeIdleState());
   }
 
