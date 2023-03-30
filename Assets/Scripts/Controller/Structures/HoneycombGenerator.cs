@@ -109,6 +109,11 @@ public class HoneycombGenerator : MonoBehaviour {
     case StructureType.BroodNest:
       newHoneycomb =
           Instantiate(broodNest, offset, honeycomb.transform.rotation);
+      // add the bee slots the the GameState so queen knows to lay eggs
+      foreach (Transform child in newHoneycomb.transform) {
+        if (child.tag == "BabySlot")
+          state._beeEggSlots.Add(child.gameObject.GetComponent<BeeEggSlot>());
+      }
       break;
     case StructureType.QueenNest:
       newHoneycomb =

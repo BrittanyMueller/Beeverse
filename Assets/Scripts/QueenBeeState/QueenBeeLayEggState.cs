@@ -7,6 +7,6 @@ public class QueenBeeLayEggState : QueenBeeState {
   public override void Execute(QueenBee bee) {
 
     bee.LayEggState();
-    bee.ChangeState(new QueenBeeTakeoffState());
+    bee.ChangeState(new QueenBeeTakeOffState());
   }
 }

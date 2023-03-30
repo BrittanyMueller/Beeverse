@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeeEgg : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class BeeEggSlot : MonoBehaviour {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+  public BroodNest nest;
+  public GameObject egg;
+  public bool hasEgg {
+    get { return _hasEgg; }
+    set {
+      _hasEgg = value;
+      if (_hasEgg) {
+        GameObject eggGameObject =
+            Instantiate(egg, transform.position, transform.rotation);
+        // TODO add egg to brood nest @b
+      }
     }
+  }
+  private bool _hasEgg;
+
+  public TimeTracker timeToHatch;
 }

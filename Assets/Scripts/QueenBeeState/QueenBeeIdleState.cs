@@ -8,11 +8,8 @@ public class QueenBeeIdleState : QueenBeeState {
 
     if (bee.IsDead) {
       bee.ChangeState(new QueenBeeDieState());
-    } else if (bee.hasTask && !bee.atTask) {
-      bee.ChangeState(new QueenBeeTravelState());
-    } else if (bee.hasTask && bee.atTask) {
-      bee.ChangeState(new QueenBeeLandingState());
-
+    } else if (bee.hasTask || bee.hasEgg) {
+      bee.ChangeState(new QueenBeeTakeOffState());
     } else {
       bee.IdleState();
     }

@@ -8,7 +8,9 @@ public class QueenBee : Bee {
   private float _rotationSpeed = 1f;
   private float _flySpeed = 10f;
   private float _flyHeight = 20f;
-  private QueenBeeState _currentState = new QueenBeeState();
+  private QueenBeeState _currentState = new QueenBeeIdleState();
+  private Animator _anim;
+  private CharacterController _controller;
   private GameState _state;
 
   public QueenBeeTask Task {
@@ -37,10 +39,7 @@ public class QueenBee : Bee {
   }
 
   public bool hasEgg {
-    get {
-      
-      return false;
-    }
+    get { return _state._beeEggSlots.Find((value) => !value.hasEgg) != null; }
   }
 
   public bool hasTakenOff {
@@ -52,19 +51,28 @@ public class QueenBee : Bee {
   // Start is called before the first frame update
   protected override void Start() {
     base.Start();
-
+    _anim = gameObject.GetComponentsInChildren<Animator>()[0];
+    _controller = gameObject.GetComponent<CharacterController>();
     GameObject state = GameObject.Find("GameState");
     if (state != null) {
       _state = GameObject.Find("GameState").GetComponent<GameState>();
     }
+    ChangeState(new QueenBeeIdleState());
   }
 
   // Update is called once per frame
   protected void Update() { _currentState.Execute(this); }
 
-  public void SetEggTask() {}
+  public void SetEggTask() {
+    BeeEggSlot slot = _state._beeEggSlots.Find((value) => !value.hasEgg);
+    Task = new QueenBeeTask(QueenBeeTask.TaskType.LayEgg,
+                            slot.gameObject.transform.position, slot);
+  }
 
-  public void SetHomeTask() {}
+  public void SetHomeTask() {
+    Task = new QueenBeeTask(QueenBeeTask.TaskType.ReturnToNest,
+                            _state.QueenHoneycomb.workSpots[0].position);
+  }
 
   /*** State methods ***/
   public void ChangeState(QueenBeeState newState) {
@@ -72,24 +80,24 @@ public class QueenBee : Bee {
     Debug.Log(_currentState.GetType().Name);
   }
 
-  public void IdleState() {}
+  public void IdleState() {
+    _anim.SetBool("Flying", false);
+    _anim.SetBool("Idle", true);
+  }
 
   public void DieState() {
     if (!isDead) {
       isDead = true;
-
-      // _anim.SetBool("Flying", false);
-      // _anim.SetBool("Working", false);
-
-      // _anim.SetBool("Die", true);
-
+      _anim.SetBool("Flying", false);
+      _anim.SetBool("Idle", true);
     } else {
       _controller.Move(new Vector3(0, -0.1f, 0));
     }
   }
 
   public void LayEggState() {
-    // todo lay the egg
+    // add egg to slot
+    Task._curSlot.hasEgg = true;
   }
 
   public void TravelState() {

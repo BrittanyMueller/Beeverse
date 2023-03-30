@@ -13,6 +13,7 @@ public class GameState : MonoBehaviour {
   }
 
   public List<WorkerBee> _bees;
+  public List<BeeEggSlot> _beeEggSlots;
   private int _deadBees = 0;
   public QueenBee _queen;
 
