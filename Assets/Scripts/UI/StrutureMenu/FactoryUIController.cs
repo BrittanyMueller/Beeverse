@@ -17,16 +17,14 @@ public class FactoryUIController : StructureUIController {
     _curFactory = factory;
     selectBeeCallback = _curFactory.SetWorker;
     removeBeeCallback = _curFactory.RemoveWorker;
-    refreshCallback = refresh;
-
-
+    refreshCallback = Refresh;
+    
     // Set text for resource collection speeds
     factoryNameText.text = _curFactory.Name;
 
     costText.text = _curFactory.CostToString();
     minutesPerResourceText.text = _curFactory.conversionTimeMinutes.ToString();
-
-    // todo set production time text and cost text
+    
     base.Show(factory.bees);
   }
 
@@ -35,7 +33,7 @@ public class FactoryUIController : StructureUIController {
     _curFactory = null;
   }
 
-  public void refresh() {
+  private void Refresh() {
     Show(_curFactory);
   }
 }

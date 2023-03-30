@@ -12,9 +12,7 @@ public class WorkerBee : Bee {
   public GameObject _rightEyeDead;
   public GameObject _frown;
 
-  // If we are in the menu our idle animation
-  // should be different.
-  public bool inMenu = false;
+
 
   // location where the bee travels for idle animation;
   private Vector3 _idleLocation;
@@ -120,7 +118,6 @@ public class WorkerBee : Bee {
       case WorkerBeeTask.TaskType.HoneyFactory:
         return "Honey Technician";
       }
-
       return "NULL";
     }
   }

@@ -17,6 +17,7 @@ public class HudController : MonoBehaviour {
   public FlowerUIController flowerMenu;
   public BuildingUIController buildingMenu;
   public FactoryUIController factoryMenu;
+  public BeeProfileController beeProfileController;
 
   public List<Button> createHoneycombButtons;
   private Button createHoneyFactory;

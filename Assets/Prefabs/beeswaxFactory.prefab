@@ -111,8 +111,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.85279095, y: 0.2294165, z: 0.59828395}
-  m_Center: {x: 0, y: 0.108080745, z: -0.00472826}
+  m_Size: {x: 0.85279095, y: 0.042713318, z: 0.59828395}
+  m_Center: {x: 0, y: 0.014729219, z: -0.00472826}
 --- !u!114 &4970439756582888989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   inResources: 00000000
   inResourcesConversionRate: 03000000
   outResource: 1
+  outResourceCollectionRate: 1
   conversionTimeMinutes: 10
 --- !u!1 &5810123519048997258
 GameObject:

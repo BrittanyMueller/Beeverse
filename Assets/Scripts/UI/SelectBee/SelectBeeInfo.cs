@@ -10,9 +10,12 @@ public class SelectBeeInfo : MonoBehaviour {
   public WorkerBee bee;
   public int targetSelect;
   // Start is called before the first frame update
-  void Start() {
-    gameObject.GetComponentsInChildren<TMP_Text>()[0].text = bee.beeName;
-    gameObject.GetComponentsInChildren<TMP_Text>()[1].text =
-        bee.AgeInDays + " days old";
+  void Start() { 
+      if (bee != null) {
+        gameObject.GetComponentsInChildren<TMP_Text>()[0].text = bee.beeName;
+        gameObject.GetComponentsInChildren<TMP_Text>()[1].text =
+            bee.AgeInDays + " days old";
+          
+      }
   }
 }
