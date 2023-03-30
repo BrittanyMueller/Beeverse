@@ -70,7 +70,8 @@ public class HudController : MonoBehaviour {
   }
 
   public void CloseStructureMenu() {
-    if (state.Paused) return;
+    if (state.Paused)
+      return;
     structureMenu.SetActive(false);
     flowerMenu.Hide();
     buildingMenu.Hide();
@@ -78,7 +79,8 @@ public class HudController : MonoBehaviour {
   }
 
   public void OpenStructureMenu(StructureType type, MonoBehaviour structure) {
-    if (state.Paused) return;
+    if (state.Paused)
+      return;
     // Hide all children
     flowerMenu.Hide();
     buildingMenu.Hide();

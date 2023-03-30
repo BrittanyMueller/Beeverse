@@ -80,16 +80,18 @@ public class HoneycombGenerator : MonoBehaviour {
       var existsInClosed = _closedList.Exists(
           (value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
                      Mathf.Abs(value.z - space.z) < 0.001);
-      
+
       // Make sure it doesn't collide with any flower
       bool flowerCollider = false;
-      foreach (GameObject flower in GameObject.FindGameObjectsWithTag("Flower")) {
+      foreach (GameObject flower in GameObject.FindGameObjectsWithTag(
+                   "Flower")) {
         if (flower.GetComponent<BoxCollider>().bounds.Contains(space)) {
           flowerCollider = true;
           break;
         }
       }
-      if (!existsInOpen && !existsInClosed && !flowerCollider && buildableArea.bounds.Contains(space)) {
+      if (!existsInOpen && !existsInClosed && !flowerCollider &&
+          buildableArea.bounds.Contains(space)) {
         _openList.Add(space);
       }
     }
@@ -145,7 +147,8 @@ public class HoneycombGenerator : MonoBehaviour {
   }
 
   public void ShowBuildingHints(int type) {
-    if (state.Paused) return;
+    if (state.Paused)
+      return;
     if (_honeycombHintObjects.Count != 0)
       return;
 

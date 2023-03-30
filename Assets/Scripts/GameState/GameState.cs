@@ -218,7 +218,8 @@ public class GameState : MonoBehaviour {
    * Creates a honeycomb at pos of a given type
    */
   public void CreateHoneycomb(Vector3 pos, StructureType type) {
-    if (Paused) return;
+    if (Paused)
+      return;
     honeycombGenerator.CreateHoneycomb(pos, type);
     honeycombGenerator.HideBuildingHints();
   }
@@ -298,7 +299,8 @@ public class GameState : MonoBehaviour {
    * 5x speed is 25 minutes
    */
   public void setGameSpeed(int minutes) {
-    if (Paused) return;
+    if (Paused)
+      return;
     GameState.minutesPerSecond = minutes;
   }
 }

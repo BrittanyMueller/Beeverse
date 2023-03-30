@@ -32,7 +32,6 @@ public class StructureUIController : MonoBehaviour {
 
   private Sprite _beeSelfie;
   private Sprite _beeShadow;
-  
 
   // Each child is expected to implement a show and hide function
   public virtual void Hide() {
@@ -66,8 +65,10 @@ public class StructureUIController : MonoBehaviour {
 
       // Set bee name and active profile pic
       obj.GetComponentsInChildren<TMP_Text>()[0].text = bees[index].beeName;
-      obj.transform.Find("Frame/BeeSelfie").GetComponent<Image>().sprite = _beeSelfie;
-      // obj.GetComponentsInChildren<Image>()[0].GetComponentsInChildren<Image>()[0].sprite = _beeSelfie;
+      obj.transform.Find("Frame/BeeSelfie").GetComponent<Image>().sprite =
+          _beeSelfie;
+      // obj.GetComponentsInChildren<Image>()[0].GetComponentsInChildren<Image>()[0].sprite
+      // = _beeSelfie;
 
       // set onclick with the index of the bee so we can backtrack which bee was
       // chosen Need a tmp variable because c# sucks
@@ -90,7 +91,8 @@ public class StructureUIController : MonoBehaviour {
 
       // set info about the bee. If the spot is empty just make the text <EMPTY>
       // obj.GetComponentsInChildren<Image>()[0].sprite = _beeShadow;
-      obj.transform.Find("Frame/BeeSelfie").GetComponent<Image>().sprite = _beeShadow;
+      obj.transform.Find("Frame/BeeSelfie").GetComponent<Image>().sprite =
+          _beeShadow;
       obj.GetComponentsInChildren<TMP_Text>()[0].text = "<EMPTY>";
 
       // set onclick with the index of the bee so we can backtrack which bee was
@@ -107,7 +109,8 @@ public class StructureUIController : MonoBehaviour {
   }
 
   public void SelectBee(int index) {
-    if (state.Paused) return;
+    if (state.Paused)
+      return;
     // Open up the select bee menu given the index
     // and a references to this so it can return
     selectBee.Show(index, (WorkerBee bee) => {
@@ -121,7 +124,8 @@ public class StructureUIController : MonoBehaviour {
   }
 
   public void RemoveBee(int index) {
-    if (state.Paused) return;
+    if (state.Paused)
+      return;
     // remove the bee with the given callback
     if (removeBeeCallback != null) {
       removeBeeCallback(index);

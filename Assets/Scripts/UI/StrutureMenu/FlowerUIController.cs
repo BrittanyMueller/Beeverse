@@ -19,7 +19,6 @@ public class FlowerUIController : StructureUIController {
     removeBeeCallback = _curPatch.RemoveWorker;
     refreshCallback = refresh;
 
-
     // Set text for resource collection speeds
     conversionText.text = (_curPatch.conversionTimeMinutes).ToString();
 
@@ -31,7 +30,5 @@ public class FlowerUIController : StructureUIController {
     _curPatch = null;
   }
 
-  public void refresh() {
-    Show(_curPatch);
-  }
+  public void refresh() { Show(_curPatch); }
 }

@@ -26,9 +26,9 @@ public class Bee : MonoBehaviour {
   // If we are in the menu our idle animation
   // should be different.
   public bool inMenu = false;
-  
+
   private BeeProfileController _profileController;
-  
+
   // Used to keep track of how much life
   // the be has left should be set by child
   // in start
@@ -51,12 +51,15 @@ public class Bee : MonoBehaviour {
 
   // Start is called before the first frame update
   protected virtual void Start() {
-    
+
     // Make their lifespan random by a 5 day deviation
     System.Random rand = new System.Random();
     _lifeSpan = new TimeTracker(lifeSpanInDays, 0, 0);
-    _lifeSpan.AddMinutes(rand.Next((5*60*25) *2) - 7200);
-    _profileController = GameObject.Find("/HudController").GetComponent<HudController>().beeProfileController;
+    _lifeSpan.AddMinutes(rand.Next((5 * 60 * 25) * 2) - 7200);
+    lifeSpanInDays = _lifeSpan.day;
+    _profileController = GameObject.Find("/HudController")
+                             .GetComponent<HudController>()
+                             .beeProfileController;
   }
 
   /**
@@ -67,15 +70,15 @@ public class Bee : MonoBehaviour {
   public virtual void UpdateTimeTick(int minutes) {
     _lifeSpan.SubMinutes(minutes);
   }
-  
-  
+
   /**
    * Opens profile window for bee on click
    */
   private void OnMouseDown() {
     // make sure UI isn't on UI and this isn't the queen honeycomb
-    if (inMenu || EventSystem.current.IsPointerOverGameObject()) return;
-    
+    if (inMenu || EventSystem.current.IsPointerOverGameObject())
+      return;
+
     Debug.Log("Pressed a bee!");
     _profileController.Show(this);
   }

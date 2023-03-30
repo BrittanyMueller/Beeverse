@@ -61,7 +61,7 @@ public class Honeycomb : MonoBehaviour {
     foreach (var _ in workSpots) {
       bees.Add(null);
     }
-    
+
     // find the hudController in the scene
     GameObject controller = GameObject.Find("HudController");
     if (controller != null) {

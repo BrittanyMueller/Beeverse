@@ -12,8 +12,6 @@ public class WorkerBee : Bee {
   public GameObject _rightEyeDead;
   public GameObject _frown;
 
-
-
   // location where the bee travels for idle animation;
   private Vector3 _idleLocation;
   private float _idleFlyHeight = 30f;

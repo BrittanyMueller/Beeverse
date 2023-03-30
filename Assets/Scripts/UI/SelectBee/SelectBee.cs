@@ -17,7 +17,6 @@ public class SelectBee : MonoBehaviour {
 
   private GameState state;
 
-
   /**
    * Shows A list of current bees that can be used for the job
    * If a bee is selected then the callback will be triggered with the chosen
@@ -26,7 +25,6 @@ public class SelectBee : MonoBehaviour {
   public void Show(int index, Action<WorkerBee> callback) {
 
     state = GameObject.Find("GameState").GetComponent<GameState>();
-
 
     // Clear the current list
     {
@@ -52,7 +50,8 @@ public class SelectBee : MonoBehaviour {
       info.targetSelect = index;
 
       obj.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => {
-        if (state.Paused);
+        if (state.Paused)
+          ;
         callback(bee);
         Hide();
       });
@@ -65,8 +64,10 @@ public class SelectBee : MonoBehaviour {
    * Hides the Select BeeScreen
    */
   public void Hide() {
-    if(state == null) state = GameObject.Find("GameState").GetComponent<GameState>();
-    if (state.Paused) return;
+    if (state == null)
+      state = GameObject.Find("GameState").GetComponent<GameState>();
+    if (state.Paused)
+      return;
     // Clear the current list
     {
       var children = new List<GameObject>();

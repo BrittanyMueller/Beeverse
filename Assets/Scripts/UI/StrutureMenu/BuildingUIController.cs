@@ -47,7 +47,5 @@ public class BuildingUIController : StructureUIController {
     _honeycomb = null;
   }
 
-  public void refresh() {
-    Show(_honeycomb);
-  }
+  public void refresh() { Show(_honeycomb); }
 }
