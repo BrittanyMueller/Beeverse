@@ -71,6 +71,7 @@ MonoBehaviour:
   bees: []
   structure: {fileID: 613341536872685055}
   honeycombType: 3
+  showedStructure: 0
   buildSpeedPerSecond: 0.01
   inResources: 0000000004000000
   inResourcesConversionRate: 030000000a000000
@@ -267,6 +268,10 @@ PrefabInstance:
     - target: {fileID: -2797317998971996231, guid: 7429dc3175ab5e04ba47b18a77d5a85d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -747416105187108730, guid: 7429dc3175ab5e04ba47b18a77d5a85d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: -747416105187108730, guid: 7429dc3175ab5e04ba47b18a77d5a85d, type: 3}
       propertyPath: m_LocalPosition.z
