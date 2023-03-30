@@ -92,6 +92,7 @@ public class StructureUIController : MonoBehaviour {
   }
 
   public void SelectBee(int index) {
+    if (state.Paused) return;
     // Open up the select bee menu given the index
     // and a references to this so it can return
     selectBee.Show(index, (WorkerBee bee) => {
@@ -105,6 +106,7 @@ public class StructureUIController : MonoBehaviour {
   }
 
   public void RemoveBee(int index) {
+    if (state.Paused) return;
     // remove the bee with the given callback
     if (removeBeeCallback != null) {
       removeBeeCallback(index);
