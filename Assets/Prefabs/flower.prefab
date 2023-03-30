@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6301513657778299025}
   m_Layer: 0
   m_Name: flower
-  m_TagString: Untagged
+  m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,8 +71,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 21.041174, y: 4.7105393, z: 21.30001}
-  m_Center: {x: 0, y: 0.691673, z: 0}
+  m_Size: {x: 21.041174, y: 1.1374178, z: 21.30001}
+  m_Center: {x: 0, y: -1.0948884, z: 0}
 --- !u!1001 &1616155837102907003
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class HoneycombGenerator : MonoBehaviour {
   public GameObject beeswaxFactory;
   public GameObject royalJellyFactory;
   public GameState state;
+  public BoxCollider buildableArea;
 
   // Special bool that is used to autogenerate honeycombs
   // if it is in the menu
@@ -79,7 +80,16 @@ public class HoneycombGenerator : MonoBehaviour {
       var existsInClosed = _closedList.Exists(
           (value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
                      Mathf.Abs(value.z - space.z) < 0.001);
-      if (!existsInOpen && !existsInClosed) {
+      
+      // Make sure it doesn't collide with any flower
+      bool flowerCollider = false;
+      foreach (GameObject flower in GameObject.FindGameObjectsWithTag("Flower")) {
+        if (flower.GetComponent<BoxCollider>().bounds.Contains(space)) {
+          flowerCollider = true;
+          break;
+        }
+      }
+      if (!existsInOpen && !existsInClosed && !flowerCollider && buildableArea.bounds.Contains(space)) {
         _openList.Add(space);
       }
     }

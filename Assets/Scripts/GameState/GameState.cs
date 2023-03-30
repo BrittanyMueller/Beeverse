@@ -122,6 +122,8 @@ public class GameState : MonoBehaviour {
       foreach (Bee bee in _bees) {
         bee.UpdateTimeTick(5);
       }
+      // Update the queen that time has passed
+      _queen.UpdateTimeTick(5);
     }
 
     // Notify the logs a day has passed

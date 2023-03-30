@@ -39,16 +39,23 @@ public class Bee : MonoBehaviour {
 
   // Returns how old a given bee is.
   public int AgeInDays {
-    get { return lifeSpanInDays - _lifeSpan.day; }
+    get { return lifeSpanInDays - _lifeSpan.day + startAge; }
   }
   public int lifeSpanInDays;
+
+  // How old the bee was when it gets instantiated from a baby
+  public int startAge = 5;
 
   // Indicates to the game state if the bee has current died
   public bool isDead;
 
   // Start is called before the first frame update
   protected virtual void Start() {
+    
+    // Make their lifespan random by a 5 day deviation
+    System.Random rand = new System.Random();
     _lifeSpan = new TimeTracker(lifeSpanInDays, 0, 0);
+    _lifeSpan.AddMinutes(rand.Next((5*60*25) *2) - 7200);
     _profileController = GameObject.Find("/HudController").GetComponent<HudController>().beeProfileController;
   }
 
