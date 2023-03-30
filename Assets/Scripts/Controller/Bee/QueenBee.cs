@@ -84,7 +84,7 @@ public class QueenBee : Bee {
     _anim.SetBool("Flying", false);
     _anim.SetBool("Idle", true);
 
-        // Make sure we are touching the floor
+    // Make sure we are touching the floor
     if (!_controller.isGrounded)
       _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime, 0));
   }

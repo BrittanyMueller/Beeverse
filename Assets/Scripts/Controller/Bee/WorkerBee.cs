@@ -248,7 +248,7 @@ public class WorkerBee : Bee {
     _anim.SetBool("Working", true);
 
     // Make sure we are touching the floor
-    if (!_controller.isGrounded)
+    if (!_controller.isGrounded && Task.taskType != WorkerBeeTask.TaskType.Forager)
       _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime, 0));
 
     switch (_task.taskType) {
