@@ -45,9 +45,6 @@ public class HoneycombGenerator : MonoBehaviour {
       StartCoroutine(RandomGeneration());
   }
 
-  // Update is called once per frame
-  void Update() {}
-
   IEnumerator RandomGeneration() {
     var rand = new System.Random();
     while (true) {
@@ -138,6 +135,7 @@ public class HoneycombGenerator : MonoBehaviour {
   }
 
   public void ShowBuildingHints(int type) {
+    if (state.Paused) return;
     if (_honeycombHintObjects.Count != 0)
       return;
 

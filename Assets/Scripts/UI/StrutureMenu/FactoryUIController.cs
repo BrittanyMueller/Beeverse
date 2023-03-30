@@ -17,6 +17,8 @@ public class FactoryUIController : StructureUIController {
     _curFactory = factory;
     selectBeeCallback = _curFactory.SetWorker;
     removeBeeCallback = _curFactory.RemoveWorker;
+    refreshCallback = refresh;
+
 
     // Set text for resource collection speeds
     factoryNameText.text = _curFactory.Name;
@@ -31,5 +33,9 @@ public class FactoryUIController : StructureUIController {
   public override void Hide() {
     base.Hide();
     _curFactory = null;
+  }
+
+  public void refresh() {
+    Show(_curFactory);
   }
 }

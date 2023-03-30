@@ -28,6 +28,7 @@ public class StructureUIController : MonoBehaviour {
   // which should be implemented by the child class
   protected Action<WorkerBee, int> selectBeeCallback;
   protected Action<int> removeBeeCallback;
+  protected Action refreshCallback;
 
   // Each child is expected to implement a show and hide function
   public virtual void Hide() {
@@ -92,6 +93,7 @@ public class StructureUIController : MonoBehaviour {
   }
 
   public void SelectBee(int index) {
+    if (state.Paused) return;
     // Open up the select bee menu given the index
     // and a references to this so it can return
     selectBee.Show(index, (WorkerBee bee) => {
@@ -100,17 +102,18 @@ public class StructureUIController : MonoBehaviour {
       } else {
         Debug.Log("ERROR: SelectBee callback not set");
       }
-      hudController.CloseStructureMenu();
+      refreshCallback();
     });
   }
 
   public void RemoveBee(int index) {
+    if (state.Paused) return;
     // remove the bee with the given callback
     if (removeBeeCallback != null) {
       removeBeeCallback(index);
     } else {
       Debug.Log("ERROR: RemoveBee callback not set");
     }
-    hudController.CloseStructureMenu();
+    refreshCallback();
   }
 }
