@@ -39,7 +39,7 @@ public class QueenBee : Bee {
   }
 
   public bool hasEgg {
-    get { return _state._beeEggSlots.Find((value) => !value.hasEgg) != null; }
+    get { return _state._beeEggSlots.Find((value) => !value.HasEgg) != null; }
   }
 
   public bool hasTakenOff {
@@ -64,7 +64,7 @@ public class QueenBee : Bee {
   protected void Update() { _currentState.Execute(this); }
 
   public void SetEggTask() {
-    BeeEggSlot slot = _state._beeEggSlots.Find((value) => !value.hasEgg);
+    BeeEggSlot slot = _state._beeEggSlots.Find((value) => !value.HasEgg);
     Task = new QueenBeeTask(QueenBeeTask.TaskType.LayEgg,
                             slot.gameObject.transform.position, slot);
   }
@@ -102,7 +102,7 @@ public class QueenBee : Bee {
   public void LayEggState() {
     // add egg to slot
     if (Task != null && Task._curSlot != null)
-      Task._curSlot.hasEgg = true;
+      Task._curSlot.HasEgg = true;
   }
 
   public void TravelState() {

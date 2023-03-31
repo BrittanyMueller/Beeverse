@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BeeEggSlot : MonoBehaviour {
 
-  public BroodNest nest;
-  public GameObject egg;
-  public bool hasEgg {
+  [SerializeField] private BroodNest broodNest;
+  [SerializeField] private GameObject egg;
+  
+  public bool HasEgg {
     get { return _hasEgg; }
     set {
       _hasEgg = value;

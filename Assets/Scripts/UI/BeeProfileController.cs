@@ -14,14 +14,12 @@ public class BeeProfileController : MonoBehaviour {
 
   private Sprite _queenBee;
   private Sprite _workerBee;
-  private Sprite _babyBee;
 
   // Start is called before the first frame update
   private void Awake() {
     // Load images of bees for sprite swapping
     _queenBee = Resources.Load<Sprite>("BeePics/queenSelfie");
     _workerBee = Resources.Load<Sprite>("BeePics/beeSelfie");
-    _babyBee = Resources.Load<Sprite>("BeePics/larvaSelfie");
     gameObject.SetActive(false);
   }
 
@@ -34,18 +32,14 @@ public class BeeProfileController : MonoBehaviour {
       beeAge.text += "s";
 
     switch (bee.type) {
-    case BeeType.Baby:
-      beeJob.text = "Baby";
-      beeSelfie.sprite = _babyBee;
-      break;
-    case BeeType.Queen:
-      beeJob.text = "Queen";
-      beeSelfie.sprite = _queenBee;
-      break;
-    case BeeType.Worker:
-      beeJob.text = ((WorkerBee)bee).jobTitle;
-      beeSelfie.sprite = _workerBee;
-      break;
+      case BeeType.Queen:
+        beeJob.text = "Queen";
+        beeSelfie.sprite = _queenBee;
+        break;
+      case BeeType.Worker:
+        beeJob.text = ((WorkerBee)bee).jobTitle;
+        beeSelfie.sprite = _workerBee;
+        break;
     }
     gameObject.SetActive(true);
   }

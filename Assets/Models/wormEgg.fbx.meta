@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 084f76b0b503d394ab140c24884b93b7
+guid: 5eedafd883a125e4e825bbff0add0877
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: body
-    second: {fileID: 2100000, guid: ce3d80213251c5ef2bb8e5f94eaf951c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: larva
-    second: {fileID: 2100000, guid: 05b0029b148194f4782550d1fce9a83b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

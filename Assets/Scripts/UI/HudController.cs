@@ -17,7 +17,10 @@ public class HudController : MonoBehaviour {
   public FlowerUIController flowerMenu;
   public BuildingUIController buildingMenu;
   public FactoryUIController factoryMenu;
+  public BroodNestUIController broodNestMenu;
+  public SelectEggTypeController eggMenu;
   public BeeProfileController beeProfileController;
+  public BabyProfileController babyProfileController;
 
   public List<Button> createHoneycombButtons;
   private Button createHoneyFactory;
@@ -76,6 +79,7 @@ public class HudController : MonoBehaviour {
     flowerMenu.Hide();
     buildingMenu.Hide();
     factoryMenu.Hide();
+    broodNestMenu.Hide();
   }
 
   public void OpenStructureMenu(StructureType type, MonoBehaviour structure) {
@@ -85,6 +89,7 @@ public class HudController : MonoBehaviour {
     flowerMenu.Hide();
     buildingMenu.Hide();
     factoryMenu.Hide();
+    broodNestMenu.Hide();
 
     // Open the correct menu
     switch (type) {
@@ -98,6 +103,9 @@ public class HudController : MonoBehaviour {
     case StructureType.BeeswaxFactory:
     case StructureType.RoyalJellyFactory:
       factoryMenu.Show((HoneycombFactory)structure);
+      break;
+    case StructureType.BroodNest:
+      broodNestMenu.Show((BroodNest)structure);
       break;
     }
     structureMenu.SetActive(true);

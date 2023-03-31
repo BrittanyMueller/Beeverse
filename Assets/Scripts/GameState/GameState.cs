@@ -17,6 +17,12 @@ public class GameState : MonoBehaviour {
   private int _deadBees = 0;
   public QueenBee _queen;
 
+  private bool _hasQueenEgg;
+  public bool HasQueenEgg {
+    get => _hasQueenEgg;
+    set => _hasQueenEgg = value;
+  }
+
   // Bounding box where bees are allowed to idle too.
   public BoxCollider idleArea = null;
 
