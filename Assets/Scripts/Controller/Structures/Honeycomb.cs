@@ -130,11 +130,11 @@ public class Honeycomb : MonoBehaviour {
         // add the bee slots the the GameState so queen knows to lay eggs
         foreach (Transform child in this.transform) {
           if (child.tag == "BabySlot")
-            _state._beeEggSlots.Add(child.gameObject.GetComponent<BeeEggSlot>());
+            _state._beeEggSlots.Add(
+                child.gameObject.GetComponent<BeeEggSlot>());
         }
       }
     }
-
   }
 
   /**

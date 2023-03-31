@@ -59,7 +59,8 @@ public class Bee : MonoBehaviour {
     _lifeSpan = new TimeTracker(lifeSpanInDays, 0, 0);
     _lifeSpan.AddMinutes(rand.Next((5 * 60 * 25) * 2) - 7200);
     lifeSpanInDays = _lifeSpan.day;
-    hudController = GameObject.Find("/HudController").GetComponent<HudController>();
+    hudController =
+        GameObject.Find("/HudController").GetComponent<HudController>();
     profileController = hudController.beeProfileController;
     babyProfileController = hudController.babyProfileController;
   }

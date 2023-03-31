@@ -4,8 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BabyProfileController : MonoBehaviour
-{
+public class BabyProfileController : MonoBehaviour {
   [SerializeField]
   private TMP_Text beeName;
   [SerializeField]

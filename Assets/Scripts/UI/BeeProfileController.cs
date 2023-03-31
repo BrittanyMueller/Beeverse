@@ -32,14 +32,14 @@ public class BeeProfileController : MonoBehaviour {
       beeAge.text += "s";
 
     switch (bee.type) {
-      case BeeType.Queen:
-        beeJob.text = "Queen";
-        beeSelfie.sprite = _queenBee;
-        break;
-      case BeeType.Worker:
-        beeJob.text = ((WorkerBee)bee).jobTitle;
-        beeSelfie.sprite = _workerBee;
-        break;
+    case BeeType.Queen:
+      beeJob.text = "Queen";
+      beeSelfie.sprite = _queenBee;
+      break;
+    case BeeType.Worker:
+      beeJob.text = ((WorkerBee)bee).jobTitle;
+      beeSelfie.sprite = _workerBee;
+      break;
     }
     gameObject.SetActive(true);
   }

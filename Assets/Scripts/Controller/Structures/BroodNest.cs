@@ -3,6 +3,4 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BroodNest : Honeycomb {
-    
-}
+public class BroodNest : Honeycomb {}
