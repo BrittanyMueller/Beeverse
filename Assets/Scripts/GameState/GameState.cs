@@ -34,6 +34,10 @@ public class GameState : MonoBehaviour {
   public Honeycomb QueenHoneycomb {
     get { return _honeycombs[0]; }
   }
+  
+  // Bee models
+  public GameObject queenModel;
+  public GameObject workerModel;
 
   // Controllers for GUIs
   public LogController logController;
@@ -102,13 +106,14 @@ public class GameState : MonoBehaviour {
     _day = 0;
 
     // Set default resources count
-    resources = new BeeResources();
-    // TODO revert resources when done debugging
-    resources.beeswax = 2000;
-    resources.honey = 2000;
-    resources.nectar = 2000;
-    resources.pollen = 2000;
-    resources.royalJelly = 2000;
+    resources = new BeeResources {
+      // TODO revert resources when done debugging
+      beeswax = 2000,
+      honey = 2000,
+      nectar = 2000,
+      pollen = 2000,
+      royalJelly = 2000
+    };
     resourceController.UpdateResources(resources);
 
     // set init totals
@@ -130,13 +135,40 @@ public class GameState : MonoBehaviour {
       foreach (Bee bee in _bees) {
         bee.UpdateTimeTick(5);
       }
+      // Update the queen that time has passed
+      if (_queen) _queen.UpdateTimeTick(5);
+      
       foreach (var beeSlot in _beeEggSlots) {
         if (beeSlot.HasEgg) {
           beeSlot.babyBee.UpdateTimeTick(5);
+          if (beeSlot.babyBee.AgeInDays == 5) {
+            var spawnPoint = beeSlot.babyBee.transform.position + new Vector3(0, 5, 0);
+            if (beeSlot.babyBee.isQueen) {
+              // Baby bee grows into queen bee
+              var newQueen = Instantiate(queenModel, spawnPoint, beeSlot.babyBee.transform.rotation).GetComponent<QueenBee>();
+              newQueen.beeName = beeSlot.babyBee.beeName;
+              newQueen.ChangeState(new QueenBeeTakeOffState());
+
+              if (_queen) {
+                // Kill off the old queen :(
+                _queen.ChangeState(new QueenBeeDieState());
+                StartCoroutine(RemoveQueenBee(_queen));
+              }
+              _queen = newQueen;
+              _hasQueenEgg = false;
+            }
+            else {
+              // Baby bee grows into worker bee
+              var workerBee = Instantiate(workerModel, spawnPoint, beeSlot.babyBee.transform.rotation).GetComponent<WorkerBee>();
+              workerBee.beeName = beeSlot.babyBee.beeName;
+              workerBee.ChangeState(new WorkerBeeTakeOffState());
+              _bees.Add(workerBee);
+            }
+            Destroy(beeSlot.babyBee.gameObject);  // RIP
+            beeSlot.HasEgg = false;
+          }
         }
       }
-      // Update the queen that time has passed
-      _queen.UpdateTimeTick(5);
     }
 
     // Notify the logs a day has passed
@@ -159,6 +191,10 @@ public class GameState : MonoBehaviour {
       return bee.isDead;
     });
 
+    if (_queen && _queen.isDead) {
+      StartCoroutine(RemoveQueenBee(_queen));
+    }
+
     // Bring up Lose Menu
     if (_bees.Count == 0 && _deadBees == 0) {
       gameOverController.SetTotalBees(_totalBees);
@@ -169,13 +205,18 @@ public class GameState : MonoBehaviour {
       Paused = true;
       hudController.GameOver();
     }
-
     resourceController.UpdateResources(resources);
   }
 
   IEnumerator RemoveBee(Bee bee) {
     yield return new WaitForSeconds(10);
     _deadBees--;
+    Destroy(bee.gameObject);
+  }
+  
+  IEnumerator RemoveQueenBee(Bee bee) {
+    _queen = null;
+    yield return new WaitForSeconds(10);
     Destroy(bee.gameObject);
   }
 

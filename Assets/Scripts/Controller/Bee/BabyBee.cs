@@ -17,6 +17,7 @@ public class BabyBee : Bee {
 
     protected override void Start() {
         base.Start();
+        _lifeSpan = new TimeTracker(0,0,0);
         isEgg = true;
     }
 
@@ -41,18 +42,15 @@ public class BabyBee : Bee {
         if (!isGrowing) return;
         var beeCount = 0;
         foreach (var bee in broodNest.bees) {
-            if (bee != null) {
-                beeCount += 1;
-            }
+            if (bee) beeCount += 1;
         }
         // Growth speed modifier for number of bees in nest
         _lifeSpan.AddMinutes((int)(minutes * beeCount / 2.0));
-        if (_lifeSpan.day == 5) {
-            // Bee grows up, delete egg
-            Debug.Log("Bee growed up");
-        } else if (_lifeSpan.day == 3 && isEgg) {
+        if (_lifeSpan.day == 3 && isEgg) {
+            // Egg grows into larva bee model
             eggModel.SetActive(false);
             larvaModel.SetActive(true);
+            isEgg = false;
         }
     }
 }

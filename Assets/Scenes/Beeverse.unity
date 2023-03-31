@@ -2263,6 +2263,8 @@ MonoBehaviour:
   idleArea: {fileID: 1324927716}
   _honeycombs:
   - {fileID: 240825073}
+  queenModel: {fileID: 5997492887046209572, guid: a82704e20e651d2abae5f140a09e7a57, type: 3}
+  workerModel: {fileID: 712691921818339953, guid: a6abe74e2d699872b91264657daba04e, type: 3}
   logController: {fileID: 186268378}
   resourceController: {fileID: 517461030}
   hudController: {fileID: 163843272}
@@ -4360,7 +4362,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308104022}
-  m_LocalRotation: {x: 0.258819, y: -0.000000023504358, z: 0.0000000062979733, w: 0.9659259}
+  m_LocalRotation: {x: 0.258819, y: 0.000000023504347, z: -0.00000000629797, w: 0.9659259}
   m_LocalPosition: {x: 500, y: 250, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8461,7 +8463,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680831986}
-  m_LocalRotation: {x: 0.258819, y: -0.000000023504358, z: 0.0000000062979733, w: 0.9659259}
+  m_LocalRotation: {x: 0.258819, y: 0.000000023504347, z: -0.00000000629797, w: 0.9659259}
   m_LocalPosition: {x: 500, y: 250, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
