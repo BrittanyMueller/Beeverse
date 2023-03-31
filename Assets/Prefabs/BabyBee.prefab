@@ -55,6 +55,10 @@ MonoBehaviour:
   isDead: 0
   isGrowing: 0
   isQueen: 0
+  isEgg: 1
+  broodNest: {fileID: 0}
+  eggModel: {fileID: 7430884771685661919}
+  larvaModel: {fileID: 9041089149105584411}
 --- !u!65 &2679667412294854125
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -145,6 +149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eedafd883a125e4e825bbff0add0877, type: 3}
+--- !u!1 &7430884771685661919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5eedafd883a125e4e825bbff0add0877, type: 3}
+  m_PrefabInstance: {fileID: 7772834199431790990}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7805898108224579173 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5eedafd883a125e4e825bbff0add0877, type: 3}
@@ -278,5 +287,10 @@ PrefabInstance:
 --- !u!4 &8517351437605528481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 084f76b0b503d394ab140c24884b93b7, type: 3}
+  m_PrefabInstance: {fileID: 8194598022481347658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9041089149105584411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 084f76b0b503d394ab140c24884b93b7, type: 3}
   m_PrefabInstance: {fileID: 8194598022481347658}
   m_PrefabAsset: {fileID: 0}

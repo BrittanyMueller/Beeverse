@@ -20,7 +20,7 @@ public class BroodNestUIController : StructureUIController {
                 beeCount += 1;
             }
         }
-        growthModifier.text = (beeCount * 50).ToString() + "%";
+        growthModifier.text = beeCount * 50 + "%";
         base.Show(honeycomb.bees);
     }
 

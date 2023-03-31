@@ -4360,7 +4360,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308104022}
-  m_LocalRotation: {x: 0.258819, y: 0.000000023504347, z: -0.00000000629797, w: 0.9659259}
+  m_LocalRotation: {x: 0.258819, y: -0.000000023504358, z: 0.0000000062979733, w: 0.9659259}
   m_LocalPosition: {x: 500, y: 250, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8461,7 +8461,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680831986}
-  m_LocalRotation: {x: 0.258819, y: 0.000000023504347, z: -0.00000000629797, w: 0.9659259}
+  m_LocalRotation: {x: 0.258819, y: -0.000000023504358, z: 0.0000000062979733, w: 0.9659259}
   m_LocalPosition: {x: 500, y: 250, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14108,7 +14108,6 @@ GameObject:
   - component: {fileID: 1219524821}
   - component: {fileID: 1219524820}
   - component: {fileID: 1219524819}
-  - component: {fileID: 1219524823}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -14210,27 +14209,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1219524823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219524818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 888a7bf8d5194d45b80478cb36efd32d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalBeesText: {fileID: 0}
-  totalQueensText: {fileID: 0}
-  totalDaysText: {fileID: 0}
-  totalHoneyText: {fileID: 0}
-  totalBeeswaxText: {fileID: 0}
-  totalRoyalJellyText: {fileID: 0}
-  totalPollenText: {fileID: 0}
-  totalNectarText: {fileID: 0}
-  totalHoneycombsText: {fileID: 0}
 --- !u!1 &1229719298
 GameObject:
   m_ObjectHideFlags: 0

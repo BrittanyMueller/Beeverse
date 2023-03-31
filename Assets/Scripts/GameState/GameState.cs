@@ -130,6 +130,11 @@ public class GameState : MonoBehaviour {
       foreach (Bee bee in _bees) {
         bee.UpdateTimeTick(5);
       }
+      foreach (var beeSlot in _beeEggSlots) {
+        if (beeSlot.HasEgg) {
+          beeSlot.babyBee.UpdateTimeTick(5);
+        }
+      }
       // Update the queen that time has passed
       _queen.UpdateTimeTick(5);
     }
