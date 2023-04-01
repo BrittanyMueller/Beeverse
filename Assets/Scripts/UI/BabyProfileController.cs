@@ -72,7 +72,7 @@ public class BabyProfileController : MonoBehaviour {
       beeJob.text = "Future Queen";
     }
     UpdateProgress(_babyBee.AgeInMinutes / (5.0f * 25 * 60));
-    
+
     gameObject.SetActive(true);
   }
 }

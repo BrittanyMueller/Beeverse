@@ -78,7 +78,8 @@ public class HoneycombFactory : Honeycomb {
 
       str += ResourceToString(inResources[i], inResourcesConversionRate[i].ToString());
     }
-    return str + " -> ".ToString() + " " + ResourceToString(outResource, outResourceCollectionRate.ToString());
+    return str + " -> ".ToString() + " " +
+           ResourceToString(outResource, outResourceCollectionRate.ToString());
   }
 
   private string ResourceToString(BeeResources.Type type, string amount) {

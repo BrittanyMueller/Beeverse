@@ -6,8 +6,8 @@ public class BeeEggSlot : MonoBehaviour {
   [SerializeField]
   private GameObject egg;
 
-  public BabyBee babyBee;   // Baby Bee in this slot
-  public int index;   // Index of the egg slot
+  public BabyBee babyBee;  // Baby Bee in this slot
+  public int index;        // Index of the egg slot
 
   private bool _hasEgg;
   public bool HasEgg {

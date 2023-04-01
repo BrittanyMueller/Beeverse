@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
   public float minFOV = 3;
   public float maxFOV = 40;
 
-  public float minXRotation = 360 - 30; // Not this is because angles or stored [0,360]
+  public float minXRotation = 360 - 30;  // Not this is because angles or stored [0,360]
   public float maxXRotation = 90;
 
   public float minXTravel = 100;
@@ -56,8 +56,10 @@ public class CameraController : MonoBehaviour {
     moveDirection.y = 0;  // Lock y-axis when moving
 
     // Prevent the camera from moving off the terrain
-    var newPosition = transform.position + moveDirection.normalized * (cameraSpeed * Time.deltaTime);
-    if (newPosition.x < minXTravel || newPosition.x > maxXTravel || newPosition.z < minZTravel || newPosition.z > maxZTravel) {
+    var newPosition =
+        transform.position + moveDirection.normalized * (cameraSpeed * Time.deltaTime);
+    if (newPosition.x < minXTravel || newPosition.x > maxXTravel || newPosition.z < minZTravel ||
+        newPosition.z > maxZTravel) {
       return;
     }
     transform.position = newPosition;
@@ -74,7 +76,7 @@ public class CameraController : MonoBehaviour {
     var rotateSpeed = maxRotateSpeed * _targetFOV / maxFOV;
     if (Input.GetMouseButton(1)) {
       var newAngle = transform.eulerAngles.x + rotateDirection * rotateSpeed * Time.deltaTime;
-      if (!( newAngle < maxXRotation || newAngle > minXRotation)) {
+      if (!(newAngle < maxXRotation || newAngle > minXRotation)) {
         return;
       }
       transform.eulerAngles += new Vector3(rotateDirection * rotateSpeed * Time.deltaTime, 0, 0);

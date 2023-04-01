@@ -106,7 +106,7 @@ public class GameState : MonoBehaviour {
   // Start is called before the first frame update
   void Start() {
     // Make bees ignore collision for other bees
-    Physics.IgnoreLayerCollision(6,6);
+    Physics.IgnoreLayerCollision(6, 6);
     if (inMenu)
       return;
 
@@ -146,6 +146,9 @@ public class GameState : MonoBehaviour {
 
       // daylight nighttime
       if (_currentTime.Hour == 7 && _currentTime.Minute == 0) {
+        // Day message
+        UpdateLog("Day " + _day);
+        UpdateLog("> " + BeeStuff.GetRandomPun());
         // Play morning song
         backgroundMusic.clip = audioDayTimeMusic;
         backgroundMusic.Play(0);
@@ -177,11 +180,13 @@ public class GameState : MonoBehaviour {
                                  .GetComponent<QueenBee>();
               newQueen.beeName = beeSlot.babyBee.beeName;
               newQueen.ChangeState(new QueenBeeTakeOffState());
-              UpdateLog("> The new Queen Bee was born. Welcome to the hive, " + newQueen.beeName + "!");
+              UpdateLog("> The new Queen Bee was born. Welcome to the hive, " + newQueen.beeName +
+                        "!");
 
               if (_queen) {
                 // Remove old queen from the game! Good bye Queen
-                UpdateLog("> " + _queen.beeName + " feels replaced and moves on to another hive...");
+                UpdateLog("> " + _queen.beeName +
+                          " feels replaced and moves on to another hive...");
                 _queen.IsLeavingHive = true;
                 _queen.ChangeState(new QueenBeeTakeOffState());
                 StartCoroutine(RemoveQueenBee(_queen, 15));
@@ -196,7 +201,8 @@ public class GameState : MonoBehaviour {
               workerBee.beeName = beeSlot.babyBee.beeName;
               workerBee.ChangeState(new WorkerBeeTakeOffState());
               _bees.Add(workerBee);
-              UpdateLog("> A new Worker Bee was born. Welcome to the hive, " + workerBee.beeName + "!");
+              UpdateLog("> A new Worker Bee was born. Welcome to the hive, " + workerBee.beeName +
+                        "!");
             }
             Destroy(beeSlot.babyBee.gameObject);  // RIP
             beeSlot.HasEgg = false;
@@ -208,8 +214,6 @@ public class GameState : MonoBehaviour {
     // Notify the logs a day has passed
     if (_day != _currentTime.Day) {
       _day += 1;
-      UpdateLog("Day " + _day);
-      UpdateLog("> " + BeeStuff.GetRandomPun());
     }
 
     // Remove all bees that have died

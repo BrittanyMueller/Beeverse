@@ -168,7 +168,6 @@ public class WorkerBee : Bee {
     _anim.SetBool("Flying", true);
     _anim.SetBool("Working", false);
 
-
     // check if we have an idle location or if we are there
     // to see if we need a new location or if we should
     // keep traveling to it
@@ -239,12 +238,10 @@ public class WorkerBee : Bee {
     _anim.SetBool("Flying", false);
     _anim.SetBool("Working", true);
 
-    
     // snap them to the work spot
     _controller.enabled = false;
     _controller.transform.position = Task.taskLocation;
     _controller.enabled = true;
-    
 
     switch (_task.taskType) {
       case WorkerBeeTask.TaskType.Forager:

@@ -15,12 +15,12 @@ public class BuildingUIController : StructureUIController {
 
   // Update is called once per frame
   void Update() {
-    if(_honeycomb) {
+    if (_honeycomb) {
       UpdateProgress(_honeycomb.BuildProgress);
       // if its built update to other menu
       if (_honeycomb.Built) {
-          var HUDController = GameObject.Find("/HudController").GetComponent<HudController>();
-          HUDController.OpenStructureMenu(_honeycomb.honeycombType, _honeycomb);
+        var HUDController = GameObject.Find("/HudController").GetComponent<HudController>();
+        HUDController.OpenStructureMenu(_honeycomb.honeycombType, _honeycomb);
       }
     }
   }

@@ -52,7 +52,7 @@ public class HudController : MonoBehaviour {
   private void Update() {
     // Set the value of the population
     populationText.text = state._bees.Count.ToString();
-    
+
     // disable and enable buttons
     _createHoneyFactory.interactable = (state.pollenCount >= 100 && state.nectarCount >= 50);
     _createBeeswaxFactory.interactable = (state.honeyCount >= 100 && state.nectarCount >= 50);
