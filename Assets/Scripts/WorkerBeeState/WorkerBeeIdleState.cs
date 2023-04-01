@@ -12,7 +12,6 @@ public class WorkerBeeIdleState : WorkerBeeState {
       bee.ChangeState(new WorkerBeeTravelState());
     } else if (bee.HasTask && bee.AtTask) {
       bee.ChangeState(new WorkerBeeLandingState());
-
     } else {
       bee.Idle();
     }

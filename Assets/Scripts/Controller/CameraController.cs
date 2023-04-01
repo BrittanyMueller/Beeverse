@@ -89,4 +89,8 @@ public class CameraController : MonoBehaviour {
       _targetFOV = minFOV;
     virtualCamera.m_Lens.FieldOfView = _targetFOV;
   }
+
+  private void RecentreCamera() {
+    
+  }
 }
