@@ -210,7 +210,7 @@ public class GameState : MonoBehaviour {
     foreach (Bee bee in _bees) {
       if (bee.isDead) {
         StartCoroutine(RemoveBee(bee));
-        UpdateLog(">" + bee.beeName + " has died. rest in Bees");
+        UpdateLog("> " + bee.beeName + " has died at the old age of " + bee.AgeInDays + " days. Rest in Bees");
       }
     }
     _bees.RemoveAll((WorkerBee bee) => {

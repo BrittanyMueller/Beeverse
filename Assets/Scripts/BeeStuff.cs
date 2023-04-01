@@ -32,15 +32,15 @@ public abstract class BeeStuff {
     "Just bee yourself; you're the bees knees!",
     "Truth bee told, this is a lot of bee puns.",
     "Everyday I'm bumblin'",
-    "What do bees like with their sushi?\n...Wasa-bee!",
+    "What do bees like with their sushi? ...Wasa-bee!",
     "According to all known laws of aviation, there is no way a bee should be able to fly...",
     "You're a force to bee reckoned with.",
     "These bee puns really sting.",
     "To bee or not to bee? The answer is always bees.",
     "It's a new day, bee positive.",
-    "What blood type do happy bees have?\n...Bee Positive!",
+    "What blood type do happy bees have? ...Bee Positive!",
     "The bees want more honey and less working flowers.",
-    "What do bees use to style their hair?\n...Honeycombs!",
+    "What do bees use to style their hair? ...Honeycombs!",
     "It’s a bright and honey day."
   };
 

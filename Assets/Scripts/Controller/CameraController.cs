@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour {
   // but allow full rotation on x axis
 
   public float maxCameraSpeed = 300f;
-  public float maxRotateSpeed = 75f;
+  public float maxRotateSpeed = 100f;
 
   public float minFOV = 3;
   public float maxFOV = 40;
@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour {
     RotateCamera();
     MoveCamera();
     ZoomCamera();
+    RecentreCamera();
   }
 
   private void MoveCamera() {
@@ -69,6 +70,11 @@ public class CameraController : MonoBehaviour {
 
     // TODO adjust zoom amount based on current FOV (zoom feels slow when
     // near/at maxFOV)
+    var zoomAmount = 2;
+    if (_targetFOV > 15) {
+      // Adjust zoom amount to decrement faster when far away
+      zoomAmount = 5;
+    }
 
     // Disable zoom when scrolling UI elements
     if (EventSystem.current.IsPointerOverGameObject())
@@ -76,11 +82,11 @@ public class CameraController : MonoBehaviour {
 
     if (Input.mouseScrollDelta.y > 0) {
       // Positive scrolling forward (zoom in)
-      _targetFOV -= 1;
+      _targetFOV -= zoomAmount;
     }
     if (Input.mouseScrollDelta.y < 0) {
       // Negative indicates scrolling backward (zoom out)
-      _targetFOV += 1;
+      _targetFOV += zoomAmount;
     }
     // Check that desired FOV does not exceed limits
     if (_targetFOV > maxFOV)
@@ -91,6 +97,11 @@ public class CameraController : MonoBehaviour {
   }
 
   private void RecentreCamera() {
-    
+    if (Input.GetKey(KeyCode.Space)) {
+      var target = new Vector3(500, 250, 80);
+      // transform.rotation = new Quaternion(0,0,0);
+      // transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(), Time.time * rotationResetSpeed); 
+      transform.position = target;
+    }
   }
 }
