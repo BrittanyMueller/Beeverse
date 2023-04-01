@@ -15,14 +15,14 @@ public class BuildingUIController : StructureUIController {
   private Honeycomb _honeycomb;
 
   // Update is called once per frame
-  void Update() { updateProgress(_honeycomb.buildProgress); }
+  void Update() { UpdateProgress(_honeycomb.BuildProgress); }
 
   /**
    * Used to update the current progress of the building
    * shown in the menu
    * @param progress a percent as a float which should be clamped 0-1
    */
-  void updateProgress(float progress) {
+  private void UpdateProgress(float progress) {
     var oldPos = progressBar.anchoredPosition;
     progressBar.SetInsetAndSizeFromParentEdge(
         RectTransform.Edge.Left, 0, progressBarLimit.sizeDelta.x * (progress));
@@ -37,7 +37,7 @@ public class BuildingUIController : StructureUIController {
     _honeycomb = honeycomb;
     selectBeeCallback = _honeycomb.SetWorker;
     removeBeeCallback = _honeycomb.RemoveWorker;
-    refreshCallback = refresh;
+    refreshCallback = Refresh;
 
     base.Show(honeycomb.bees);
   }
@@ -47,5 +47,5 @@ public class BuildingUIController : StructureUIController {
     _honeycomb = null;
   }
 
-  public void refresh() { Show(_honeycomb); }
+  private void Refresh() { Show(_honeycomb); }
 }

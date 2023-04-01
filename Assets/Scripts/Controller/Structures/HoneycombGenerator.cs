@@ -155,24 +155,24 @@ public class HoneycombGenerator : MonoBehaviour {
     BeeResources res = new BeeResources();
     switch ((StructureType)type) {
     case StructureType.HoneyFactory:
-      res.pollen = 100;
-      res.nectar = 50;
+      res.Pollen = 100;
+      res.Nectar = 50;
       break;
 
     case StructureType.BeeswaxFactory:
-      res.honey = 100;
-      res.nectar = 50;
+      res.Honey = 100;
+      res.Nectar = 50;
       break;
 
     case StructureType.RoyalJellyFactory:
-      res.honey = 100;
-      res.beeswax = 100;
+      res.Honey = 100;
+      res.Beeswax = 100;
       break;
 
     case StructureType.BroodNest:
-      res.beeswax = 100;
-      res.honey = 50;
-      res.royalJelly = 10;
+      res.Beeswax = 100;
+      res.Honey = 50;
+      res.RoyalJelly = 10;
       break;
     }
 

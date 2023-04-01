@@ -2,15 +2,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BabyBee : Bee {
-
-  public bool isGrowing;
-  public bool isQueen;
-
-  // Flag to manage age of baby bee
-  public bool isEgg;
-
-  // Brood Nest the bee is located in
-  public BroodNest broodNest;
+  
+  
+  public bool isGrowing;  // Indicates if BabyBee has started growing
+  public bool isQueen;    // Indicates if BabyBee is type Queen or Worker
+  public bool isEgg;      // BabyBees will be an egg until 3 days old
+  
+  public BroodNest broodNest;   // Brood Nest the bee is located in
 
   [SerializeField]
   private GameObject eggModel;
@@ -19,7 +17,7 @@ public class BabyBee : Bee {
 
   protected override void Start() {
     base.Start();
-    _lifeSpan = new TimeTracker(0, 0, 0);
+    LifeSpan = new TimeTracker(0, 0, 0);
     isEgg = true;
   }
 
@@ -28,31 +26,30 @@ public class BabyBee : Bee {
       // Make sure UI isn't on UI or in main menu
       if (inMenu || EventSystem.current.IsPointerOverGameObject())
         return;
-      profileController.Hide();
-      babyProfileController.Show(this);
+      ProfileController.Hide();
+      BabyProfileController.Show(this);
     } else {
-      hudController.eggMenu.Show(this);
+      HUDController.eggMenu.Show(this);
     }
   }
 
-  public new int AgeInDays { get => _lifeSpan.day;
-}
+  // Override AgeInDays of BabyBees to be from lifespan
+  public new int AgeInDays => LifeSpan.Day;
 
-public override void UpdateTimeTick(int minutes) {
-  if (!isGrowing)
-    return;
-  var beeCount = 0;
-  foreach (var bee in broodNest.bees) {
-    if (bee)
-      beeCount += 1;
-  }
-  // Growth speed modifier for number of bees in nest
-  _lifeSpan.AddMinutes((int)(minutes * beeCount / 2.0));
-  if (_lifeSpan.day == 3 && isEgg) {
-    // Egg grows into larva bee model
+  public override void UpdateTimeTick(int minutes) {
+    if (!isGrowing)
+      return;
+    var beeCount = 0;
+    foreach (var bee in broodNest.bees) {
+      if (bee)
+        beeCount += 1;
+    }
+    // Growth speed modifier for number of bees in nest
+    LifeSpan.AddMinutes((int)(minutes * beeCount / 2.0));
+    if (LifeSpan.Day != 3 || !isEgg) return;
+    // Change egg into larva bee model when old enough
     eggModel.SetActive(false);
     larvaModel.SetActive(true);
     isEgg = false;
   }
-}
 }

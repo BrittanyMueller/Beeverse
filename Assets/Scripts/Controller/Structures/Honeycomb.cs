@@ -38,17 +38,15 @@ public class Honeycomb : MonoBehaviour {
     }
   }
 
-  public bool built {
-    get { return _buildProgress >= 1; }
-  }
+  public bool Built => _buildProgress >= 1;
 
   public bool showedStructure = false;
 
-  public float buildProgress {
-    get { return _buildProgress; }
+  public float BuildProgress {
+    get => _buildProgress;
     set {
       _buildProgress = value;
-      if (built && !showedStructure) {
+      if (Built && !showedStructure) {
         showedStructure = true;
         ShowStructure();
       }
@@ -57,11 +55,11 @@ public class Honeycomb : MonoBehaviour {
   private float _buildProgress = 0.0f;
   public float buildSpeedPerSecond = 0.1f;
 
-  protected HudController _hudController;
-  protected GameState _state;
+  private HudController _hudController;
+  private GameState _state;
 
   // Start is called before the first frame update
-  void Start() {
+  private void Start() {
     foreach (var _ in workSpots) {
       bees.Add(null);
     }
@@ -105,7 +103,7 @@ public class Honeycomb : MonoBehaviour {
                                  structure.transform.position);
 
     // If the honeycomb is already built update their role
-    if (built) {
+    if (Built) {
       bee.Task.taskType = WorkerBeeTask.StructureTypeAsTaskType(honeycombType);
     }
   }
@@ -124,12 +122,12 @@ public class Honeycomb : MonoBehaviour {
    * created the centre structure
    */
   public void ShowStructure() {
-    if (structure != null) {
+    if (structure) {
       structure.SetActive(true);
       if (honeycombType == StructureType.BroodNest) {
         // add the bee slots the the GameState so queen knows to lay eggs
         foreach (Transform child in this.transform) {
-          if (child.tag == "BabySlot")
+          if (child.CompareTag("BabySlot"))
             _state._beeEggSlots.Add(
                 child.gameObject.GetComponent<BeeEggSlot>());
         }
@@ -141,17 +139,13 @@ public class Honeycomb : MonoBehaviour {
    * Opens the controller for the honeycomb if the honeycomb isn't built
    * yet it will instead open the building menu
    */
-  void OnMouseDown() {
+  private void OnMouseDown() {
     // make sure UI isn't on UI and this isn't the queen honeycomb
     if (EventSystem.current.IsPointerOverGameObject() ||
         honeycombType == StructureType.QueenNest)
       return;
 
-    // check to see if the structure is built
-    if (!built) {
-      _hudController.OpenStructureMenu(StructureType.Building, this);
-    } else {
-      _hudController.OpenStructureMenu(honeycombType, this);
-    }
+    // Show build progress menu or completed structure menu if built
+    _hudController.OpenStructureMenu(!Built ? StructureType.Building : honeycombType, this);
   }
 }

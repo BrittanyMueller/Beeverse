@@ -8,9 +8,9 @@ public class WorkerBeeLandingState : WorkerBeeState {
 
     if (bee.IsDead) {
       bee.ChangeState(new WorkerBeeDieState());
-    } else if (bee.hasTask && bee.hasLanded) {
+    } else if (bee.HasTask && bee.HasLanded) {
       bee.ChangeState(new WorkerBeeWorkingState());
-    } else if (!bee.hasTask) {
+    } else if (!bee.HasTask) {
       bee.ChangeState(new WorkerBeeTakeOffState());
     } else {
       bee.LandAtTask();

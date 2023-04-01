@@ -8,9 +8,9 @@ public class WorkerBeeIdleState : WorkerBeeState {
 
     if (bee.IsDead) {
       bee.ChangeState(new WorkerBeeDieState());
-    } else if (bee.hasTask && !bee.atTask) {
+    } else if (bee.HasTask && !bee.AtTask) {
       bee.ChangeState(new WorkerBeeTravelState());
-    } else if (bee.hasTask && bee.atTask) {
+    } else if (bee.HasTask && bee.AtTask) {
       bee.ChangeState(new WorkerBeeLandingState());
 
     } else {

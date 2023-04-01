@@ -37,7 +37,7 @@ public class BeeProfileController : MonoBehaviour {
       beeSelfie.sprite = _queenBee;
       break;
     case BeeType.Worker:
-      beeJob.text = ((WorkerBee)bee).jobTitle;
+      beeJob.text = ((WorkerBee)bee).JobTitle;
       beeSelfie.sprite = _workerBee;
       break;
     }

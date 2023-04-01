@@ -7,7 +7,7 @@ public class WorkerBeeWorkingState : WorkerBeeState {
 
     if (bee.IsDead) {
       bee.ChangeState(new WorkerBeeDieState());
-    } else if (!bee.hasTask || bee.taskChanged) {
+    } else if (!bee.HasTask || bee.taskChanged) {
       bee.taskChanged = false;
       bee.ChangeState(new WorkerBeeTakeOffState());
       // They stopped working so reset their current

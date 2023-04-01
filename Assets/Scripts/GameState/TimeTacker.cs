@@ -5,18 +5,10 @@
  */
 public class TimeTracker {
 
-  public int day {
-    get { return _day; }
-  }
-  public int hour {
-    get { return _hour; }
-  }
-  public int minute {
-    get { return _minute; }
-  }
-  public int totalTime {
-    get { return _totalMinute; }
-  }
+  public int Day => _day;
+  public int Hour => _hour;
+  public int Minute => _minute;
+  public int TotalTime => _totalMinute;
 
   // Keep track of time cached after every change
   private int _day;
@@ -48,8 +40,7 @@ public class TimeTracker {
   }
 
   public override string ToString() {
-    return "Day " + day.ToString() + " " + hour.ToString().PadLeft(2, '0') +
-           ":" + minute.ToString().PadLeft(2, '0');
-    ;
+    return "Day " + Day + " " + Hour.ToString().PadLeft(2, '0') +
+           ":" + Minute.ToString().PadLeft(2, '0');
   }
 }

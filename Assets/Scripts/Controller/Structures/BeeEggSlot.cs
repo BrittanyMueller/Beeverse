@@ -13,15 +13,14 @@ public class BeeEggSlot : MonoBehaviour {
 
   private bool _hasEgg;
   public bool HasEgg {
-    get { return _hasEgg; }
+    get => _hasEgg;
     set {
       _hasEgg = value;
-      if (_hasEgg) {
-        var eggGameObject =
-            Instantiate(egg, transform.position, transform.rotation);
-        babyBee = eggGameObject.GetComponent<BabyBee>();
-        babyBee.broodNest = broodNest;
-      }
+      if (!_hasEgg) return;
+      var eggGameObject =
+        Instantiate(egg, transform.position, transform.rotation);
+      babyBee = eggGameObject.GetComponent<BabyBee>();
+      babyBee.broodNest = broodNest;
     }
   }
 }

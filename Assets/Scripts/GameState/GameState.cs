@@ -48,19 +48,19 @@ public class GameState : MonoBehaviour {
 
   private BeeResources resources;
   public float honeyCount {
-    get { return resources.honey; }
+    get { return resources.Honey; }
   }
   public float nectarCount {
-    get { return resources.nectar; }
+    get { return resources.Nectar; }
   }
   public float beeswaxCount {
-    get { return resources.beeswax; }
+    get { return resources.Beeswax; }
   }
   public float pollenCount {
-    get { return resources.pollen; }
+    get { return resources.Pollen; }
   }
   public float royalJellyCount {
-    get { return resources.royalJelly; }
+    get { return resources.RoyalJelly; }
   }
 
   // generator to create honeycombs
@@ -107,8 +107,8 @@ public class GameState : MonoBehaviour {
 
     // Set default resources count
     resources = new BeeResources {// TODO revert resources when done debugging
-                                  beeswax = 2000, honey = 2000, nectar = 2000,
-                                  pollen = 2000, royalJelly = 2000
+                                  Beeswax = 2000, Honey = 2000, Nectar = 2000,
+                                  Pollen = 2000, RoyalJelly = 2000
     };
     resourceController.UpdateResources(resources);
 
@@ -173,7 +173,7 @@ public class GameState : MonoBehaviour {
     }
 
     // Notify the logs a day has passed
-    if (_day != _currentTime.day) {
+    if (_day != _currentTime.Day) {
       _day += 1;
       UpdateLog("Day " + _day.ToString());
       UpdateLog("> " + BeeStuff.GetRandomPun());
@@ -202,7 +202,7 @@ public class GameState : MonoBehaviour {
       gameOverController.SetTotalQueen(_totalQueens);
       gameOverController.SetTotalResources(_totalResources);
       gameOverController.SetTotalHoneycombs(_honeycombs.Count);
-      gameOverController.SetTotalDays(_currentTime.day);
+      gameOverController.SetTotalDays(_currentTime.Day);
       Paused = true;
       hudController.GameOver();
     }
@@ -283,38 +283,38 @@ public class GameState : MonoBehaviour {
    * resources will be capped at 9999
    */
   public void AddPollen(int pollen) {
-    resources.pollen += pollen;
-    _totalResources.pollen += pollen;
-    if (resources.pollen > 9999)
-      resources.pollen = 9999;
+    resources.Pollen += pollen;
+    _totalResources.Pollen += pollen;
+    if (resources.Pollen > 9999)
+      resources.Pollen = 9999;
   }
 
   public void AddNectar(int nectar) {
-    resources.nectar += nectar;
-    _totalResources.nectar += nectar;
-    if (resources.nectar > 9999)
-      resources.nectar = 9999;
+    resources.Nectar += nectar;
+    _totalResources.Nectar += nectar;
+    if (resources.Nectar > 9999)
+      resources.Nectar = 9999;
   }
 
   public void AddHoney(int honey) {
-    resources.honey += honey;
-    _totalResources.honey += honey;
-    if (resources.honey > 9999)
-      resources.honey = 9999;
+    resources.Honey += honey;
+    _totalResources.Honey += honey;
+    if (resources.Honey > 9999)
+      resources.Honey = 9999;
   }
 
   public void AddRoyalJelly(int royalJelly) {
-    resources.royalJelly += royalJelly;
-    _totalResources.royalJelly += royalJelly;
-    if (resources.royalJelly > 9999)
-      resources.royalJelly = 9999;
+    resources.RoyalJelly += royalJelly;
+    _totalResources.RoyalJelly += royalJelly;
+    if (resources.RoyalJelly > 9999)
+      resources.RoyalJelly = 9999;
   }
 
   public void AddBeeswax(int beeswax) {
-    resources.beeswax += beeswax;
-    _totalResources.beeswax += beeswax;
-    if (resources.beeswax > 9999)
-      resources.beeswax = 9999;
+    resources.Beeswax += beeswax;
+    _totalResources.Beeswax += beeswax;
+    if (resources.Beeswax > 9999)
+      resources.Beeswax = 9999;
   }
 
   /**
@@ -326,23 +326,23 @@ public class GameState : MonoBehaviour {
   public bool ConsumeResources(BeeResources consume) {
 
     // test if we can consume the resources
-    if (consume.beeswax > resources.beeswax)
+    if (consume.Beeswax > resources.Beeswax)
       return false;
-    if (consume.honey > resources.honey)
+    if (consume.Honey > resources.Honey)
       return false;
-    if (consume.royalJelly > resources.royalJelly)
+    if (consume.RoyalJelly > resources.RoyalJelly)
       return false;
-    if (consume.nectar > resources.nectar)
+    if (consume.Nectar > resources.Nectar)
       return false;
-    if (consume.pollen > resources.pollen)
+    if (consume.Pollen > resources.Pollen)
       return false;
 
     // consume the resources.
-    resources.beeswax -= consume.beeswax;
-    resources.honey -= consume.honey;
-    resources.royalJelly -= consume.royalJelly;
-    resources.nectar -= consume.nectar;
-    resources.pollen -= consume.pollen;
+    resources.Beeswax -= consume.Beeswax;
+    resources.Honey -= consume.Honey;
+    resources.RoyalJelly -= consume.RoyalJelly;
+    resources.Nectar -= consume.Nectar;
+    resources.Pollen -= consume.Pollen;
     return true;
   }
 

@@ -15,7 +15,7 @@ public class SelectBee : MonoBehaviour {
   // holds all the bees that can be selected
   public GameObject beeList;
 
-  private GameState state;
+  private GameState _state;
 
   /**
    * Shows A list of current bees that can be used for the job
@@ -24,7 +24,7 @@ public class SelectBee : MonoBehaviour {
    */
   public void Show(int index, Action<WorkerBee> callback) {
 
-    state = GameObject.Find("GameState").GetComponent<GameState>();
+    _state = GameObject.Find("GameState").GetComponent<GameState>();
 
     // Clear the current list
     {
@@ -35,28 +35,26 @@ public class SelectBee : MonoBehaviour {
     }
 
     // get the game state we we can get a list of bees
-    var bees = state._bees;
-    foreach (WorkerBee bee in bees) {
+    var bees = _state._bees;
+    foreach (var bee in bees) {
       // if they have a task skip
-      if (bee.hasTask)
+      if (bee.HasTask)
         continue;
       GameObject obj =
           Instantiate(beeDetails, new Vector3(0, 0, 0), Quaternion.identity);
       obj.transform.SetParent(beeList.transform);
 
       // Set the bee and select
-      SelectBeeInfo info = obj.GetComponent<SelectBeeInfo>();
+      var info = obj.GetComponent<SelectBeeInfo>();
       info.bee = bee;
       info.targetSelect = index;
 
       obj.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => {
-        if (state.Paused)
-          ;
+        if (_state.Paused) return;
         callback(bee);
         Hide();
       });
     }
-
     gameObject.SetActive(true);
   }
 
@@ -64,9 +62,9 @@ public class SelectBee : MonoBehaviour {
    * Hides the Select BeeScreen
    */
   public void Hide() {
-    if (state == null)
-      state = GameObject.Find("GameState").GetComponent<GameState>();
-    if (state.Paused)
+    if (_state == null)
+      _state = GameObject.Find("GameState").GetComponent<GameState>();
+    if (_state.Paused)
       return;
     // Clear the current list
     {

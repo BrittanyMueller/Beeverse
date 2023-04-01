@@ -1,5 +1,5 @@
 ﻿
-public enum StructureType : int {
+public enum StructureType {
   Flower,
   HoneyFactory,
   BeeswaxFactory,

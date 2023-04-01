@@ -23,41 +23,41 @@ public class HudController : MonoBehaviour {
   public BabyProfileController babyProfileController;
 
   public List<Button> createHoneycombButtons;
-  private Button createHoneyFactory;
-  private Button createBeeswaxFactory;
-  private Button createRoyalJellyFactory;
-  private Button createBroodNest;
+  private Button _createHoneyFactory;
+  private Button _createBeeswaxFactory;
+  private Button _createRoyalJellyFactory;
+  private Button _createBroodNest;
 
   public GameState state;
   // Start is called before the first frame update
-  void Start() {
+  private void Start() {
     menu.SetActive(false);
     gameOver.SetActive(false);
     CloseStructureMenu();
 
     foreach (Button button in createHoneycombButtons) {
       if (button.gameObject.name == "HoneyFactory") {
-        createHoneyFactory = button;
+        _createHoneyFactory = button;
       } else if (button.gameObject.name == "BeeswaxFactory") {
-        createBeeswaxFactory = button;
+        _createBeeswaxFactory = button;
       } else if (button.gameObject.name == "RoyalJellyFactory") {
-        createRoyalJellyFactory = button;
+        _createRoyalJellyFactory = button;
       } else if (button.gameObject.name == "BroodNest") {
-        createBroodNest = button;
+        _createBroodNest = button;
       }
     }
   }
 
-  void Update() {
+  private void Update() {
 
     // disable and enable buttons
-    createHoneyFactory.interactable =
+    _createHoneyFactory.interactable =
         (state.pollenCount >= 100 && state.nectarCount >= 50);
-    createBeeswaxFactory.interactable =
+    _createBeeswaxFactory.interactable =
         (state.honeyCount >= 100 && state.nectarCount >= 50);
-    createRoyalJellyFactory.interactable =
+    _createRoyalJellyFactory.interactable =
         (state.honeyCount >= 100 && state.beeswaxCount >= 100);
-    createBroodNest.interactable =
+    _createBroodNest.interactable =
         (state.beeswaxCount >= 100 && state.honeyCount >= 50 &&
          state.royalJellyCount >= 10);
   }
@@ -93,20 +93,20 @@ public class HudController : MonoBehaviour {
 
     // Open the correct menu
     switch (type) {
-    case StructureType.Flower:
-      flowerMenu.Show((Flower)structure);
-      break;
-    case StructureType.Building:
-      buildingMenu.Show((Honeycomb)structure);
-      break;
-    case StructureType.HoneyFactory:
-    case StructureType.BeeswaxFactory:
-    case StructureType.RoyalJellyFactory:
-      factoryMenu.Show((HoneycombFactory)structure);
-      break;
-    case StructureType.BroodNest:
-      broodNestMenu.Show((BroodNest)structure);
-      break;
+      case StructureType.Flower:
+        flowerMenu.Show((Flower)structure);
+        break;
+      case StructureType.Building:
+        buildingMenu.Show((Honeycomb)structure);
+        break;
+      case StructureType.HoneyFactory:
+      case StructureType.BeeswaxFactory:
+      case StructureType.RoyalJellyFactory:
+        factoryMenu.Show((HoneycombFactory)structure);
+        break;
+      case StructureType.BroodNest:
+        broodNestMenu.Show((BroodNest)structure);
+        break;
     }
     structureMenu.SetActive(true);
   }

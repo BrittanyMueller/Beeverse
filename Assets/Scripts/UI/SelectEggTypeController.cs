@@ -34,7 +34,7 @@ public class SelectEggTypeController : MonoBehaviour {
   public void SetWorkerEgg() {
     _currentEgg.isGrowing = true;
     _currentEgg.isQueen = false;
-    var cost = new BeeResources { honey = 40, royalJelly = 10 };
+    var cost = new BeeResources { Honey = 40, RoyalJelly = 10 };
     state.ConsumeResources(cost);
     _currentEgg.beeName = BeeStuff.GetRandomName();
     Hide();
@@ -44,10 +44,9 @@ public class SelectEggTypeController : MonoBehaviour {
     _currentEgg.isGrowing = true;
     _currentEgg.isQueen = true;
     state.HasQueenEgg = true;
-    var cost = new BeeResources { royalJelly = 50 };
+    var cost = new BeeResources { RoyalJelly = 50 };
     state.ConsumeResources(cost);
-    // TODO make list of queen names
-    _currentEgg.beeName = BeeStuff.GetRandomName();
+    _currentEgg.beeName = BeeStuff.GetRandomQueenName();
     Hide();
   }
 }

@@ -9,8 +9,7 @@ using UnityEngine.EventSystems;
  * build, working in factories, and taking care
  * of baby bees. They will also have a much shorter lifespan than the queen
  *
- * The Queen responsibility is to lay eggs, which will be done in the broods
- * nest.
+ * The Queen is responsible for laying eggs in the brood nest.
  */
 public enum BeeType { Queen, Worker, Baby }
 
@@ -27,22 +26,18 @@ public class Bee : MonoBehaviour {
   // should be different.
   public bool inMenu = false;
 
-  protected HudController hudController;
-  protected BeeProfileController profileController;
-  protected BabyProfileController babyProfileController;
+  protected HudController HUDController;
+  protected BeeProfileController ProfileController;
+  protected BabyProfileController BabyProfileController;
 
   // Used to keep track of how much life
   // the be has left should be set by child
   // in start
-  protected TimeTracker _lifeSpan;
-  public bool IsDead {
-    get { return _lifeSpan.totalTime <= 0; }
-  }
+  protected TimeTracker LifeSpan;
+  public bool IsDead => LifeSpan.TotalTime <= 0;
 
-  // Returns how old a given bee is.
-  public int AgeInDays {
-    get { return lifeSpanInDays - _lifeSpan.day + startAge; }
-  }
+  // Returns how old a given bee is in days
+  public int AgeInDays => lifeSpanInDays - LifeSpan.Day + startAge;
   public int lifeSpanInDays;
 
   // How old the bee was when it gets instantiated from a baby
@@ -56,13 +51,13 @@ public class Bee : MonoBehaviour {
 
     // Make their lifespan random by a 5 day deviation
     System.Random rand = new System.Random();
-    _lifeSpan = new TimeTracker(lifeSpanInDays, 0, 0);
-    _lifeSpan.AddMinutes(rand.Next((5 * 60 * 25) * 2) - 7200);
-    lifeSpanInDays = _lifeSpan.day;
-    hudController =
+    LifeSpan = new TimeTracker(lifeSpanInDays, 0, 0);
+    LifeSpan.AddMinutes(rand.Next((5 * 60 * 25) * 2) - 7200);
+    lifeSpanInDays = LifeSpan.Day;
+    HUDController =
         GameObject.Find("/HudController").GetComponent<HudController>();
-    profileController = hudController.beeProfileController;
-    babyProfileController = hudController.babyProfileController;
+    ProfileController = HUDController.beeProfileController;
+    BabyProfileController = HUDController.babyProfileController;
   }
 
   /**
@@ -71,7 +66,7 @@ public class Bee : MonoBehaviour {
    * be called in order to maintain the bees lifespan and dead time.
    */
   public virtual void UpdateTimeTick(int minutes) {
-    _lifeSpan.SubMinutes(minutes);
+    LifeSpan.SubMinutes(minutes);
   }
 
   /**
@@ -81,7 +76,7 @@ public class Bee : MonoBehaviour {
     // Make sure UI isn't on UI or in main menu
     if (inMenu || EventSystem.current.IsPointerOverGameObject())
       return;
-    babyProfileController.Hide();
-    profileController.Show(this);
+    BabyProfileController.Hide();
+    ProfileController.Show(this);
   }
 }

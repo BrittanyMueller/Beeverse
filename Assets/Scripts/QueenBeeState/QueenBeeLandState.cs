@@ -7,7 +7,7 @@ public class QueenBeeLandState : QueenBeeState {
 
     if (bee.IsDead) {
       bee.ChangeState(new QueenBeeDieState());
-    } else if (bee.hasTask && bee.hasLanded) {
+    } else if (bee.HasTask && bee.HasLanded) {
       if (bee.Task.taskType == QueenBeeTask.TaskType.LayEgg) {
         bee.ChangeState(new QueenBeeLayEggState());
       } else {

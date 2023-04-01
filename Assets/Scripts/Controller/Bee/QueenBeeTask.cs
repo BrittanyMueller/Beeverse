@@ -12,15 +12,15 @@ public class QueenBeeTask {
   // Where they should sit
   public Vector3 taskLocation;
 
-  public BeeEggSlot _curSlot = null;
+  public BeeEggSlot _curSlot;
 
   public QueenBeeTask(TaskType task, Vector3 location) {
-    this.taskType = task;
+    taskType = task;
     taskLocation = location;
   }
 
   public QueenBeeTask(TaskType task, Vector3 location, BeeEggSlot slot) {
-    this.taskType = task;
+    taskType = task;
     taskLocation = location;
     _curSlot = slot;
   }

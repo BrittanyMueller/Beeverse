@@ -50,19 +50,19 @@ public class HoneycombFactory : Honeycomb {
          i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
       switch (inResources[i]) {
       case BeeResources.Type.Beeswax:
-        res.beeswax = inResourcesConversionRate[i];
+        res.Beeswax = inResourcesConversionRate[i];
         break;
       case BeeResources.Type.Honey:
-        res.honey = inResourcesConversionRate[i];
+        res.Honey = inResourcesConversionRate[i];
         break;
       case BeeResources.Type.Nectar:
-        res.nectar = inResourcesConversionRate[i];
+        res.Nectar = inResourcesConversionRate[i];
         break;
       case BeeResources.Type.RoyalJelly:
-        res.royalJelly = inResourcesConversionRate[i];
+        res.RoyalJelly = inResourcesConversionRate[i];
         break;
       case BeeResources.Type.Pollen:
-        res.pollen = inResourcesConversionRate[i];
+        res.Pollen = inResourcesConversionRate[i];
         break;
       }
     }

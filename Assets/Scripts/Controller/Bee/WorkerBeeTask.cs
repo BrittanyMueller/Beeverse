@@ -23,7 +23,7 @@ public class WorkerBeeTask {
   public int workerSpotIndex;
 
   public WorkerBeeTask(TaskType task, Vector3 location, int index) {
-    this.taskType = task;
+    taskType = task;
     taskLocation = location;
     targetLocation = new Vector3(0, 0);
     workerSpotIndex = index;
@@ -31,7 +31,7 @@ public class WorkerBeeTask {
 
   public WorkerBeeTask(TaskType task, Vector3 location, int index,
                        Vector3 target) {
-    this.taskType = task;
+    taskType = task;
     taskLocation = location;
     targetLocation = target;
     workerSpotIndex = index;
@@ -43,16 +43,16 @@ public class WorkerBeeTask {
    */
   public static TaskType StructureTypeAsTaskType(StructureType type) {
     switch (type) {
-    case StructureType.HoneyFactory:
-      return TaskType.HoneyFactory;
-    case StructureType.RoyalJellyFactory:
-      return TaskType.RoyalJellyFactory;
-    case StructureType.BeeswaxFactory:
-      return TaskType.BeeswaxFactory;
-    case StructureType.BroodNest:
-      return TaskType.Nurse;
-    case StructureType.Flower:
-      return TaskType.Forager;
+      case StructureType.HoneyFactory:
+        return TaskType.HoneyFactory;
+      case StructureType.RoyalJellyFactory:
+        return TaskType.RoyalJellyFactory;
+      case StructureType.BeeswaxFactory:
+        return TaskType.BeeswaxFactory;
+      case StructureType.BroodNest:
+        return TaskType.Nurse;
+      case StructureType.Flower:
+        return TaskType.Forager;
     }
     return TaskType.Builder;
   }

@@ -14,16 +14,14 @@ public class QueenBee : Bee {
   private GameState _state;
 
   public QueenBeeTask Task {
-    get { return _task; }
-    set { _task = value; }
+    get => _task;
+    set => _task = value;
   }
   private QueenBeeTask _task = null;
 
-  public bool hasTask {
-    get { return Task != null; }
-  }
+  public bool HasTask => Task != null;
 
-  public bool atTask {
+  public bool AtTask {
     get {
       var distance = Task.taskLocation - transform.position;
       distance.y = 0;
@@ -31,22 +29,18 @@ public class QueenBee : Bee {
     }
   }
 
-  public bool hasLanded {
+  public bool HasLanded {
     get {
       var distance = Task.taskLocation - transform.position;
       return distance.sqrMagnitude < 10; // basically on task
     }
   }
 
-  public bool hasEgg {
-    get { return _state._beeEggSlots.Find((value) => !value.HasEgg) != null; }
+  public bool HasEgg {
+    get { return _state._beeEggSlots.Find((value) => !value.HasEgg); }
   }
 
-  public bool hasTakenOff {
-    get {
-      return transform.position.y >= _flyHeight; // basically on task
-    }
-  }
+  public bool HasTakenOff => transform.position.y >= _flyHeight; // basically on task
 
   // Start is called before the first frame update
   protected override void Start() {
@@ -101,7 +95,7 @@ public class QueenBee : Bee {
 
   public void LayEggState() {
     // add egg to slot
-    if (Task != null && Task._curSlot != null)
+    if (Task != null && Task._curSlot)
       Task._curSlot.HasEgg = true;
   }
 
@@ -111,20 +105,18 @@ public class QueenBee : Bee {
 
     RotateTo(Task.taskLocation);
 
-    Vector3 taskBeeVec = Task.taskLocation - transform.position;
-    Vector3 forwardVec = transform.forward;
+    var taskBeeVec = Task.taskLocation - transform.position;
+    var forwardVec = transform.forward;
     taskBeeVec.y = 0;
     forwardVec.y = 0;
     if ((Vector3.Angle(taskBeeVec, forwardVec) < 10)) {
-      _controller.Move(transform.TransformDirection(Vector3.forward) *
-                       _flySpeed * Time.deltaTime * GameState.GetGameSpeed());
+      _controller.Move(transform.TransformDirection(Vector3.forward) * (_flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
 
     // check if they are at the correct height
     if (Mathf.Abs(transform.position.y - _flyHeight) > 0.05) {
-      int dir = (transform.position.y < _flyHeight) ? 1 : -1;
-      _controller.Move(transform.TransformDirection(Vector3.up) * dir *
-                       _flySpeed * Time.deltaTime * GameState.GetGameSpeed());
+      var dir = (transform.position.y < _flyHeight) ? 1 : -1;
+      _controller.Move(transform.TransformDirection(Vector3.up) * (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
   }
 
@@ -146,10 +138,9 @@ public class QueenBee : Bee {
   }
 
   public void RotateTo(Vector3 location) {
-    float singleStep =
+    var singleStep =
         _rotationSpeed * Time.deltaTime * GameState.GetGameSpeed();
-    Vector3 taskBeeVec = location - transform.position;
-    Vector3 forwardsVec = transform.forward;
+    var taskBeeVec = location - transform.position;
 
     // only want to rotate on the xz axis
     taskBeeVec.y = 0;

@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour {
   [SerializeField]
   private CinemachineVirtualCamera virtualCamera;
 
-  void Start() { _targetFOV = 20; }
+  private void Start() { _targetFOV = 20; }
   private void Update() {
     RotateCamera();
     MoveCamera();

@@ -123,7 +123,7 @@ public class StructureUIController : MonoBehaviour {
     });
   }
 
-  public void RemoveBee(int index) {
+  private void RemoveBee(int index) {
     if (state.Paused)
       return;
     // remove the bee with the given callback

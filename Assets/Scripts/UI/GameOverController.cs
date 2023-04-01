@@ -28,11 +28,11 @@ public class GameOverController : MonoBehaviour {
   public void SetTotalDays(int days) { totalDaysText.text = days.ToString(); }
 
   public void SetTotalResources(BeeResources resources) {
-    totalBeeswaxText.text = resources.beeswax.ToString();
-    totalHoneyText.text = resources.honey.ToString();
-    totalNectarText.text = resources.nectar.ToString();
-    totalRoyalJellyText.text = resources.royalJelly.ToString();
-    totalPollenText.text = resources.pollen.ToString();
+    totalBeeswaxText.text = resources.Beeswax.ToString();
+    totalHoneyText.text = resources.Honey.ToString();
+    totalNectarText.text = resources.Nectar.ToString();
+    totalRoyalJellyText.text = resources.RoyalJelly.ToString();
+    totalPollenText.text = resources.Pollen.ToString();
   }
 
   public void SetTotalHoneycombs(int count) {

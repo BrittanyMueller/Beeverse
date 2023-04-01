@@ -7,7 +7,7 @@ public class MainMenuController : MonoBehaviour {
 
   public GameObject credits;
   // Start is called before the first frame update
-  void Start() { credits.SetActive(false); }
+  private void Start() { credits.SetActive(false); }
 
   public void StartGame() {
     // Make sure game isn't paused

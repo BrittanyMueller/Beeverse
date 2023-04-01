@@ -15,7 +15,7 @@ public class Flower : MonoBehaviour {
   public int nectarCollectionRate = 3;
 
   // Start is called before the first frame update
-  void Start() {
+  private void Start() {
     foreach (var _ in flowerLocations) {
       bees.Add(null);
     }
@@ -23,7 +23,7 @@ public class Flower : MonoBehaviour {
         GameObject.Find("HudController").GetComponent<HudController>();
   }
 
-  void OnMouseDown() {
+  private void OnMouseDown() {
     // make sure UI isn't on UI
     if (!EventSystem.current.IsPointerOverGameObject()) {
       _controller.OpenStructureMenu(StructureType.Flower, this);
