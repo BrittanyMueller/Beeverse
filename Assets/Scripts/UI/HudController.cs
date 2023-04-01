@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /** Responsible for controller what
  * pops up and is closed for the UI of the
@@ -20,6 +21,7 @@ public class HudController : MonoBehaviour {
   public SelectEggTypeController eggMenu;
   public BeeProfileController beeProfileController;
   public BabyProfileController babyProfileController;
+  public TMP_Text populationText;
 
   public List<Button> createHoneycombButtons;
   private Button _createHoneyFactory;
@@ -48,6 +50,9 @@ public class HudController : MonoBehaviour {
   }
 
   private void Update() {
+    // Set the value of the population
+    populationText.text = state._bees.Count.ToString();
+    
     // disable and enable buttons
     _createHoneyFactory.interactable = (state.pollenCount >= 100 && state.nectarCount >= 50);
     _createBeeswaxFactory.interactable = (state.honeyCount >= 100 && state.nectarCount >= 50);
