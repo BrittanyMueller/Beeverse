@@ -43,6 +43,9 @@ public class QueenBee : Bee {
   public bool HasTakenOff =>
       transform.position.y >= _flyHeight; // basically on task
 
+  // Flag to direct Queen bee to abandon hive!
+  public bool IsLeavingHive { get; set; }
+
   // Start is called before the first frame update
   protected override void Start() {
     base.Start();
@@ -65,8 +68,11 @@ public class QueenBee : Bee {
   }
 
   public void SetHomeTask() {
-    Task = new QueenBeeTask(QueenBeeTask.TaskType.ReturnToNest,
-                            _state.QueenHoneycomb.workSpots[0].position);
+    Task = new QueenBeeTask(QueenBeeTask.TaskType.ReturnToNest, _state.QueenHoneycomb.workSpots[0].position);
+  }
+
+  public void SetLeaveHiveTask() {
+    Task = new QueenBeeTask(QueenBeeTask.TaskType.LeaveHive, _state.QueenHoneycomb.workSpots[1].position);
   }
 
   /*** State methods ***/
@@ -136,7 +142,7 @@ public class QueenBee : Bee {
     _anim.SetBool("Flying", true);
     _anim.SetBool("Idle", false);
 
-    // fly straight up
+    // Fly straight up
     _controller.Move(new Vector3(
         0, _flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
   }

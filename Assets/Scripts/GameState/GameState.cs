@@ -178,11 +178,14 @@ public class GameState : MonoBehaviour {
                                  .GetComponent<QueenBee>();
               newQueen.beeName = beeSlot.babyBee.beeName;
               newQueen.ChangeState(new QueenBeeTakeOffState());
+              UpdateLog("Welcome the new Queen Bee, " + newQueen.beeName + "!");
 
               if (_queen) {
-                // Kill off the old queen :(
-                _queen.ChangeState(new QueenBeeDieState());
-                StartCoroutine(RemoveQueenBee(_queen));
+                // Remove old queen from the game! Good bye Queen
+                UpdateLog("Queen " + _queen.beeName + " feels replaced and moves on to another hive...");
+                _queen.IsLeavingHive = true;
+                _queen.ChangeState(new QueenBeeTakeOffState());
+                StartCoroutine(RemoveQueenBee(_queen, 15));
               }
               _queen = newQueen;
               _hasQueenEgg = false;
@@ -205,12 +208,12 @@ public class GameState : MonoBehaviour {
     // Notify the logs a day has passed
     if (_day != _currentTime.Day) {
       _day += 1;
-      UpdateLog("Day " + _day.ToString());
+      UpdateLog("Day " + _day);
       UpdateLog("> " + BeeStuff.GetRandomPun());
     }
 
     // Remove all bees that have died
-    foreach (Bee bee in _bees) {
+    foreach (var bee in _bees) {
       if (bee.isDead) {
         StartCoroutine(RemoveBee(bee));
         UpdateLog("> " + bee.beeName + " has died at the old age of " + bee.AgeInDays + " days. Rest in Bees");
@@ -239,15 +242,15 @@ public class GameState : MonoBehaviour {
     resourceController.UpdateResources(resources);
   }
 
-  IEnumerator RemoveBee(Bee bee) {
+  private IEnumerator RemoveBee(Bee bee) {
     yield return new WaitForSeconds(10);
     _deadBees--;
     Destroy(bee.gameObject);
   }
 
-  IEnumerator RemoveQueenBee(Bee bee) {
+  private IEnumerator RemoveQueenBee(Bee bee, int wait = 10) {
     _queen = null;
-    yield return new WaitForSeconds(10);
+    yield return new WaitForSeconds(wait);
     Destroy(bee.gameObject);
   }
 

@@ -121,16 +121,16 @@ public class Honeycomb : MonoBehaviour {
    * Called when construction is finished to
    * created the centre structure
    */
-  public void ShowStructure() {
-    if (structure) {
-      structure.SetActive(true);
-      if (honeycombType == StructureType.BroodNest) {
-        // add the bee slots the the GameState so queen knows to lay eggs
-        foreach (Transform child in this.transform) {
-          if (child.CompareTag("BabySlot"))
-            _state._beeEggSlots.Add(
-                child.gameObject.GetComponent<BeeEggSlot>());
-        }
+  private void ShowStructure() {
+    if (!structure) return;
+    structure.SetActive(true);
+    _state.UpdateLog("The " + Name + " has finished building!");
+    if (honeycombType == StructureType.BroodNest) {
+      // Add the egg slots to the GameState so Queen knows to lay eggs
+      foreach (Transform child in this.transform) {
+        if (child.CompareTag("BabySlot"))
+          _state._beeEggSlots.Add(
+            child.gameObject.GetComponent<BeeEggSlot>());
       }
     }
   }

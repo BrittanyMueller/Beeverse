@@ -8,7 +8,9 @@ public class QueenBeeTakeOffState : QueenBeeState {
     if (bee.IsDead) {
       bee.ChangeState(new QueenBeeDieState());
     } else if (bee.HasTakenOff) {
-      if (bee.HasEgg) {
+      if (bee.IsLeavingHive) {
+        bee.SetLeaveHiveTask();
+      } else if (bee.HasEgg) {
         bee.SetEggTask();
       } else {
         bee.SetHomeTask();

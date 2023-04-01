@@ -6,6 +6,7 @@ public class QueenBeeTask {
   public enum TaskType {
     LayEgg,
     ReturnToNest,
+    LeaveHive
   }
   public TaskType taskType;
 

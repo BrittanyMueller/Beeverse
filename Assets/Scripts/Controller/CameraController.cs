@@ -99,6 +99,7 @@ public class CameraController : MonoBehaviour {
   private void RecentreCamera() {
     if (Input.GetKey(KeyCode.Space)) {
       var target = new Vector3(500, 250, 80);
+      transform.eulerAngles = new Vector3(30, 0, 0);
       // transform.rotation = new Quaternion(0,0,0);
       // transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(), Time.time * rotationResetSpeed); 
       transform.position = target;

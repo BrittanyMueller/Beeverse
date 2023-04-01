@@ -4593,7 +4593,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308104022}
-  m_LocalRotation: {x: 0.258819, y: 0.000000023504347, z: -0.00000000629797, w: 0.9659259}
+  m_LocalRotation: {x: 0.258819, y: -0.000000023504358, z: 0.0000000062979733, w: 0.9659259}
   m_LocalPosition: {x: 500, y: 250, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7258,6 +7258,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5509443711455570123, guid: a4f070c717cf04e4f92e02558b2b0558, type: 3}
+      propertyPath: workSpots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5509443711455570123, guid: a4f070c717cf04e4f92e02558b2b0558, type: 3}
+      propertyPath: workSpots.Array.data[1]
+      value: 
+      objectReference: {fileID: 1336545154}
     - target: {fileID: 2389277663583106993, guid: a4f070c717cf04e4f92e02558b2b0558, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8724,7 +8732,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680831986}
-  m_LocalRotation: {x: 0.258819, y: 0.000000023504347, z: -0.00000000629797, w: 0.9659259}
+  m_LocalRotation: {x: 0.258819, y: -0.000000023504358, z: 0.0000000062979733, w: 0.9659259}
   m_LocalPosition: {x: 500, y: 250, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9001,8 +9009,8 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0
-    m_NormalBias: 0
+    m_Bias: 0.1
+    m_NormalBias: 1
     m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
@@ -9991,8 +9999,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 112.02155, y: 0}
-  m_SizeDelta: {x: 224.0431, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &792780840
 MonoBehaviour:
@@ -15948,6 +15956,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326615778}
   m_CullTransparentMesh: 1
+--- !u!1 &1336545153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1336545154}
+  m_Layer: 0
+  m_Name: QueenExit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1336545154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336545153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -46, y: 53.4, z: 599.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1350830228
 GameObject:
   m_ObjectHideFlags: 0
