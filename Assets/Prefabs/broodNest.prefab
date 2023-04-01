@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 8050903120329245744}
   - component: {fileID: 2878905560753939696}
   - component: {fileID: 1990950948319247563}
-  - component: {fileID: -7067990435906865644}
+  - component: {fileID: 2956996244595454741}
   m_Layer: 0
   m_Name: broodNest
   m_TagString: Untagged
@@ -539,7 +539,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.86311185, y: 0.058842406, z: 0.5}
   m_Center: {x: -0.0034561157, y: 0.0042295097, z: 0}
---- !u!82 &-7067990435906865644
+--- !u!82 &2956996244595454741
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -551,7 +551,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 16d7523494718289cb4a803856b4e0df, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.112
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
