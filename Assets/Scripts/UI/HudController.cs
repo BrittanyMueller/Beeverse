@@ -8,7 +8,6 @@ using UnityEngine.UI;
  * entire application
  */
 public class HudController : MonoBehaviour {
-
   public GameObject menu;
   public GameObject gameOver;
 
@@ -49,17 +48,12 @@ public class HudController : MonoBehaviour {
   }
 
   private void Update() {
-
     // disable and enable buttons
-    _createHoneyFactory.interactable =
-        (state.pollenCount >= 100 && state.nectarCount >= 50);
-    _createBeeswaxFactory.interactable =
-        (state.honeyCount >= 100 && state.nectarCount >= 50);
-    _createRoyalJellyFactory.interactable =
-        (state.honeyCount >= 100 && state.beeswaxCount >= 100);
+    _createHoneyFactory.interactable = (state.pollenCount >= 100 && state.nectarCount >= 50);
+    _createBeeswaxFactory.interactable = (state.honeyCount >= 100 && state.nectarCount >= 50);
+    _createRoyalJellyFactory.interactable = (state.honeyCount >= 100 && state.beeswaxCount >= 100);
     _createBroodNest.interactable =
-        (state.beeswaxCount >= 100 && state.honeyCount >= 50 &&
-         state.royalJellyCount >= 10);
+        (state.beeswaxCount >= 100 && state.honeyCount >= 50 && state.royalJellyCount >= 10);
   }
 
   public void Pause() {
@@ -93,26 +87,30 @@ public class HudController : MonoBehaviour {
 
     // Open the correct menu
     switch (type) {
-    case StructureType.Flower:
-      flowerMenu.Show((Flower)structure);
-      break;
-    case StructureType.Building:
-      buildingMenu.Show((Honeycomb)structure);
-      break;
-    case StructureType.HoneyFactory:
-    case StructureType.BeeswaxFactory:
-    case StructureType.RoyalJellyFactory:
-      factoryMenu.Show((HoneycombFactory)structure);
-      break;
-    case StructureType.BroodNest:
-      broodNestMenu.Show((BroodNest)structure);
-      break;
+      case StructureType.Flower:
+        flowerMenu.Show((Flower)structure);
+        break;
+      case StructureType.Building:
+        buildingMenu.Show((Honeycomb)structure);
+        break;
+      case StructureType.HoneyFactory:
+      case StructureType.BeeswaxFactory:
+      case StructureType.RoyalJellyFactory:
+        factoryMenu.Show((HoneycombFactory)structure);
+        break;
+      case StructureType.BroodNest:
+        broodNestMenu.Show((BroodNest)structure);
+        break;
     }
     structureMenu.SetActive(true);
   }
-  public void Exit() { Application.Quit(); }
+  public void Exit() {
+    Application.Quit();
+  }
 
-  public void Save() { state.Save(); }
+  public void Save() {
+    state.Save();
+  }
 
   // Game is over display screen and hide other GUIs
   public void GameOver() {

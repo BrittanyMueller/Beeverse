@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Flower : MonoBehaviour {
-
   public List<Transform> flowerLocations;
   public List<WorkerBee> bees;
 
@@ -19,8 +18,7 @@ public class Flower : MonoBehaviour {
     foreach (var _ in flowerLocations) {
       bees.Add(null);
     }
-    _controller =
-        GameObject.Find("HudController").GetComponent<HudController>();
+    _controller = GameObject.Find("HudController").GetComponent<HudController>();
   }
 
   private void OnMouseDown() {
@@ -37,10 +35,12 @@ public class Flower : MonoBehaviour {
     }
 
     bees[index] = bee;
-    bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.Forager,
-                                 flowerLocations[index].position, index);
+    bee.Task =
+        new WorkerBeeTask(WorkerBeeTask.TaskType.Forager, flowerLocations[index].position, index);
     bee.flower = this;
   }
 
-  public void RemoveWorker(int index) { bees[index].Task = null; }
+  public void RemoveWorker(int index) {
+    bees[index].Task = null;
+  }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BeeEggSlot : MonoBehaviour {
-
   [SerializeField]
   private BroodNest broodNest;
   [SerializeField]
@@ -18,8 +17,7 @@ public class BeeEggSlot : MonoBehaviour {
       _hasEgg = value;
       if (!_hasEgg)
         return;
-      var eggGameObject =
-          Instantiate(egg, transform.position, transform.rotation);
+      var eggGameObject = Instantiate(egg, transform.position, transform.rotation);
       babyBee = eggGameObject.GetComponent<BabyBee>();
       babyBee.broodNest = broodNest;
     }

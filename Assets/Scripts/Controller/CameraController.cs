@@ -16,7 +16,9 @@ public class CameraController : MonoBehaviour {
   [SerializeField]
   private CinemachineVirtualCamera virtualCamera;
 
-  private void Start() { _targetFOV = 20; }
+  private void Start() {
+    _targetFOV = 20;
+  }
   private void Update() {
     RotateCamera();
     MoveCamera();
@@ -29,26 +31,24 @@ public class CameraController : MonoBehaviour {
     var input = new Vector3(0, 0, 0);
 
     if (Input.GetKey(KeyCode.W))
-      input.z = 1f; // Move forward
+      input.z = 1f;  // Move forward
     if (Input.GetKey(KeyCode.A))
-      input.x = -1f; // Move left
+      input.x = -1f;  // Move left
     if (Input.GetKey(KeyCode.S))
-      input.z = -1f; // Move back
+      input.z = -1f;  // Move back
     if (Input.GetKey(KeyCode.D))
-      input.x = 1f; // Move right
+      input.x = 1f;  // Move right
 
     // Adjust camera speed based on FOV
     var cameraSpeed = maxCameraSpeed * _targetFOV / maxFOV;
 
     // Move direction relative to camera position
     var moveDirection = transform.forward * input.z + transform.right * input.x;
-    moveDirection.y = 0; // Lock y-axis when moving
-    transform.position +=
-        moveDirection.normalized * (cameraSpeed * Time.deltaTime);
+    moveDirection.y = 0;  // Lock y-axis when moving
+    transform.position += moveDirection.normalized * (cameraSpeed * Time.deltaTime);
   }
 
   private void RotateCamera() {
-
     var rotateDirection = 0f;
     if (Input.GetKey(KeyCode.Q))
       rotateDirection = 1f;
@@ -58,16 +58,13 @@ public class CameraController : MonoBehaviour {
     // Adjust rotate speed relative to how zoomed out
     var rotateSpeed = maxRotateSpeed * _targetFOV / maxFOV;
     if (Input.GetMouseButton(1)) {
-      transform.eulerAngles +=
-          new Vector3(rotateDirection * rotateSpeed * Time.deltaTime, 0, 0);
+      transform.eulerAngles += new Vector3(rotateDirection * rotateSpeed * Time.deltaTime, 0, 0);
     } else {
-      transform.eulerAngles +=
-          new Vector3(0, -rotateDirection * rotateSpeed * Time.deltaTime, 0);
+      transform.eulerAngles += new Vector3(0, -rotateDirection * rotateSpeed * Time.deltaTime, 0);
     }
   }
 
   private void ZoomCamera() {
-
     // TODO adjust zoom amount based on current FOV (zoom feels slow when
     // near/at maxFOV)
     var zoomAmount = 2;
@@ -101,7 +98,8 @@ public class CameraController : MonoBehaviour {
       var target = new Vector3(500, 250, 80);
       transform.eulerAngles = new Vector3(30, 0, 0);
       // transform.rotation = new Quaternion(0,0,0);
-      // transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(), Time.time * rotationResetSpeed); 
+      // transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(), Time.time *
+      // rotationResetSpeed);
       transform.position = target;
     }
   }

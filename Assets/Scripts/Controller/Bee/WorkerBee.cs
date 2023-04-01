@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkerBee : Bee {
-
   // Model facial features used for its dead state
   public GameObject _leftEye;
   public GameObject _rightEye;
@@ -43,20 +42,19 @@ public class WorkerBee : Bee {
     set {
       // set only if it already had a task
       if (_task != null) {
-
         taskChanged = true;
         // remove from old task
         switch (_task.taskType) {
-        case WorkerBeeTask.TaskType.Forager:
-          // set old flower spot to null
-          flower.bees[_task.workerSpotIndex] = null;
-          flower = null;
-          break;
-        default:
-          // set old flower spot to null
-          honeycomb.bees[_task.workerSpotIndex] = null;
-          honeycomb = null;
-          break;
+          case WorkerBeeTask.TaskType.Forager:
+            // set old flower spot to null
+            flower.bees[_task.workerSpotIndex] = null;
+            flower = null;
+            break;
+          default:
+            // set old flower spot to null
+            honeycomb.bees[_task.workerSpotIndex] = null;
+            honeycomb = null;
+            break;
         }
       }
       _task = value;
@@ -70,7 +68,7 @@ public class WorkerBee : Bee {
     get {
       var distance = Task.taskLocation - transform.position;
       distance.y = 0;
-      return distance.sqrMagnitude < 0.5; // 2cm
+      return distance.sqrMagnitude < 0.5;  // 2cm
     }
   }
 
@@ -78,19 +76,18 @@ public class WorkerBee : Bee {
     get {
       var distance = _idleLocation - transform.position;
       distance.y = 0;
-      return distance.sqrMagnitude < 1; // 1cm
+      return distance.sqrMagnitude < 1;  // 1cm
     }
   }
 
   public bool HasLanded {
     get {
       var distance = Task.taskLocation - transform.position;
-      return distance.sqrMagnitude < 10; // basically on task
+      return distance.sqrMagnitude < 10;  // basically on task
     }
   }
 
-  public bool HasTakenOff =>
-      transform.position.y >= _flyHeight; // basically on task
+  public bool HasTakenOff => transform.position.y >= _flyHeight;  // basically on task
 
   public string JobTitle {
     get {
@@ -98,18 +95,18 @@ public class WorkerBee : Bee {
         return "Honey Enjoyer";
       }
       switch (_task.taskType) {
-      case WorkerBeeTask.TaskType.Builder:
-        return "Builder";
-      case WorkerBeeTask.TaskType.Forager:
-        return "Forager";
-      case WorkerBeeTask.TaskType.Nurse:
-        return "Nurse";
-      case WorkerBeeTask.TaskType.BeeswaxFactory:
-        return "Beeswax Engineer";
-      case WorkerBeeTask.TaskType.RoyalJellyFactory:
-        return "Royal Jelly Architect";
-      case WorkerBeeTask.TaskType.HoneyFactory:
-        return "Honey Technician";
+        case WorkerBeeTask.TaskType.Builder:
+          return "Builder";
+        case WorkerBeeTask.TaskType.Forager:
+          return "Forager";
+        case WorkerBeeTask.TaskType.Nurse:
+          return "Nurse";
+        case WorkerBeeTask.TaskType.BeeswaxFactory:
+          return "Beeswax Engineer";
+        case WorkerBeeTask.TaskType.RoyalJellyFactory:
+          return "Royal Jelly Architect";
+        case WorkerBeeTask.TaskType.HoneyFactory:
+          return "Honey Technician";
       }
       return "NULL";
     }
@@ -128,7 +125,9 @@ public class WorkerBee : Bee {
   }
 
   // Update is called once per frame
-  protected void Update() { _currentState.Execute(this); }
+  protected void Update() {
+    _currentState.Execute(this);
+  }
 
   public override void UpdateTimeTick(int minutes) {
     base.UpdateTimeTick(minutes);
@@ -170,7 +169,6 @@ public class WorkerBee : Bee {
     _anim.speed = 1f;
     _anim.SetBool("Flying", true);
 
-
     // check if we have an idle location or if we are there
     // to see if we need a new location or if we should
     // keep traveling to it
@@ -199,9 +197,8 @@ public class WorkerBee : Bee {
     // check if they are at the correct height
     if (Mathf.Abs(transform.position.y - _idleFlyHeight) > 0.05) {
       var dir = (transform.position.y < _idleFlyHeight) ? 1 : -1;
-      _controller.Move(
-          transform.TransformDirection(Vector3.up) *
-          (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      _controller.Move(transform.TransformDirection(Vector3.up) *
+                       (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
   }
 
@@ -222,9 +219,8 @@ public class WorkerBee : Bee {
     // check if they are at the correct height
     if (Mathf.Abs(transform.position.y - _flyHeight) > 0.05) {
       var dir = (transform.position.y < _flyHeight) ? 1 : -1;
-      _controller.Move(
-          transform.TransformDirection(Vector3.up) *
-          (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      _controller.Move(transform.TransformDirection(Vector3.up) *
+                       (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
   }
   public void LandAtTask() {
@@ -232,8 +228,7 @@ public class WorkerBee : Bee {
     _anim.speed = 0.5f;
 
     // fly straight down
-    _controller.Move(new Vector3(
-        0, -_flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
+    _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
   }
 
   public void Work() {
@@ -242,22 +237,21 @@ public class WorkerBee : Bee {
     _anim.SetBool("Working", true);
 
     // Make sure we are touching the floor
-    if (!_controller.isGrounded &&
-        Task.taskType != WorkerBeeTask.TaskType.Forager)
+    if (!_controller.isGrounded && Task.taskType != WorkerBeeTask.TaskType.Forager)
       _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime, 0));
 
     switch (_task.taskType) {
-    case WorkerBeeTask.TaskType.Forager:
-      WorkAtFlower();
-      break;
-    case WorkerBeeTask.TaskType.Builder:
-      BuildHoneycomb();
-      break;
-    case WorkerBeeTask.TaskType.HoneyFactory:
-    case WorkerBeeTask.TaskType.BeeswaxFactory:
-    case WorkerBeeTask.TaskType.RoyalJellyFactory:
-      WorkAtFactory();
-      break;
+      case WorkerBeeTask.TaskType.Forager:
+        WorkAtFlower();
+        break;
+      case WorkerBeeTask.TaskType.Builder:
+        BuildHoneycomb();
+        break;
+      case WorkerBeeTask.TaskType.HoneyFactory:
+      case WorkerBeeTask.TaskType.BeeswaxFactory:
+      case WorkerBeeTask.TaskType.RoyalJellyFactory:
+        WorkAtFactory();
+        break;
     }
     RotateToJobTarget();
   }
@@ -268,8 +262,7 @@ public class WorkerBee : Bee {
     _anim.SetBool("Working", false);
 
     // fly straight up
-    _controller.Move(new Vector3(
-        0, _flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
+    _controller.Move(new Vector3(0, _flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
   }
 
   /*** State Helpers ***/
@@ -284,8 +277,7 @@ public class WorkerBee : Bee {
 
     // based off of
     // https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
-    var newDirection =
-        Vector3.RotateTowards(transform.forward, taskBeeVec, singleStep, 0f);
+    var newDirection = Vector3.RotateTowards(transform.forward, taskBeeVec, singleStep, 0f);
     transform.rotation = Quaternion.LookRotation(newDirection);
   }
 
@@ -304,14 +296,12 @@ public class WorkerBee : Bee {
 
     // based off of
     // https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
-    var newDirection =
-        Vector3.RotateTowards(transform.forward, targetBeeVec, singleStep, 0f);
+    var newDirection = Vector3.RotateTowards(transform.forward, targetBeeVec, singleStep, 0f);
     transform.rotation = Quaternion.LookRotation(newDirection);
   }
 
   private void WorkAtFactory() {
-    if (_workTimerSet &&
-        _workTimer <= 0) { // currently working see if we are done
+    if (_workTimerSet && _workTimer <= 0) {  // currently working see if we are done
       ((HoneycombFactory)honeycomb).AddResource(_state);
       _workTimerSet = false;
     }
@@ -324,19 +314,17 @@ public class WorkerBee : Bee {
   }
 
   private void BuildHoneycomb() {
-    honeycomb.BuildProgress += honeycomb.buildSpeedPerSecond * Time.deltaTime *
-                               GameState.GetGameSpeed();
+    honeycomb.BuildProgress +=
+        honeycomb.buildSpeedPerSecond * Time.deltaTime * GameState.GetGameSpeed();
     // honeycomb finished building change job
     if (honeycomb.Built) {
-      _task.taskType =
-          WorkerBeeTask.StructureTypeAsTaskType(honeycomb.honeycombType);
+      _task.taskType = WorkerBeeTask.StructureTypeAsTaskType(honeycomb.honeycombType);
     }
   }
 
   private void WorkAtFlower() {
     // Check if we have finished working
-    if (_workTimerSet &&
-        _workTimer <= 0) { // currently working see if we are done
+    if (_workTimerSet && _workTimer <= 0) {  // currently working see if we are done
       _state.AddPollen(flower.pollenCollectionRate);
       _state.AddNectar(flower.nectarCollectionRate);
       _workTimerSet = false;

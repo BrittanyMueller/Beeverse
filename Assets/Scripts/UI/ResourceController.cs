@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 
 public class ResourceController : MonoBehaviour {
-
   public TMP_Text honeyText;
   public TMP_Text nectarText;
   public TMP_Text royalJellyText;

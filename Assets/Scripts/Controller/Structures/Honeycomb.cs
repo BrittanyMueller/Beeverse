@@ -10,7 +10,6 @@ using UnityEngine.EventSystems;
  * or update calls with the exception of the build Menu
  */
 public class Honeycomb : MonoBehaviour {
-
   public List<Transform> workSpots;
   public List<WorkerBee> bees;
 
@@ -22,18 +21,18 @@ public class Honeycomb : MonoBehaviour {
   public string Name {
     get {
       switch (honeycombType) {
-      case StructureType.HoneyFactory:
-        return "Honey Factory";
-      case StructureType.BeeswaxFactory:
-        return "Beeswax Factory";
-      case StructureType.RoyalJellyFactory:
-        return "Royal Jelly Factory";
-      case StructureType.BroodNest:
-        return "Brood Nest";
-      case StructureType.QueenNest:
-        return "Queen Nest";
-      default:
-        return "INVALID NAME";
+        case StructureType.HoneyFactory:
+          return "Honey Factory";
+        case StructureType.BeeswaxFactory:
+          return "Beeswax Factory";
+        case StructureType.RoyalJellyFactory:
+          return "Royal Jelly Factory";
+        case StructureType.BroodNest:
+          return "Brood Nest";
+        case StructureType.QueenNest:
+          return "Queen Nest";
+        default:
+          return "INVALID NAME";
       }
     }
   }
@@ -88,7 +87,6 @@ public class Honeycomb : MonoBehaviour {
    * as a builder
    */
   public void SetWorker(WorkerBee bee, int index) {
-
     var oldBee = bees[index];
     if (oldBee != null) {
       oldBee.Task = null;
@@ -98,8 +96,7 @@ public class Honeycomb : MonoBehaviour {
     bee.honeycomb = this;
 
     // Set Their task to the honeycomb
-    bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.Builder,
-                                 workSpots[index].position, index,
+    bee.Task = new WorkerBeeTask(WorkerBeeTask.TaskType.Builder, workSpots[index].position, index,
                                  structure.transform.position);
 
     // If the honeycomb is already built update their role
@@ -122,15 +119,15 @@ public class Honeycomb : MonoBehaviour {
    * created the centre structure
    */
   private void ShowStructure() {
-    if (!structure) return;
+    if (!structure)
+      return;
     structure.SetActive(true);
     _state.UpdateLog("The " + Name + " has finished building!");
     if (honeycombType == StructureType.BroodNest) {
       // Add the egg slots to the GameState so Queen knows to lay eggs
       foreach (Transform child in this.transform) {
         if (child.CompareTag("BabySlot"))
-          _state._beeEggSlots.Add(
-            child.gameObject.GetComponent<BeeEggSlot>());
+          _state._beeEggSlots.Add(child.gameObject.GetComponent<BeeEggSlot>());
       }
     }
   }
@@ -141,12 +138,10 @@ public class Honeycomb : MonoBehaviour {
    */
   private void OnMouseDown() {
     // make sure UI isn't on UI and this isn't the queen honeycomb
-    if (EventSystem.current.IsPointerOverGameObject() ||
-        honeycombType == StructureType.QueenNest)
+    if (EventSystem.current.IsPointerOverGameObject() || honeycombType == StructureType.QueenNest)
       return;
 
     // Show build progress menu or completed structure menu if built
-    _hudController.OpenStructureMenu(
-        !Built ? StructureType.Building : honeycombType, this);
+    _hudController.OpenStructureMenu(!Built ? StructureType.Building : honeycombType, this);
   }
 }

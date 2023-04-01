@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 
 public class BuildingUIController : StructureUIController {
-
   public TMP_Text buildingStructureName;
 
   // used to control progress for progress bar
@@ -15,7 +14,9 @@ public class BuildingUIController : StructureUIController {
   private Honeycomb _honeycomb;
 
   // Update is called once per frame
-  void Update() { UpdateProgress(_honeycomb.BuildProgress); }
+  void Update() {
+    UpdateProgress(_honeycomb.BuildProgress);
+  }
 
   /**
    * Used to update the current progress of the building
@@ -24,13 +25,12 @@ public class BuildingUIController : StructureUIController {
    */
   private void UpdateProgress(float progress) {
     var oldPos = progressBar.anchoredPosition;
-    progressBar.SetInsetAndSizeFromParentEdge(
-        RectTransform.Edge.Left, 0, progressBarLimit.sizeDelta.x * (progress));
+    progressBar.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0,
+                                              progressBarLimit.sizeDelta.x * (progress));
     progressBar.ForceUpdateRectTransforms();
   }
 
   public void Show(Honeycomb honeycomb) {
-
     // set title
     buildingStructureName.text = honeycomb.Name;
 
@@ -47,5 +47,7 @@ public class BuildingUIController : StructureUIController {
     _honeycomb = null;
   }
 
-  private void Refresh() { Show(_honeycomb); }
+  private void Refresh() {
+    Show(_honeycomb);
+  }
 }

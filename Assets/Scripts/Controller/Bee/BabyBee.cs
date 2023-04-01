@@ -2,12 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BabyBee : Bee {
+  public bool isGrowing;  // Indicates if BabyBee has started growing
+  public bool isQueen;    // Indicates if BabyBee is type Queen or Worker
+  public bool isEgg;      // BabyBees will be an egg until 3 days old
 
-  public bool isGrowing; // Indicates if BabyBee has started growing
-  public bool isQueen;   // Indicates if BabyBee is type Queen or Worker
-  public bool isEgg;     // BabyBees will be an egg until 3 days old
-
-  public BroodNest broodNest; // Brood Nest the bee is located in
+  public BroodNest broodNest;  // Brood Nest the bee is located in
 
   [SerializeField]
   private GameObject eggModel;
@@ -34,8 +33,7 @@ public class BabyBee : Bee {
 
   // Override AgeInDays of BabyBees to be from lifespan
   public new int AgeInDays => LifeSpan.Day;
-    public int AgeInMinutes => LifeSpan.TotalTime;
-
+  public int AgeInMinutes => LifeSpan.TotalTime;
 
   public override void UpdateTimeTick(int minutes) {
     if (!isGrowing)

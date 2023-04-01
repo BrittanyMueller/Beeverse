@@ -4,7 +4,6 @@
  * and state
  */
 public class TimeTracker {
-
   public int Day => _day;
   public int Hour => _hour;
   public int Minute => _minute;

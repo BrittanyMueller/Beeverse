@@ -6,8 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
-
-
   // A bool to notify we aren't actually playing the game
   public bool inMenu = false;
   // Audio stuff
@@ -94,7 +92,6 @@ public class GameState : MonoBehaviour {
   public bool Paused {
     get { return _paused; }
     set {
-
       _paused = value;
       NotifyPausedChanged();
     }
@@ -108,7 +105,8 @@ public class GameState : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
-    if (inMenu) return;
+    if (inMenu)
+      return;
 
     _paused = false;
 
@@ -121,9 +119,9 @@ public class GameState : MonoBehaviour {
     _day = 0;
 
     // Set default resources count
-    resources = new BeeResources {// TODO revert resources when done debugging
-                                  Beeswax = 2000, Honey = 2000, Nectar = 2000,
-                                  Pollen = 2000, RoyalJelly = 2000
+    resources = new BeeResources {
+      // TODO revert resources when done debugging
+      Beeswax = 2000, Honey = 2000, Nectar = 2000, Pollen = 2000, RoyalJelly = 2000
     };
     resourceController.UpdateResources(resources);
 
@@ -135,7 +133,8 @@ public class GameState : MonoBehaviour {
 
   // Update is called once per frame
   void FixedUpdate() {
-    if (inMenu) return;
+    if (inMenu)
+      return;
     _secondTimer -= Time.deltaTime;
     if (_secondTimer <= 0) {
       _secondTimer = 5.0f / minutesPerSecond;
@@ -169,12 +168,10 @@ public class GameState : MonoBehaviour {
         if (beeSlot.HasEgg) {
           beeSlot.babyBee.UpdateTimeTick(5);
           if (beeSlot.babyBee.AgeInDays == 5) {
-            var spawnPoint =
-                beeSlot.babyBee.transform.position + new Vector3(0, 5, 0);
+            var spawnPoint = beeSlot.babyBee.transform.position + new Vector3(0, 5, 0);
             if (beeSlot.babyBee.isQueen) {
               // Baby bee grows into queen bee
-              var newQueen = Instantiate(queenModel, spawnPoint,
-                                         beeSlot.babyBee.transform.rotation)
+              var newQueen = Instantiate(queenModel, spawnPoint, beeSlot.babyBee.transform.rotation)
                                  .GetComponent<QueenBee>();
               newQueen.beeName = beeSlot.babyBee.beeName;
               newQueen.ChangeState(new QueenBeeTakeOffState());
@@ -182,7 +179,8 @@ public class GameState : MonoBehaviour {
 
               if (_queen) {
                 // Remove old queen from the game! Good bye Queen
-                UpdateLog("Queen " + _queen.beeName + " feels replaced and moves on to another hive...");
+                UpdateLog("Queen " + _queen.beeName +
+                          " feels replaced and moves on to another hive...");
                 _queen.IsLeavingHive = true;
                 _queen.ChangeState(new QueenBeeTakeOffState());
                 StartCoroutine(RemoveQueenBee(_queen, 15));
@@ -191,14 +189,14 @@ public class GameState : MonoBehaviour {
               _hasQueenEgg = false;
             } else {
               // Baby bee grows into worker bee
-              var workerBee = Instantiate(workerModel, spawnPoint,
-                                          beeSlot.babyBee.transform.rotation)
-                                  .GetComponent<WorkerBee>();
+              var workerBee =
+                  Instantiate(workerModel, spawnPoint, beeSlot.babyBee.transform.rotation)
+                      .GetComponent<WorkerBee>();
               workerBee.beeName = beeSlot.babyBee.beeName;
               workerBee.ChangeState(new WorkerBeeTakeOffState());
               _bees.Add(workerBee);
             }
-            Destroy(beeSlot.babyBee.gameObject); // RIP
+            Destroy(beeSlot.babyBee.gameObject);  // RIP
             beeSlot.HasEgg = false;
           }
         }
@@ -216,7 +214,8 @@ public class GameState : MonoBehaviour {
     foreach (var bee in _bees) {
       if (bee.isDead) {
         StartCoroutine(RemoveBee(bee));
-        UpdateLog("> " + bee.beeName + " has died at the old age of " + bee.AgeInDays + " days. Rest in Bees");
+        UpdateLog("> " + bee.beeName + " has died at the old age of " + bee.AgeInDays +
+                  " days. Rest in Bees");
       }
     }
     _bees.RemoveAll((WorkerBee bee) => {
@@ -260,7 +259,6 @@ public class GameState : MonoBehaviour {
 
   // Tell everyone who cares the game is no longer paused
   private void NotifyPausedChanged() {
-
     if (_paused) {
       Time.timeScale = 0;
     } else {
@@ -270,9 +268,13 @@ public class GameState : MonoBehaviour {
 
   // Update the log with information
 
-  public void UpdateLog(String update) { logController.UpdateLog(update); }
+  public void UpdateLog(String update) {
+    logController.UpdateLog(update);
+  }
 
-  public void Save() { Debug.Log("Your game is saved.. jk not impl yet"); }
+  public void Save() {
+    Debug.Log("Your game is saved.. jk not impl yet");
+  }
 
   // Restarts the game into its default state
   public void Restart() {
@@ -283,7 +285,9 @@ public class GameState : MonoBehaviour {
   /**
    * Gets the current speed of the game assuming 5 minutes is 1x
    */
-  public static float GetGameSpeed() { return GameState.minutesPerSecond / 5; }
+  public static float GetGameSpeed() {
+    return GameState.minutesPerSecond / 5;
+  }
 
   /**
    * Gets a random idle location for a bee to travel
@@ -297,8 +301,7 @@ public class GameState : MonoBehaviour {
     // note uses -z because the game object will be at the top left of the
     // idleArea
     return idleArea.transform.position +
-           new Vector3(_rand.Next(0, (int)size.x), 0,
-                       -_rand.Next(0, (int)size.z));
+           new Vector3(_rand.Next(0, (int)size.x), 0, -_rand.Next(0, (int)size.z));
   }
 
   /**
@@ -357,7 +360,6 @@ public class GameState : MonoBehaviour {
    * @returns false if the resources weren't consumed
    */
   public bool ConsumeResources(BeeResources consume) {
-
     // test if we can consume the resources
     if (consume.Beeswax > resources.Beeswax)
       return false;

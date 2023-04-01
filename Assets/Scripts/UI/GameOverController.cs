@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameOverController : MonoBehaviour {
-
   public TMP_Text totalBeesText;
   public TMP_Text totalQueensText;
 
@@ -19,13 +18,17 @@ public class GameOverController : MonoBehaviour {
 
   public TMP_Text totalHoneycombsText;
 
-  public void SetTotalBees(int bees) { totalBeesText.text = bees.ToString(); }
+  public void SetTotalBees(int bees) {
+    totalBeesText.text = bees.ToString();
+  }
 
   public void SetTotalQueen(int queens) {
     totalQueensText.text = queens.ToString();
   }
 
-  public void SetTotalDays(int days) { totalDaysText.text = days.ToString(); }
+  public void SetTotalDays(int days) {
+    totalDaysText.text = days.ToString();
+  }
 
   public void SetTotalResources(BeeResources resources) {
     totalBeeswaxText.text = resources.Beeswax.ToString();

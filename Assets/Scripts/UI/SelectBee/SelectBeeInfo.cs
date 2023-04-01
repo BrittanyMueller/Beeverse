@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 public class SelectBeeInfo : MonoBehaviour {
-
   // holds the bee that this panel is about
   public WorkerBee bee;
   public int targetSelect;
@@ -13,8 +12,7 @@ public class SelectBeeInfo : MonoBehaviour {
   void Start() {
     if (bee != null) {
       gameObject.GetComponentsInChildren<TMP_Text>()[0].text = bee.beeName;
-      gameObject.GetComponentsInChildren<TMP_Text>()[1].text =
-          bee.AgeInDays + " days old";
+      gameObject.GetComponentsInChildren<TMP_Text>()[1].text = bee.AgeInDays + " days old";
     }
   }
 }

@@ -1,7 +1,6 @@
 using TMPro;
 
 public class FactoryUIController : StructureUIController {
-
   public TMP_Text factoryNameText;
   public TMP_Text minutesPerResourceText;
   public TMP_Text costText;
@@ -9,7 +8,6 @@ public class FactoryUIController : StructureUIController {
   private HoneycombFactory _curFactory;
 
   public void Show(HoneycombFactory factory) {
-
     // set factory and callback
     _curFactory = factory;
     selectBeeCallback = _curFactory.SetWorker;
@@ -30,5 +28,7 @@ public class FactoryUIController : StructureUIController {
     _curFactory = null;
   }
 
-  private void Refresh() { Show(_curFactory); }
+  private void Refresh() {
+    Show(_curFactory);
+  }
 }

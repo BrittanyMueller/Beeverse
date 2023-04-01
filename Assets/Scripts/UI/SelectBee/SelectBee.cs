@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System;
 
 public class SelectBee : MonoBehaviour {
-
   // Prefab containing details about the bee
   // as well as a button which can be used to select the bee
   public GameObject beeDetails;
@@ -23,14 +22,12 @@ public class SelectBee : MonoBehaviour {
    * bee as the arg.
    */
   public void Show(int index, Action<WorkerBee> callback) {
-
     _state = GameObject.Find("GameState").GetComponent<GameState>();
 
     // Clear the current list
     {
       var children = new List<GameObject>();
-      foreach (Transform child in beeList.transform)
-        children.Add(child.gameObject);
+      foreach (Transform child in beeList.transform) children.Add(child.gameObject);
       children.ForEach(child => Destroy(child));
     }
 
@@ -40,8 +37,7 @@ public class SelectBee : MonoBehaviour {
       // if they have a task skip
       if (bee.HasTask)
         continue;
-      GameObject obj =
-          Instantiate(beeDetails, new Vector3(0, 0, 0), Quaternion.identity);
+      GameObject obj = Instantiate(beeDetails, new Vector3(0, 0, 0), Quaternion.identity);
       obj.transform.SetParent(beeList.transform);
 
       // Set the bee and select
@@ -70,8 +66,7 @@ public class SelectBee : MonoBehaviour {
     // Clear the current list
     {
       var children = new List<GameObject>();
-      foreach (Transform child in beeList.transform)
-        children.Add(child.gameObject);
+      foreach (Transform child in beeList.transform) children.Add(child.gameObject);
       children.ForEach(child => Destroy(child));
     }
 

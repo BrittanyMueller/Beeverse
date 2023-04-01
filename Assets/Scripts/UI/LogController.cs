@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using TMPro;
 
 public class LogController : MonoBehaviour {
-
   public TMP_Text LogContent;
   public RectTransform LogRect;
   public ScrollRect logScroll;
@@ -14,7 +13,6 @@ public class LogController : MonoBehaviour {
   // Borrowed from
   // https://stackoverflow.com/questions/47613015/how-do-i-get-a-unity-scroll-rect-to-scroll-to-the-bottom-after-the-contents-rec
   IEnumerator ApplyScrollPosition(ScrollRect sr, float verticalPos) {
-
     yield return new WaitForEndOfFrame();
     var delta = sr.verticalNormalizedPosition - verticalPos;
     if (verticalPos < 10) {

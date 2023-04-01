@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectEggTypeController : MonoBehaviour {
-
   public GameState state;
 
   [SerializeField]
@@ -15,16 +14,18 @@ public class SelectEggTypeController : MonoBehaviour {
 
   private BabyBee _currentEgg;
 
-  private void Awake() { gameObject.SetActive(false); }
-
-  private void Update() {
-    setWorkerEgg.interactable =
-        state.royalJellyCount >= 10 && state.honeyCount >= 40;
-    setQueenEgg.interactable =
-        !state.HasQueenEgg && state.royalJellyCount >= 50;
+  private void Awake() {
+    gameObject.SetActive(false);
   }
 
-  public void Hide() { gameObject.SetActive(false); }
+  private void Update() {
+    setWorkerEgg.interactable = state.royalJellyCount >= 10 && state.honeyCount >= 40;
+    setQueenEgg.interactable = !state.HasQueenEgg && state.royalJellyCount >= 50;
+  }
+
+  public void Hide() {
+    gameObject.SetActive(false);
+  }
 
   public void Show(BabyBee egg) {
     gameObject.SetActive(true);

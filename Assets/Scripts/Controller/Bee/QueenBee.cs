@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QueenBee : Bee {
-
   // Movement variables
   private float _rotationSpeed = 1f;
   private float _flySpeed = 10f;
@@ -25,14 +24,14 @@ public class QueenBee : Bee {
     get {
       var distance = Task.taskLocation - transform.position;
       distance.y = 0;
-      return distance.sqrMagnitude < 1; // 2cm
+      return distance.sqrMagnitude < 1;  // 2cm
     }
   }
 
   public bool HasLanded {
     get {
       var distance = Task.taskLocation - transform.position;
-      return distance.sqrMagnitude < 10; // basically on task
+      return distance.sqrMagnitude < 10;  // basically on task
     }
   }
 
@@ -40,8 +39,7 @@ public class QueenBee : Bee {
     get { return _state._beeEggSlots.Find((value) => !value.HasEgg); }
   }
 
-  public bool HasTakenOff =>
-      transform.position.y >= _flyHeight; // basically on task
+  public bool HasTakenOff => transform.position.y >= _flyHeight;  // basically on task
 
   // Flag to direct Queen bee to abandon hive!
   public bool IsLeavingHive { get; set; }
@@ -59,20 +57,23 @@ public class QueenBee : Bee {
   }
 
   // Update is called once per frame
-  protected void Update() { _currentState.Execute(this); }
+  protected void Update() {
+    _currentState.Execute(this);
+  }
 
   public void SetEggTask() {
     BeeEggSlot slot = _state._beeEggSlots.Find((value) => !value.HasEgg);
-    Task = new QueenBeeTask(QueenBeeTask.TaskType.LayEgg,
-                            slot.gameObject.transform.position, slot);
+    Task = new QueenBeeTask(QueenBeeTask.TaskType.LayEgg, slot.gameObject.transform.position, slot);
   }
 
   public void SetHomeTask() {
-    Task = new QueenBeeTask(QueenBeeTask.TaskType.ReturnToNest, _state.QueenHoneycomb.workSpots[0].position);
+    Task = new QueenBeeTask(QueenBeeTask.TaskType.ReturnToNest,
+                            _state.QueenHoneycomb.workSpots[0].position);
   }
 
   public void SetLeaveHiveTask() {
-    Task = new QueenBeeTask(QueenBeeTask.TaskType.LeaveHive, _state.QueenHoneycomb.workSpots[1].position);
+    Task = new QueenBeeTask(QueenBeeTask.TaskType.LeaveHive,
+                            _state.QueenHoneycomb.workSpots[1].position);
   }
 
   /*** State methods ***/
@@ -124,9 +125,8 @@ public class QueenBee : Bee {
     // check if they are at the correct height
     if (Mathf.Abs(transform.position.y - _flyHeight) > 0.05) {
       var dir = (transform.position.y < _flyHeight) ? 1 : -1;
-      _controller.Move(
-          transform.TransformDirection(Vector3.up) *
-          (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      _controller.Move(transform.TransformDirection(Vector3.up) *
+                       (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
   }
 
@@ -134,8 +134,7 @@ public class QueenBee : Bee {
     RotateTo(Task.taskLocation);
 
     // fly straight down
-    _controller.Move(new Vector3(
-        0, -_flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
+    _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
   }
 
   public void TakeOffState() {
@@ -143,8 +142,7 @@ public class QueenBee : Bee {
     _anim.SetBool("Idle", false);
 
     // Fly straight up
-    _controller.Move(new Vector3(
-        0, _flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
+    _controller.Move(new Vector3(0, _flySpeed * Time.deltaTime * GameState.GetGameSpeed(), 0));
   }
 
   public void RotateTo(Vector3 location) {
@@ -157,8 +155,7 @@ public class QueenBee : Bee {
 
     // based off of
     // https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
-    var newDirection =
-        Vector3.RotateTowards(transform.forward, taskBeeVec, singleStep, 0f);
+    var newDirection = Vector3.RotateTowards(transform.forward, taskBeeVec, singleStep, 0f);
     transform.rotation = Quaternion.LookRotation(newDirection);
   }
 }

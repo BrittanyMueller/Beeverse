@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HoneycombFactory : Honeycomb {
-
   // Resources IO conversions
   public List<BeeResources.Type> inResources;
   public List<int> inResourcesConversionRate;
@@ -20,21 +19,21 @@ public class HoneycombFactory : Honeycomb {
    */
   public void AddResource(GameState state) {
     switch (outResource) {
-    case BeeResources.Type.Beeswax:
-      state.AddBeeswax(outResourceCollectionRate);
-      break;
-    case BeeResources.Type.Honey:
-      state.AddHoney(outResourceCollectionRate);
-      break;
-    case BeeResources.Type.Nectar:
-      state.AddNectar(outResourceCollectionRate);
-      break;
-    case BeeResources.Type.Pollen:
-      state.AddPollen(outResourceCollectionRate);
-      break;
-    case BeeResources.Type.RoyalJelly:
-      state.AddRoyalJelly(outResourceCollectionRate);
-      break;
+      case BeeResources.Type.Beeswax:
+        state.AddBeeswax(outResourceCollectionRate);
+        break;
+      case BeeResources.Type.Honey:
+        state.AddHoney(outResourceCollectionRate);
+        break;
+      case BeeResources.Type.Nectar:
+        state.AddNectar(outResourceCollectionRate);
+        break;
+      case BeeResources.Type.Pollen:
+        state.AddPollen(outResourceCollectionRate);
+        break;
+      case BeeResources.Type.RoyalJelly:
+        state.AddRoyalJelly(outResourceCollectionRate);
+        break;
     }
   }
 
@@ -46,24 +45,23 @@ public class HoneycombFactory : Honeycomb {
     BeeResources res = new BeeResources();
 
     // Calculate the needed resources and package it up for game state
-    for (int i = 0;
-         i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
+    for (int i = 0; i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
       switch (inResources[i]) {
-      case BeeResources.Type.Beeswax:
-        res.Beeswax = inResourcesConversionRate[i];
-        break;
-      case BeeResources.Type.Honey:
-        res.Honey = inResourcesConversionRate[i];
-        break;
-      case BeeResources.Type.Nectar:
-        res.Nectar = inResourcesConversionRate[i];
-        break;
-      case BeeResources.Type.RoyalJelly:
-        res.RoyalJelly = inResourcesConversionRate[i];
-        break;
-      case BeeResources.Type.Pollen:
-        res.Pollen = inResourcesConversionRate[i];
-        break;
+        case BeeResources.Type.Beeswax:
+          res.Beeswax = inResourcesConversionRate[i];
+          break;
+        case BeeResources.Type.Honey:
+          res.Honey = inResourcesConversionRate[i];
+          break;
+        case BeeResources.Type.Nectar:
+          res.Nectar = inResourcesConversionRate[i];
+          break;
+        case BeeResources.Type.RoyalJelly:
+          res.RoyalJelly = inResourcesConversionRate[i];
+          break;
+        case BeeResources.Type.Pollen:
+          res.Pollen = inResourcesConversionRate[i];
+          break;
       }
     }
 
@@ -74,32 +72,29 @@ public class HoneycombFactory : Honeycomb {
   public string CostToString() {
     string str = "";
 
-    for (int i = 0;
-         i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
-
+    for (int i = 0; i < inResources.Count && i < inResourcesConversionRate.Count; i++) {
       if (i != 0)
         str += " + ";
 
-      str += ResourceToString(inResources[i],
-                              inResourcesConversionRate[i].ToString());
+      str += ResourceToString(inResources[i], inResourcesConversionRate[i].ToString());
     }
     return str + " -> ".ToString() + " " + ResourceToString(outResource, "1");
   }
 
   private string ResourceToString(BeeResources.Type type, string amount) {
     switch (type) {
-    case BeeResources.Type.Beeswax:
-      return amount + " Beeswax";
-    case BeeResources.Type.Honey:
-      return amount + " Honey";
-    case BeeResources.Type.Nectar:
-      return amount + " Nectar";
-    case BeeResources.Type.RoyalJelly:
-      return amount + " Royal Jelly";
-    case BeeResources.Type.Pollen:
-      return amount + " Pollen";
-    default:
-      return "Unknown";
+      case BeeResources.Type.Beeswax:
+        return amount + " Beeswax";
+      case BeeResources.Type.Honey:
+        return amount + " Honey";
+      case BeeResources.Type.Nectar:
+        return amount + " Nectar";
+      case BeeResources.Type.RoyalJelly:
+        return amount + " Royal Jelly";
+      case BeeResources.Type.Pollen:
+        return amount + " Pollen";
+      default:
+        return "Unknown";
     }
   }
 }

@@ -18,7 +18,6 @@ public enum BeeType { Queen, Worker, Baby }
  * functionality between the queen and worker bee.
  */
 public class Bee : MonoBehaviour {
-
   /** Name of the bee that will be shown in the UI*/
   public string beeName;
   public BeeType type;
@@ -48,15 +47,13 @@ public class Bee : MonoBehaviour {
 
   // Start is called before the first frame update
   protected virtual void Start() {
-
     // Make their lifespan random by a 5 day deviation
     System.Random rand = new System.Random();
     LifeSpan = new TimeTracker(lifeSpanInDays, 0, 0);
     LifeSpan.AddMinutes(rand.Next((5 * 60 * 25) * 2) - 7200);
     lifeSpanInDays = LifeSpan.Day;
     if (!inMenu) {
-      HUDController =
-          GameObject.Find("/HudController").GetComponent<HudController>();
+      HUDController = GameObject.Find("/HudController").GetComponent<HudController>();
       ProfileController = HUDController.beeProfileController;
       BabyProfileController = HUDController.babyProfileController;
     }

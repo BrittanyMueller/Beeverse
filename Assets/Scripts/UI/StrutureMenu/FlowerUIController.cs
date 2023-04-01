@@ -12,7 +12,6 @@ public class FlowerUIController : StructureUIController {
   private Flower _curPatch;
 
   public void Show(Flower patch) {
-
     // set flower patch and callback
     _curPatch = patch;
     selectBeeCallback = _curPatch.SetWorker;
@@ -30,5 +29,7 @@ public class FlowerUIController : StructureUIController {
     _curPatch = null;
   }
 
-  private void Refresh() { Show(_curPatch); }
+  private void Refresh() {
+    Show(_curPatch);
+  }
 }

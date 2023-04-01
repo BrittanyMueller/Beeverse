@@ -2,12 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class QueenBeeTask {
-
-  public enum TaskType {
-    LayEgg,
-    ReturnToNest,
-    LeaveHive
-  }
+  public enum TaskType { LayEgg, ReturnToNest, LeaveHive }
   public TaskType taskType;
 
   // Where they should sit

@@ -12,7 +12,6 @@ public class BabyProfileController : MonoBehaviour {
   [SerializeField]
   private Image beeSelfie;
 
-
   // used to control progress for progress bar
   [SerializeField]
   private RectTransform progressBarLimit;
@@ -20,11 +19,9 @@ public class BabyProfileController : MonoBehaviour {
 
   private RectTransform progressBar;
 
-
   private BabyBee _babyBee;
   private Sprite _eggBeeSprite;
   private Sprite _babyBeeSprite;
-
 
   // Start is called before the first frame update
   private void Awake() {
@@ -35,10 +32,10 @@ public class BabyProfileController : MonoBehaviour {
     gameObject.SetActive(false);
   }
 
-  void Update() { 
+  void Update() {
     if (_babyBee != null)
-     UpdateProgress(_babyBee.AgeInMinutes/(5.0f*25*60)); 
-    }
+      UpdateProgress(_babyBee.AgeInMinutes / (5.0f * 25 * 60));
+  }
 
   /**
    * Used to update the current progress of the building
@@ -47,13 +44,15 @@ public class BabyProfileController : MonoBehaviour {
    */
   private void UpdateProgress(float progress) {
     var oldPos = progressBar.anchoredPosition;
-    progressBar.SetInsetAndSizeFromParentEdge(
-        RectTransform.Edge.Left, 0, progressBarLimit.sizeDelta.x * (progress));
+    progressBar.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0,
+                                              progressBarLimit.sizeDelta.x * (progress));
     progressBar.ForceUpdateRectTransforms();
   }
 
-  public void Hide() { gameObject.SetActive(false); 
-  _babyBee = null;}
+  public void Hide() {
+    gameObject.SetActive(false);
+    _babyBee = null;
+  }
 
   public void Show(BabyBee bee) {
     _babyBee = bee;

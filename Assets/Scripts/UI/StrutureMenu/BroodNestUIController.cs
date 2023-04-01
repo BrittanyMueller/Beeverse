@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 
 public class BroodNestUIController : StructureUIController {
-
   [SerializeField]
   private TMP_Text growthModifier;
   private BroodNest _broodNest;
@@ -28,5 +27,7 @@ public class BroodNestUIController : StructureUIController {
     _broodNest = null;
   }
 
-  private void Refresh() { Show(_broodNest); }
+  private void Refresh() {
+    Show(_broodNest);
+  }
 }

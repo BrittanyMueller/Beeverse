@@ -1,30 +1,25 @@
 ﻿using System;
 
 public abstract class BeeStuff {
-
   private static readonly string[] QueenNames = {
-    "Queenie", "Beatrice", "Eleanor", "Celeste",  "Callista", "Victoria",
-    "Mira",    "Raina",    "Belle",   "Tiana",    "Aurora",   "Eliza",
-    "Juliet",  "Marjorie", "Blossom", "Dahlia",   "Lily",     "Brittany",
-    "Rose",    "Magnolia", "Julie",   "Meredith", "Margaret", "Cleo",
-    "Marie",   "Rosalina"
+    "Queenie",  "Beatrice", "Eleanor", "Celeste",  "Callista", "Victoria", "Mira",
+    "Raina",    "Belle",    "Tiana",   "Aurora",   "Eliza",    "Juliet",   "Marjorie",
+    "Blossom",  "Dahlia",   "Lily",    "Brittany", "Rose",     "Magnolia", "Julie",
+    "Meredith", "Margaret", "Cleo",    "Marie",    "Rosalina"
   };
 
   private static readonly string[] BeeNames = {
-    "Jerry",    "Barry",    "Larry",   "Bam",        "Buzz",    "Spike",
-    "Trudy",    "Bee",      "Bumbles", "Fuzzy",      "Stinger", "Dart",
-    "Beatrice", "Blossom",  "Clover",  "Bruce",      "Toby",    "Cosmo",
-    "Bloom",    "Dizzy",    "Fuzzy",   "Buzzy",      "Goldie",  "Jelly",
-    "Marigold", "Tulip",    "Zazzles", "Sparkle",    "Dahlia",  "Bean",
-    "Bobby",    "Bowie",    "Bubba",   "Bash",       "Lily",    "Poppy",
-    "Rose",     "Magnolia", "Orchid",  "Pansy",      "Myrtle",  "Lilac",
-    "Sage",     "Pepper",   "Star",    "Lemon",      "Sadie",   "Sugar",
-    "Honey",    "Henry",    "Pamela",  "Sunny",      "Daisy",   "Peach",
-    "Petals",   "Bella",    "Buffy",   "Bernie",     "Billie",  "Bailey",
-    "Flutter",  "Sweetie",  "Bean",    "Boba",       "Kirby",   "Colby",
-    "Pumpkin",  "Pixie",    "Bonnie",  "Buttercup",  "Bess",    "Buster",
-    "Benny",    "Ruby",     "Maya",    "Lucy",       "Fritz",   "Ziggy",
-    "Holly",    "Bucky",    "Bobby",   "Tinkerbell", "Willow",  "Janet"
+    "Jerry",    "Barry",      "Larry",   "Bam",     "Buzz",     "Spike",     "Trudy",  "Bee",
+    "Bumbles",  "Fuzzy",      "Stinger", "Dart",    "Beatrice", "Blossom",   "Clover", "Bruce",
+    "Toby",     "Cosmo",      "Bloom",   "Dizzy",   "Fuzzy",    "Buzzy",     "Goldie", "Jelly",
+    "Marigold", "Tulip",      "Zazzles", "Sparkle", "Dahlia",   "Bean",      "Bobby",  "Bowie",
+    "Bubba",    "Bash",       "Lily",    "Poppy",   "Rose",     "Magnolia",  "Orchid", "Pansy",
+    "Myrtle",   "Lilac",      "Sage",    "Pepper",  "Star",     "Lemon",     "Sadie",  "Sugar",
+    "Honey",    "Henry",      "Pamela",  "Sunny",   "Daisy",    "Peach",     "Petals", "Bella",
+    "Buffy",    "Bernie",     "Billie",  "Bailey",  "Flutter",  "Sweetie",   "Bean",   "Boba",
+    "Kirby",    "Colby",      "Pumpkin", "Pixie",   "Bonnie",   "Buttercup", "Bess",   "Buster",
+    "Benny",    "Ruby",       "Maya",    "Lucy",    "Fritz",    "Ziggy",     "Holly",  "Bucky",
+    "Bobby",    "Tinkerbell", "Willow",  "Janet"
   };
   private static readonly string[] BeePuns = {
     "I heard ya like jazz.",

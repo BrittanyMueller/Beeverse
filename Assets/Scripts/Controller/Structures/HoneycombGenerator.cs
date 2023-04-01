@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HoneycombGenerator : MonoBehaviour {
-
   public GameObject honeycomb;
   public GameObject honeycombHint;
   public GameObject broodNest;
@@ -34,8 +33,7 @@ public class HoneycombGenerator : MonoBehaviour {
   void Start() {
     var size = honeycomb.GetComponent<BoxCollider>().bounds.size;
     _verticalOffset = size.x;
-    var hexBase =
-        _verticalOffset / Mathf.Sqrt(3); // Calculate by special triangle
+    var hexBase = _verticalOffset / Mathf.Sqrt(3);  // Calculate by special triangle
     _horizontalOffset = hexBase + (size.z - hexBase) / 2;
 
     _closedList.Add(honeycomb.transform.position);
@@ -50,41 +48,36 @@ public class HoneycombGenerator : MonoBehaviour {
     var rand = new System.Random();
     while (true) {
       yield return new WaitForSeconds(1);
-      CreateHoneycomb(_openList[rand.Next(0, _openList.Count)],
-                      StructureType.QueenNest);
+      CreateHoneycomb(_openList[rand.Next(0, _openList.Count)], StructureType.QueenNest);
     }
   }
 
   private void GenerateAvailablePositions(Vector3 position) {
-
     var possibleSpaces = new List<Vector3>() {
       new(position.x + _verticalOffset, position.y,
-          position.z), // Space vertically above
+          position.z),  // Space vertically above
       new(position.x - _verticalOffset, position.y,
-          position.z), // Space vertically below
+          position.z),  // Space vertically below
       new(position.x + _verticalOffset / 2, position.y,
-          position.z + _horizontalOffset), // Above to right space
+          position.z + _horizontalOffset),  // Above to right space
       new(position.x - _verticalOffset / 2, position.y,
-          position.z + _horizontalOffset), // Below to right space
+          position.z + _horizontalOffset),  // Below to right space
       new(position.x + _verticalOffset / 2, position.y,
-          position.z - _horizontalOffset), // Above to left space
+          position.z - _horizontalOffset),  // Above to left space
       new(position.x - _verticalOffset / 2, position.y,
-          position.z - _horizontalOffset), // Below to left space
+          position.z - _horizontalOffset),  // Below to left space
     };
 
     foreach (var space in possibleSpaces) {
       // Add new space to available list if not already found/used
-      var existsInOpen =
-          _openList.Exists((value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
-                                      Mathf.Abs(value.z - space.z) < 0.001);
-      var existsInClosed = _closedList.Exists(
-          (value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
-                     Mathf.Abs(value.z - space.z) < 0.001);
+      var existsInOpen = _openList.Exists((value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
+                                                     Mathf.Abs(value.z - space.z) < 0.001);
+      var existsInClosed = _closedList.Exists((value) => (Mathf.Abs(value.x - space.x) < 0.001) &&
+                                                         Mathf.Abs(value.z - space.z) < 0.001);
 
       // Make sure it doesn't collide with any flower
       bool flowerCollider = false;
-      foreach (GameObject flower in GameObject.FindGameObjectsWithTag(
-                   "Flower")) {
+      foreach (GameObject flower in GameObject.FindGameObjectsWithTag("Flower")) {
         if (flower.GetComponent<BoxCollider>().bounds.Contains(space)) {
           flowerCollider = true;
           break;
@@ -98,30 +91,25 @@ public class HoneycombGenerator : MonoBehaviour {
   }
 
   public void CreateHoneycomb(Vector3 offset,
-                              StructureType type) { // take type of honeycombs
+                              StructureType type) {  // take type of honeycombs
     GameObject newHoneycomb = null;
 
     switch (type) {
-    case StructureType.BeeswaxFactory:
-      newHoneycomb =
-          Instantiate(beeswaxFactory, offset, honeycomb.transform.rotation);
-      break;
-    case StructureType.BroodNest:
-      newHoneycomb =
-          Instantiate(broodNest, offset, honeycomb.transform.rotation);
-      break;
-    case StructureType.QueenNest:
-      newHoneycomb =
-          Instantiate(honeycomb, offset, honeycomb.transform.rotation);
-      break;
-    case StructureType.RoyalJellyFactory:
-      newHoneycomb =
-          Instantiate(royalJellyFactory, offset, honeycomb.transform.rotation);
-      break;
-    case StructureType.HoneyFactory:
-      newHoneycomb =
-          Instantiate(honeyFactory, offset, honeycomb.transform.rotation);
-      break;
+      case StructureType.BeeswaxFactory:
+        newHoneycomb = Instantiate(beeswaxFactory, offset, honeycomb.transform.rotation);
+        break;
+      case StructureType.BroodNest:
+        newHoneycomb = Instantiate(broodNest, offset, honeycomb.transform.rotation);
+        break;
+      case StructureType.QueenNest:
+        newHoneycomb = Instantiate(honeycomb, offset, honeycomb.transform.rotation);
+        break;
+      case StructureType.RoyalJellyFactory:
+        newHoneycomb = Instantiate(royalJellyFactory, offset, honeycomb.transform.rotation);
+        break;
+      case StructureType.HoneyFactory:
+        newHoneycomb = Instantiate(honeyFactory, offset, honeycomb.transform.rotation);
+        break;
     }
     GenerateAvailablePositions(offset);
     _closedList.Add(offset);
@@ -154,26 +142,26 @@ public class HoneycombGenerator : MonoBehaviour {
 
     BeeResources res = new BeeResources();
     switch ((StructureType)type) {
-    case StructureType.HoneyFactory:
-      res.Pollen = 100;
-      res.Nectar = 50;
-      break;
+      case StructureType.HoneyFactory:
+        res.Pollen = 100;
+        res.Nectar = 50;
+        break;
 
-    case StructureType.BeeswaxFactory:
-      res.Honey = 100;
-      res.Nectar = 50;
-      break;
+      case StructureType.BeeswaxFactory:
+        res.Honey = 100;
+        res.Nectar = 50;
+        break;
 
-    case StructureType.RoyalJellyFactory:
-      res.Honey = 100;
-      res.Beeswax = 100;
-      break;
+      case StructureType.RoyalJellyFactory:
+        res.Honey = 100;
+        res.Beeswax = 100;
+        break;
 
-    case StructureType.BroodNest:
-      res.Beeswax = 100;
-      res.Honey = 50;
-      res.RoyalJelly = 10;
-      break;
+      case StructureType.BroodNest:
+        res.Beeswax = 100;
+        res.Honey = 50;
+        res.RoyalJelly = 10;
+        break;
     }
 
     // make sure we can consume these resources
@@ -181,8 +169,7 @@ public class HoneycombGenerator : MonoBehaviour {
       return;
 
     foreach (var pos in _openList) {
-      GameObject hintObj =
-          Instantiate(honeycombHint, pos, honeycomb.transform.rotation);
+      GameObject hintObj = Instantiate(honeycombHint, pos, honeycomb.transform.rotation);
       HoneycombHint hint = hintObj.GetComponent<HoneycombHint>();
       hint.state = state;
       hint.type = (StructureType)type;

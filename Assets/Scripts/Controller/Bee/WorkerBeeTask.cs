@@ -2,15 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class WorkerBeeTask {
-
-  public enum TaskType {
-    HoneyFactory,
-    BeeswaxFactory,
-    RoyalJellyFactory,
-    Forager,
-    Nurse,
-    Builder
-  }
+  public enum TaskType { HoneyFactory, BeeswaxFactory, RoyalJellyFactory, Forager, Nurse, Builder }
   public TaskType taskType;
 
   // Where they should sit
@@ -29,8 +21,7 @@ public class WorkerBeeTask {
     workerSpotIndex = index;
   }
 
-  public WorkerBeeTask(TaskType task, Vector3 location, int index,
-                       Vector3 target) {
+  public WorkerBeeTask(TaskType task, Vector3 location, int index, Vector3 target) {
     taskType = task;
     taskLocation = location;
     targetLocation = target;
@@ -43,16 +34,16 @@ public class WorkerBeeTask {
    */
   public static TaskType StructureTypeAsTaskType(StructureType type) {
     switch (type) {
-    case StructureType.HoneyFactory:
-      return TaskType.HoneyFactory;
-    case StructureType.RoyalJellyFactory:
-      return TaskType.RoyalJellyFactory;
-    case StructureType.BeeswaxFactory:
-      return TaskType.BeeswaxFactory;
-    case StructureType.BroodNest:
-      return TaskType.Nurse;
-    case StructureType.Flower:
-      return TaskType.Forager;
+      case StructureType.HoneyFactory:
+        return TaskType.HoneyFactory;
+      case StructureType.RoyalJellyFactory:
+        return TaskType.RoyalJellyFactory;
+      case StructureType.BeeswaxFactory:
+        return TaskType.BeeswaxFactory;
+      case StructureType.BroodNest:
+        return TaskType.Nurse;
+      case StructureType.Flower:
+        return TaskType.Forager;
     }
     return TaskType.Builder;
   }

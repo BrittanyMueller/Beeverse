@@ -23,7 +23,9 @@ public class BeeProfileController : MonoBehaviour {
     gameObject.SetActive(false);
   }
 
-  public void Hide() { gameObject.SetActive(false); }
+  public void Hide() {
+    gameObject.SetActive(false);
+  }
 
   public void Show(Bee bee) {
     beeName.text = bee.beeName;
@@ -32,14 +34,14 @@ public class BeeProfileController : MonoBehaviour {
       beeAge.text += "s";
 
     switch (bee.type) {
-    case BeeType.Queen:
-      beeJob.text = "Queen";
-      beeSelfie.sprite = _queenBee;
-      break;
-    case BeeType.Worker:
-      beeJob.text = ((WorkerBee)bee).JobTitle;
-      beeSelfie.sprite = _workerBee;
-      break;
+      case BeeType.Queen:
+        beeJob.text = "Queen";
+        beeSelfie.sprite = _queenBee;
+        break;
+      case BeeType.Worker:
+        beeJob.text = ((WorkerBee)bee).JobTitle;
+        beeSelfie.sprite = _workerBee;
+        break;
     }
     gameObject.SetActive(true);
   }
