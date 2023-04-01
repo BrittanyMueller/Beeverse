@@ -438,9 +438,9 @@ MonoBehaviour:
   structure: {fileID: 8901792560423900140}
   honeycombType: 4
   showedStructure: 0
-  buildSpeedPerSecond: 0.1
-  queenPillow: {fileID: 0}
-  workerPillow: {fileID: 0}
+  buildSpeedPerSecond: 0.01
+  queenPillow: {fileID: 2100000, guid: affe8420ea98e6140b81dcb49af842a6, type: 2}
+  workerPillow: {fileID: 2100000, guid: 52d62f9cb8cad914c84ac632e663927a, type: 2}
 --- !u!65 &1990950948319247563
 BoxCollider:
   m_ObjectHideFlags: 0
