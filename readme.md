@@ -12,7 +12,10 @@ Beeverse is a survival city builder to grow and sustain a bee colony.  The main 
 Official builds can be obtained off of our ci/cd pipeline. We offer Linux, Windows, and Unofficial Mac support(Never tested) This is the best way to play our game as it will be more optimized and allow for a better experience.
 https://gitlab.larrycloud.ca/cis4820/Beeverse
 
-
+# Disclaimer
+Save and Load functionality do not currently exist and buttons were
+left in the game as we plan to expand this as a personal project after submissions
+and we not part of our original plan besides as a stretch goal
 # Third party assets
 
 - Resources Icons - gotten from https://www.flaticon.com/
