@@ -7,7 +7,7 @@ public class BabyBee : Bee {
   public bool isEgg;      // BabyBees will be an egg until 3 days old
 
   public BroodNest broodNest;  // Brood Nest the bee is located in
-
+  public int eggSlotIndex;    
   [SerializeField]
   private GameObject eggModel;
   [SerializeField]

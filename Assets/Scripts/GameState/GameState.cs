@@ -175,12 +175,11 @@ public class GameState : MonoBehaviour {
                                  .GetComponent<QueenBee>();
               newQueen.beeName = beeSlot.babyBee.beeName;
               newQueen.ChangeState(new QueenBeeTakeOffState());
-              UpdateLog("Welcome the new Queen Bee, " + newQueen.beeName + "!");
+              UpdateLog("> The new Queen Bee was born. Welcome to the hive, " + newQueen.beeName + "!");
 
               if (_queen) {
                 // Remove old queen from the game! Good bye Queen
-                UpdateLog("Queen " + _queen.beeName +
-                          " feels replaced and moves on to another hive...");
+                UpdateLog("> " + _queen.beeName + " feels replaced and moves on to another hive...");
                 _queen.IsLeavingHive = true;
                 _queen.ChangeState(new QueenBeeTakeOffState());
                 StartCoroutine(RemoveQueenBee(_queen, 15));
@@ -195,6 +194,7 @@ public class GameState : MonoBehaviour {
               workerBee.beeName = beeSlot.babyBee.beeName;
               workerBee.ChangeState(new WorkerBeeTakeOffState());
               _bees.Add(workerBee);
+              UpdateLog("> A new Worker Bee was born. Welcome to the hive, " + workerBee.beeName + "!");
             }
             Destroy(beeSlot.babyBee.gameObject);  // RIP
             beeSlot.HasEgg = false;

@@ -16,7 +16,6 @@ public class BabyProfileController : MonoBehaviour {
   [SerializeField]
   private RectTransform progressBarLimit;
   [SerializeField]
-
   private RectTransform progressBar;
 
   private BabyBee _babyBee;
@@ -26,14 +25,13 @@ public class BabyProfileController : MonoBehaviour {
   // Start is called before the first frame update
   private void Awake() {
     // Load images of bees for sprite swapping
-    // TODO get pic of baby egg
-    _eggBeeSprite = Resources.Load<Sprite>("BeePics/queenSelfie");
+    _eggBeeSprite = Resources.Load<Sprite>("BeePics/eggSelfie");
     _babyBeeSprite = Resources.Load<Sprite>("BeePics/larvaSelfie");
     gameObject.SetActive(false);
   }
 
-  void Update() {
-    if (_babyBee != null)
+  private void Update() {
+    if (_babyBee)
       UpdateProgress(_babyBee.AgeInMinutes / (5.0f * 25 * 60));
   }
 
@@ -62,7 +60,6 @@ public class BabyProfileController : MonoBehaviour {
       beeAge.text += "s";
 
     if (bee.isEgg) {
-      // TODO this job title sucks
       beeJob.text = "Professional Napper";
       beeSelfie.sprite = _eggBeeSprite;
     } else {

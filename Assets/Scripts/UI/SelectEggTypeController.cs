@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +8,6 @@ public class SelectEggTypeController : MonoBehaviour {
   private Button setWorkerEgg;
   [SerializeField]
   private Button setQueenEgg;
-
   private BabyBee _currentEgg;
 
   private void Awake() {
@@ -37,6 +33,8 @@ public class SelectEggTypeController : MonoBehaviour {
     _currentEgg.isQueen = false;
     var cost = new BeeResources { Honey = 40, RoyalJelly = 10 };
     state.ConsumeResources(cost);
+    // Update pillow colour to green worker pillow type
+    _currentEgg.broodNest.SetWorkerPillow(_currentEgg.eggSlotIndex);
     _currentEgg.beeName = BeeStuff.GetRandomName();
     Hide();
   }
@@ -47,6 +45,8 @@ public class SelectEggTypeController : MonoBehaviour {
     state.HasQueenEgg = true;
     var cost = new BeeResources { RoyalJelly = 50 };
     state.ConsumeResources(cost);
+    // Update to red queen pillow type
+    _currentEgg.broodNest.SetQueenPillow(_currentEgg.eggSlotIndex);
     _currentEgg.beeName = BeeStuff.GetRandomQueenName();
     Hide();
   }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1841256871829009579}
   - component: {fileID: 3560218102291883691}
   m_Layer: 2
-  m_Name: BabySlot (1)
+  m_Name: BabySlot2
   m_TagString: BabySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
   babyBee: {fileID: 0}
+  index: 1
 --- !u!1 &913190388379239152
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ GameObject:
   - component: {fileID: 3628987654875621234}
   - component: {fileID: 2304337252244619793}
   m_Layer: 2
-  m_Name: BabySlot (3)
+  m_Name: BabySlot4
   m_TagString: BabySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,6 +123,7 @@ MonoBehaviour:
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
   babyBee: {fileID: 0}
+  index: 3
 --- !u!1 &1366083817779692037
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +229,7 @@ GameObject:
   - component: {fileID: 7947770779117452534}
   - component: {fileID: 6708707685615655973}
   m_Layer: 2
-  m_Name: BabySlot (4)
+  m_Name: BabySlot5
   m_TagString: BabySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,6 +278,7 @@ MonoBehaviour:
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
   babyBee: {fileID: 0}
+  index: 4
 --- !u!1 &3526454330084822684
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +291,7 @@ GameObject:
   - component: {fileID: 1423400188995780324}
   - component: {fileID: 2092297369555197678}
   m_Layer: 2
-  m_Name: BabySlot (2)
+  m_Name: BabySlot3
   m_TagString: BabySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,6 +340,7 @@ MonoBehaviour:
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
   babyBee: {fileID: 0}
+  index: 2
 --- !u!1 &5023407985857121483
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,97 +372,6 @@ Transform:
   m_Father: {fileID: 8050903120329245744}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 70.178, z: 0}
---- !u!1 &6535383249703545611
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3352920505632707299}
-  - component: {fileID: 9033093555420159489}
-  - component: {fileID: 6769954832900409055}
-  m_Layer: 0
-  m_Name: BabyBeds
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3352920505632707299
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535383249703545611}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.134416, y: 0.031219, z: 0.23255998}
-  m_LocalScale: {x: 15.5, y: 15.5, z: 1.3000001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8050903120329245744}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!33 &9033093555420159489
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535383249703545611}
-  m_Mesh: {fileID: -580461911321467711, guid: 12ca9a9017e2b8246bc7b4b1eaabd6ed, type: 3}
---- !u!23 &6769954832900409055
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535383249703545611}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 4e33f6afc2dbf4c4fb5ad1db9d483e9c, type: 2}
-  - {fileID: 2100000, guid: de3a10c670c3a414b99c99ef99d939a1, type: 2}
-  - {fileID: 2100000, guid: 5e0cd2a6d93023045948d86be60ec3c7, type: 2}
-  - {fileID: 2100000, guid: 34f13a9d0c9a8234ea280783c8327c54, type: 2}
-  - {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7273697226998636170
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +403,7 @@ Transform:
   m_LocalScale: {x: 25, y: 25, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3352920505632707299}
+  - {fileID: 6886315858539627059}
   - {fileID: 3539225534393603170}
   - {fileID: 6546433166258119457}
   - {fileID: 5983160534482485452}
@@ -522,7 +435,7 @@ MonoBehaviour:
   - {fileID: 8096443821086362012}
   - {fileID: 8572326309788680842}
   bees: []
-  structure: {fileID: 6535383249703545611}
+  structure: {fileID: 8901792560423900140}
   honeycombType: 4
   showedStructure: 0
   buildSpeedPerSecond: 0.1
@@ -733,7 +646,7 @@ GameObject:
   - component: {fileID: 3397624272092618874}
   - component: {fileID: 7958825114463069760}
   m_Layer: 2
-  m_Name: BabySlot
+  m_Name: BabySlot1
   m_TagString: BabySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,3 +695,95 @@ MonoBehaviour:
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
   babyBee: {fileID: 0}
+  index: 0
+--- !u!1 &8901792560423900140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6886315858539627059}
+  - component: {fileID: 645044066980994472}
+  - component: {fileID: 1979341579689931944}
+  m_Layer: 0
+  m_Name: BabyBeds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6886315858539627059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8901792560423900140}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.134416, y: 0.031219, z: 0.23255998}
+  m_LocalScale: {x: 15.5, y: 15.5, z: 1.3000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8050903120329245744}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &645044066980994472
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8901792560423900140}
+  m_Mesh: {fileID: -580461911321467711, guid: 12ca9a9017e2b8246bc7b4b1eaabd6ed, type: 3}
+--- !u!23 &1979341579689931944
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8901792560423900140}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4e33f6afc2dbf4c4fb5ad1db9d483e9c, type: 2}
+  - {fileID: 2100000, guid: de3a10c670c3a414b99c99ef99d939a1, type: 2}
+  - {fileID: 2100000, guid: 5e0cd2a6d93023045948d86be60ec3c7, type: 2}
+  - {fileID: 2100000, guid: 34f13a9d0c9a8234ea280783c8327c54, type: 2}
+  - {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
+  - {fileID: 2100000, guid: a172356a01bcbbb4aa3046454f291688, type: 2}
+  - {fileID: 2100000, guid: 0b99463161390bc42868ba62c67052b2, type: 2}
+  - {fileID: 2100000, guid: 61ce05256d2c60e4198793e9da7722fa, type: 2}
+  - {fileID: 2100000, guid: fb20998c002246e49bf33a19552b31db, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

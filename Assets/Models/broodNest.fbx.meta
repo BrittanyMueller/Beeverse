@@ -7,31 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BabyPillow1
-    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BabyPillow2
-    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BabyPillow3
-    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BabyPillow4
-    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BabyPillow5
-    second: {fileID: 2100000, guid: 2da9ca4f03c887d40aafd0dd1a0eb4ed, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: floor
     second: {fileID: 2100000, guid: 34f13a9d0c9a8234ea280783c8327c54, type: 2}
   - first:
