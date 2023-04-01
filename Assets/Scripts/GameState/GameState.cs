@@ -7,6 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
 
+  // Audio stuff
+  public AudioSource backgroundMusic;
+  private AudioSource soundEffects;
+
+  // Audio clips
+  public AudioClip audioDayTimeMusic;
+  public AudioClip audioNightTimeMusic;
+
+  public Light sunLight;
+  public Material skyMaterial;
+
+
+
   private TimeTracker _currentTime;
   public TimeTracker CurrentTime {
     get { return _currentTime; }
@@ -102,7 +115,7 @@ public class GameState : MonoBehaviour {
     GameState.minutesPerSecond = 5;
 
     // Might change when saving comes in
-    _currentTime = new TimeTracker(1, 0, 0);
+    _currentTime = new TimeTracker(1, 6, 55);
     _day = 0;
 
     // Set default resources count
@@ -126,6 +139,20 @@ public class GameState : MonoBehaviour {
       _currentTime.AddMinutes(5);
       // Update game UI with new time
       dayController.UpdateDate(_currentTime.ToString());
+
+      // daylight nighttime
+      if (_currentTime.Hour == 7 && _currentTime.Minute == 0) {
+        // Play morning song
+        backgroundMusic.clip = audioDayTimeMusic;
+        backgroundMusic.Play(0);
+        sunLight.transform.rotation = Quaternion.Euler(70, 90, 90);
+        skyMaterial.mainTextureOffset = new Vector2(0f, 0);
+      } else if (_currentTime.Hour == 19 && _currentTime.Minute == 0) {
+        sunLight.transform.rotation = Quaternion.Euler(30, 90, 90);
+        backgroundMusic.clip = audioNightTimeMusic;
+        backgroundMusic.Play(0);
+        skyMaterial.mainTextureOffset = new Vector2(0.4f, 0);
+      }
 
       // Update all bees that time has passed
       foreach (Bee bee in _bees) {
