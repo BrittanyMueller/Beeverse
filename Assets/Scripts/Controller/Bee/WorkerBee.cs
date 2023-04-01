@@ -89,7 +89,8 @@ public class WorkerBee : Bee {
     }
   }
 
-  public bool HasTakenOff => transform.position.y >= _flyHeight; // basically on task
+  public bool HasTakenOff =>
+      transform.position.y >= _flyHeight; // basically on task
 
   public string JobTitle {
     get {
@@ -97,18 +98,18 @@ public class WorkerBee : Bee {
         return "Honey Enjoyer";
       }
       switch (_task.taskType) {
-        case WorkerBeeTask.TaskType.Builder:
-          return "Builder";
-        case WorkerBeeTask.TaskType.Forager:
-          return "Forager";
-        case WorkerBeeTask.TaskType.Nurse:
-          return "Nurse";
-        case WorkerBeeTask.TaskType.BeeswaxFactory:
-          return "Beeswax Engineer";
-        case WorkerBeeTask.TaskType.RoyalJellyFactory:
-          return "Royal Jelly Architect";
-        case WorkerBeeTask.TaskType.HoneyFactory:
-          return "Honey Technician";
+      case WorkerBeeTask.TaskType.Builder:
+        return "Builder";
+      case WorkerBeeTask.TaskType.Forager:
+        return "Forager";
+      case WorkerBeeTask.TaskType.Nurse:
+        return "Nurse";
+      case WorkerBeeTask.TaskType.BeeswaxFactory:
+        return "Beeswax Engineer";
+      case WorkerBeeTask.TaskType.RoyalJellyFactory:
+        return "Royal Jelly Architect";
+      case WorkerBeeTask.TaskType.HoneyFactory:
+        return "Honey Technician";
       }
       return "NULL";
     }
@@ -146,6 +147,7 @@ public class WorkerBee : Bee {
 
   public void Die() {
     if (!isDead) {
+      GetComponent<AudioSource>().Play(0);
       isDead = true;
 
       _anim.SetBool("Flying", false);
@@ -193,13 +195,16 @@ public class WorkerBee : Bee {
     taskBeeVec.y = 0;
     forwardVec.y = 0;
     if ((Vector3.Angle(taskBeeVec, forwardVec) < 10)) {
-      _controller.Move(transform.TransformDirection(Vector3.forward) * (_flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      _controller.Move(transform.TransformDirection(Vector3.forward) *
+                       (_flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
 
     // check if they are at the correct height
     if (Mathf.Abs(transform.position.y - _idleFlyHeight) > 0.05) {
       var dir = (transform.position.y < _idleFlyHeight) ? 1 : -1;
-      _controller.Move(transform.TransformDirection(Vector3.up) * (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      _controller.Move(
+          transform.TransformDirection(Vector3.up) *
+          (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
   }
 
@@ -213,13 +218,16 @@ public class WorkerBee : Bee {
     taskBeeVec.y = 0;
     forwardVec.y = 0;
     if ((Vector3.Angle(taskBeeVec, forwardVec) < 10)) {
-      _controller.Move(transform.TransformDirection(Vector3.forward) * (_flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      _controller.Move(transform.TransformDirection(Vector3.forward) *
+                       (_flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
 
     // check if they are at the correct height
     if (Mathf.Abs(transform.position.y - _flyHeight) > 0.05) {
       var dir = (transform.position.y < _flyHeight) ? 1 : -1;
-      _controller.Move(transform.TransformDirection(Vector3.up) * (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      _controller.Move(
+          transform.TransformDirection(Vector3.up) *
+          (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
   }
   public void LandAtTask() {
@@ -242,18 +250,18 @@ public class WorkerBee : Bee {
       _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime, 0));
 
     switch (_task.taskType) {
-      case WorkerBeeTask.TaskType.Forager:
-        WorkAtFlower();
-        break;
-      case WorkerBeeTask.TaskType.Builder:
-        BuildHoneycomb();
-        break;
-      case WorkerBeeTask.TaskType.HoneyFactory:
-      case WorkerBeeTask.TaskType.BeeswaxFactory:
-      case WorkerBeeTask.TaskType.RoyalJellyFactory:
-        WorkAtFactory();
-        break;
-      }
+    case WorkerBeeTask.TaskType.Forager:
+      WorkAtFlower();
+      break;
+    case WorkerBeeTask.TaskType.Builder:
+      BuildHoneycomb();
+      break;
+    case WorkerBeeTask.TaskType.HoneyFactory:
+    case WorkerBeeTask.TaskType.BeeswaxFactory:
+    case WorkerBeeTask.TaskType.RoyalJellyFactory:
+      WorkAtFactory();
+      break;
+    }
     RotateToJobTarget();
   }
 
@@ -270,8 +278,7 @@ public class WorkerBee : Bee {
   /*** State Helpers ***/
 
   private void RotateTo(Vector3 location) {
-    var singleStep =
-        _rotationSpeed * Time.deltaTime * GameState.GetGameSpeed();
+    var singleStep = _rotationSpeed * Time.deltaTime * GameState.GetGameSpeed();
     var taskBeeVec = location - transform.position;
 
     // only want to rotate on the xz axis
@@ -291,8 +298,7 @@ public class WorkerBee : Bee {
     if (Task.targetLocation.x == 0 && Task.targetLocation.y == 0)
       return;
 
-    var singleStep =
-        _rotationSpeed * Time.deltaTime * GameState.GetGameSpeed();
+    var singleStep = _rotationSpeed * Time.deltaTime * GameState.GetGameSpeed();
     var targetBeeVec = Task.targetLocation - transform.position;
 
     // only want to rotate on the xz axis

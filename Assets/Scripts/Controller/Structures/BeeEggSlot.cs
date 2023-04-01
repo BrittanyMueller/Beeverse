@@ -16,9 +16,10 @@ public class BeeEggSlot : MonoBehaviour {
     get => _hasEgg;
     set {
       _hasEgg = value;
-      if (!_hasEgg) return;
+      if (!_hasEgg)
+        return;
       var eggGameObject =
-        Instantiate(egg, transform.position, transform.rotation);
+          Instantiate(egg, transform.position, transform.rotation);
       babyBee = eggGameObject.GetComponent<BabyBee>();
       babyBee.broodNest = broodNest;
     }

@@ -50,7 +50,8 @@ public class SelectBee : MonoBehaviour {
       info.targetSelect = index;
 
       obj.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => {
-        if (_state.Paused) return;
+        if (_state.Paused)
+          return;
         callback(bee);
         Hide();
       });

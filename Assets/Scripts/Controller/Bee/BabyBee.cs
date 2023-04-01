@@ -2,13 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BabyBee : Bee {
-  
-  
-  public bool isGrowing;  // Indicates if BabyBee has started growing
-  public bool isQueen;    // Indicates if BabyBee is type Queen or Worker
-  public bool isEgg;      // BabyBees will be an egg until 3 days old
-  
-  public BroodNest broodNest;   // Brood Nest the bee is located in
+
+  public bool isGrowing; // Indicates if BabyBee has started growing
+  public bool isQueen;   // Indicates if BabyBee is type Queen or Worker
+  public bool isEgg;     // BabyBees will be an egg until 3 days old
+
+  public BroodNest broodNest; // Brood Nest the bee is located in
 
   [SerializeField]
   private GameObject eggModel;
@@ -46,7 +45,8 @@ public class BabyBee : Bee {
     }
     // Growth speed modifier for number of bees in nest
     LifeSpan.AddMinutes((int)(minutes * beeCount / 2.0));
-    if (LifeSpan.Day != 3 || !isEgg) return;
+    if (LifeSpan.Day != 3 || !isEgg)
+      return;
     // Change egg into larva bee model when old enough
     eggModel.SetActive(false);
     larvaModel.SetActive(true);

@@ -6,5 +6,7 @@ public class HoneycombHint : MonoBehaviour {
 
   public StructureType type;
   public GameState state;
-  private void OnMouseDown() { state.CreateHoneycomb(transform.position, type); }
+  private void OnMouseDown() {
+    state.CreateHoneycomb(transform.position, type);
+  }
 }

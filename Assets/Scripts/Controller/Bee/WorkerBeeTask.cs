@@ -43,16 +43,16 @@ public class WorkerBeeTask {
    */
   public static TaskType StructureTypeAsTaskType(StructureType type) {
     switch (type) {
-      case StructureType.HoneyFactory:
-        return TaskType.HoneyFactory;
-      case StructureType.RoyalJellyFactory:
-        return TaskType.RoyalJellyFactory;
-      case StructureType.BeeswaxFactory:
-        return TaskType.BeeswaxFactory;
-      case StructureType.BroodNest:
-        return TaskType.Nurse;
-      case StructureType.Flower:
-        return TaskType.Forager;
+    case StructureType.HoneyFactory:
+      return TaskType.HoneyFactory;
+    case StructureType.RoyalJellyFactory:
+      return TaskType.RoyalJellyFactory;
+    case StructureType.BeeswaxFactory:
+      return TaskType.BeeswaxFactory;
+    case StructureType.BroodNest:
+      return TaskType.Nurse;
+    case StructureType.Flower:
+      return TaskType.Forager;
     }
     return TaskType.Builder;
   }

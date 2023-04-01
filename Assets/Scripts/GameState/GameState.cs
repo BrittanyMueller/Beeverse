@@ -9,7 +9,6 @@ public class GameState : MonoBehaviour {
 
   // Audio stuff
   public AudioSource backgroundMusic;
-  private AudioSource soundEffects;
 
   // Audio clips
   public AudioClip audioDayTimeMusic;
@@ -17,8 +16,6 @@ public class GameState : MonoBehaviour {
 
   public Light sunLight;
   public Material skyMaterial;
-
-
 
   private TimeTracker _currentTime;
   public TimeTracker CurrentTime {

@@ -93,20 +93,20 @@ public class HudController : MonoBehaviour {
 
     // Open the correct menu
     switch (type) {
-      case StructureType.Flower:
-        flowerMenu.Show((Flower)structure);
-        break;
-      case StructureType.Building:
-        buildingMenu.Show((Honeycomb)structure);
-        break;
-      case StructureType.HoneyFactory:
-      case StructureType.BeeswaxFactory:
-      case StructureType.RoyalJellyFactory:
-        factoryMenu.Show((HoneycombFactory)structure);
-        break;
-      case StructureType.BroodNest:
-        broodNestMenu.Show((BroodNest)structure);
-        break;
+    case StructureType.Flower:
+      flowerMenu.Show((Flower)structure);
+      break;
+    case StructureType.Building:
+      buildingMenu.Show((Honeycomb)structure);
+      break;
+    case StructureType.HoneyFactory:
+    case StructureType.BeeswaxFactory:
+    case StructureType.RoyalJellyFactory:
+      factoryMenu.Show((HoneycombFactory)structure);
+      break;
+    case StructureType.BroodNest:
+      broodNestMenu.Show((BroodNest)structure);
+      break;
     }
     structureMenu.SetActive(true);
   }

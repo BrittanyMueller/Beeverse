@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
+  babyBee: {fileID: 0}
 --- !u!1 &913190388379239152
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
+  babyBee: {fileID: 0}
 --- !u!1 &1366083817779692037
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
+  babyBee: {fileID: 0}
 --- !u!1 &3526454330084822684
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
+  babyBee: {fileID: 0}
 --- !u!1 &5023407985857121483
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +470,7 @@ GameObject:
   - component: {fileID: 8050903120329245744}
   - component: {fileID: 2878905560753939696}
   - component: {fileID: 1990950948319247563}
+  - component: {fileID: -7067990435906865644}
   m_Layer: 0
   m_Name: broodNest
   m_TagString: Untagged
@@ -534,6 +539,102 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.86311185, y: 0.058842406, z: 0.5}
   m_Center: {x: -0.0034561157, y: 0.0042295097, z: 0}
+--- !u!82 &-7067990435906865644
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7273697226998636170}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 16d7523494718289cb4a803856b4e0df, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.112
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7507777010009918022
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,3 +781,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broodNest: {fileID: 2878905560753939696}
   egg: {fileID: 7380076034288571124, guid: f5e71fd80b08df14abbcacdd9dee44d0, type: 3}
+  babyBee: {fileID: 0}

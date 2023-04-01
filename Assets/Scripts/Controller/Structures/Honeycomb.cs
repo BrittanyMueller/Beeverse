@@ -146,6 +146,7 @@ public class Honeycomb : MonoBehaviour {
       return;
 
     // Show build progress menu or completed structure menu if built
-    _hudController.OpenStructureMenu(!Built ? StructureType.Building : honeycombType, this);
+    _hudController.OpenStructureMenu(
+        !Built ? StructureType.Building : honeycombType, this);
   }
 }
