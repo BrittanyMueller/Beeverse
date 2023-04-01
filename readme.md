@@ -13,5 +13,19 @@ Official builds can be obtained off of our ci/cd pipeline. We offer Linux, Windo
 https://gitlab.larrycloud.ca/cis4820/Beeverse
 
 
-# Resources Icons
-gotten from https://www.flaticon.com/
+# Third party assets
+
+- Resources Icons - gotten from https://www.flaticon.com/
+- UI backgrounds - https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811
+- Wood textures - https://assetstore.unity.com/packages/2d/textures-materials/wood/hand-painted-seamless-wood-texture-vol-6-162145
+- Flower - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
+- Sky asset - https://assetstore.unity.com/packages/3d/simple-sky-cartoon-assets-42373
+- scroll/progress bar and settings icon - https://assetstore.unity.com/packages/2d/gui/sweet-land-gui-208285
+- Bee noises https://pixabay.com/sound-effects/id-24412/
+
+# Assets done by us
+- All songs are originally created and played by Lawrence Milne
+- Sound effects for Bee death and building created by Lawrence Milne
+- Bee Assets and honeycomb structures created in blender in collaboration between Brittany Mueller and Lawrence Milne
+- Animations For bees done in collaborations between Brittany Mueller and Lawrence Milne in blender
+- All blender models with animations can be found instead of /BlenderModels 
