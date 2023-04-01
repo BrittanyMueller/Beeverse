@@ -34,6 +34,8 @@ public class BabyBee : Bee {
 
   // Override AgeInDays of BabyBees to be from lifespan
   public new int AgeInDays => LifeSpan.Day;
+    public int AgeInMinutes => LifeSpan.TotalTime;
+
 
   public override void UpdateTimeTick(int minutes) {
     if (!isGrowing)

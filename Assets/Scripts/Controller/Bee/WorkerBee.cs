@@ -170,9 +170,6 @@ public class WorkerBee : Bee {
     _anim.speed = 1f;
     _anim.SetBool("Flying", true);
 
-    // just idle don't move
-    if (inMenu)
-      return;
 
     // check if we have an idle location or if we are there
     // to see if we need a new location or if we should
