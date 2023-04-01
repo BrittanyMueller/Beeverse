@@ -112,6 +112,7 @@ public class HudController : MonoBehaviour {
   }
   public void Exit() {
     // Return to main menu
+    Resume();
     SceneManager.LoadScene("MainMenu");
   }
 

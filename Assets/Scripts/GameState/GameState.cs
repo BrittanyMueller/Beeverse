@@ -180,6 +180,7 @@ public class GameState : MonoBehaviour {
               }
               _queen = newQueen;
               _hasQueenEgg = false;
+              _totalQueens++;
             } else {
               // Baby bee grows into worker bee
               var workerBee =
@@ -190,6 +191,7 @@ public class GameState : MonoBehaviour {
               _bees.Add(workerBee);
               UpdateLog("> A new Worker Bee was born. Welcome to the hive, " + workerBee.beeName +
                         "!");
+              _totalBees++;
             }
             Destroy(beeSlot.babyBee.gameObject);  // RIP
             beeSlot.HasEgg = false;
