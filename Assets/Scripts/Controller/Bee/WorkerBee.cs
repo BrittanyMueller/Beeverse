@@ -36,13 +36,11 @@ public class WorkerBee : Bee {
 
   /****** Task management ******/
 
-  public bool taskChanged = false;
   public WorkerBeeTask Task {
     get { return _task; }
     set {
       // set only if it already had a task
       if (_task != null) {
-        taskChanged = true;
         // remove from old task
         switch (_task.taskType) {
           case WorkerBeeTask.TaskType.Forager:
@@ -168,6 +166,8 @@ public class WorkerBee : Bee {
   public void Idle() {
     _anim.speed = 1f;
     _anim.SetBool("Flying", true);
+    _anim.SetBool("Working", false);
+
 
     // check if we have an idle location or if we are there
     // to see if we need a new location or if we should
@@ -181,6 +181,8 @@ public class WorkerBee : Bee {
 
   public void TravelToIdle() {
     // Make sure it is set
+    _anim.SetBool("Flying", true);
+    _anim.SetBool("Working", false);
     if (_idleLocation == Vector3.zero)
       return;
     RotateTo(_idleLocation);
@@ -205,6 +207,7 @@ public class WorkerBee : Bee {
   public void TravelToTask() {
     _anim.speed = 1f;
     _anim.SetBool("Flying", true);
+    _anim.SetBool("Working", false);
     RotateTo(Task.taskLocation);
 
     var taskBeeVec = Task.taskLocation - transform.position;
