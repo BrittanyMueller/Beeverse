@@ -19,9 +19,7 @@ public class GameState : MonoBehaviour {
   public Material skyMaterial;
 
   private TimeTracker _currentTime;
-  public TimeTracker CurrentTime {
-    get { return _currentTime; }
-  }
+  public TimeTracker CurrentTime => _currentTime;
 
   public List<WorkerBee> _bees;
   public List<BeeEggSlot> _beeEggSlots;
@@ -42,9 +40,7 @@ public class GameState : MonoBehaviour {
   private System.Random _rand = new System.Random();
 
   // Queen honeycomb will always be the first one generated
-  public Honeycomb QueenHoneycomb {
-    get { return _honeycombs[0]; }
-  }
+  public Honeycomb QueenHoneycomb => _honeycombs[0];
 
   // Bee models
   public GameObject queenModel;
@@ -58,39 +54,31 @@ public class GameState : MonoBehaviour {
   public DayController dayController;
 
   private BeeResources resources;
-  public float honeyCount {
-    get { return resources.Honey; }
-  }
-  public float nectarCount {
-    get { return resources.Nectar; }
-  }
-  public float beeswaxCount {
-    get { return resources.Beeswax; }
-  }
-  public float pollenCount {
-    get { return resources.Pollen; }
-  }
-  public float royalJellyCount {
-    get { return resources.RoyalJelly; }
-  }
+  public float HoneyCount => resources.Honey;
+
+  public float NectarCount => resources.Nectar;
+
+  public float BeeswaxCount => resources.Beeswax;
+
+  public float PollenCount => resources.Pollen;
+
+  public float RoyalJellyCount => resources.RoyalJelly;
 
   // generator to create honeycombs
   public HoneycombGenerator honeycombGenerator;
 
-  public int Day {
-    get { return _day; }
-  }
+  public int Day => _day;
   private int _day;
 
   // Game config settings
-  public static int minutesPerSecond = 5;
+  public static int MinutesPerSecond = 5;
 
   // This timer will be used to
   // update the clock every second
   private double _secondTimer;
 
   public bool Paused {
-    get { return _paused; }
+    get => _paused;
     set {
       _paused = value;
       NotifyPausedChanged();
@@ -112,9 +100,8 @@ public class GameState : MonoBehaviour {
 
     _paused = false;
 
-    _secondTimer = 1 / minutesPerSecond;
-
-    GameState.minutesPerSecond = 5;
+    _secondTimer = 1 / MinutesPerSecond;
+    MinutesPerSecond = 5;
 
     // Might change when saving comes in
     _currentTime = new TimeTracker(1, 6, 55);
@@ -134,12 +121,12 @@ public class GameState : MonoBehaviour {
   }
 
   // Update is called once per frame
-  void FixedUpdate() {
+  private void FixedUpdate() {
     if (inMenu)
       return;
     _secondTimer -= Time.deltaTime;
     if (_secondTimer <= 0) {
-      _secondTimer = 5.0f / minutesPerSecond;
+      _secondTimer = 5.0f / MinutesPerSecond;
       _currentTime.AddMinutes(5);
       // Update game UI with new time
       dayController.UpdateDate(_currentTime.ToString());
@@ -273,13 +260,12 @@ public class GameState : MonoBehaviour {
   }
 
   // Update the log with information
-
-  public void UpdateLog(String update) {
+  public void UpdateLog(string update) {
     logController.UpdateLog(update);
   }
 
   public void Save() {
-    Debug.Log("Your game is saved.. jk not impl yet");
+    Debug.Log("Your game is saved.. jk not implemented yet.");
   }
 
   // Restarts the game into its default state
@@ -292,7 +278,8 @@ public class GameState : MonoBehaviour {
    * Gets the current speed of the game assuming 5 minutes is 1x
    */
   public static float GetGameSpeed() {
-    return GameState.minutesPerSecond / 5;
+    // ReSharper disable once PossibleLossOfFraction
+    return MinutesPerSecond / 5;
   }
 
   /**
@@ -300,7 +287,7 @@ public class GameState : MonoBehaviour {
    * to when not doing anything.
    */
   public Vector3 GetIdleLocation() {
-    if (idleArea == null)
+    if (!idleArea)
       return new Vector3(0, 0, 0);
     var size = idleArea.size;
     // Calculates a point in the box collider for idle
@@ -393,9 +380,9 @@ public class GameState : MonoBehaviour {
    * 2x speed is 10 minutes
    * 5x speed is 25 minutes
    */
-  public void setGameSpeed(int minutes) {
+  public void SetGameSpeed(int minutes) {
     if (Paused)
       return;
-    GameState.minutesPerSecond = minutes;
+    MinutesPerSecond = minutes;
   }
 }

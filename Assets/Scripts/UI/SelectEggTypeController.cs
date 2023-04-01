@@ -15,8 +15,8 @@ public class SelectEggTypeController : MonoBehaviour {
   }
 
   private void Update() {
-    setWorkerEgg.interactable = state.royalJellyCount >= 10 && state.honeyCount >= 40;
-    setQueenEgg.interactable = !state.HasQueenEgg && state.royalJellyCount >= 50;
+    setWorkerEgg.interactable = state.RoyalJellyCount >= 10 && state.HoneyCount >= 40;
+    setQueenEgg.interactable = !state.HasQueenEgg && state.RoyalJellyCount >= 50;
   }
 
   public void Hide() {

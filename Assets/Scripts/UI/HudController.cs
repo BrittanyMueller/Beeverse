@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /** Responsible for controller what
  * pops up and is closed for the UI of the
@@ -54,11 +55,11 @@ public class HudController : MonoBehaviour {
     populationText.text = state._bees.Count.ToString();
 
     // disable and enable buttons
-    _createHoneyFactory.interactable = (state.pollenCount >= 100 && state.nectarCount >= 50);
-    _createBeeswaxFactory.interactable = (state.honeyCount >= 100 && state.nectarCount >= 50);
-    _createRoyalJellyFactory.interactable = (state.honeyCount >= 100 && state.beeswaxCount >= 100);
+    _createHoneyFactory.interactable = (state.PollenCount >= 100 && state.NectarCount >= 50);
+    _createBeeswaxFactory.interactable = (state.HoneyCount >= 100 && state.NectarCount >= 50);
+    _createRoyalJellyFactory.interactable = (state.HoneyCount >= 100 && state.BeeswaxCount >= 100);
     _createBroodNest.interactable =
-        (state.beeswaxCount >= 100 && state.honeyCount >= 50 && state.royalJellyCount >= 10);
+        (state.BeeswaxCount >= 100 && state.HoneyCount >= 50 && state.RoyalJellyCount >= 10);
   }
 
   public void Pause() {
@@ -110,7 +111,8 @@ public class HudController : MonoBehaviour {
     structureMenu.SetActive(true);
   }
   public void Exit() {
-    Application.Quit();
+    // Return to main menu
+    SceneManager.LoadScene("MainMenu");
   }
 
   public void Save() {
