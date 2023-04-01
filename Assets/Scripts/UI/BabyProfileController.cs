@@ -12,21 +12,51 @@ public class BabyProfileController : MonoBehaviour {
   [SerializeField]
   private Image beeSelfie;
 
-  private Sprite _eggBee;
-  private Sprite _babyBee;
+
+  // used to control progress for progress bar
+  [SerializeField]
+  private RectTransform progressBarLimit;
+  [SerializeField]
+
+  private RectTransform progressBar;
+
+
+  private BabyBee _babyBee;
+  private Sprite _eggBeeSprite;
+  private Sprite _babyBeeSprite;
+
 
   // Start is called before the first frame update
   private void Awake() {
     // Load images of bees for sprite swapping
     // TODO get pic of baby egg
-    _eggBee = Resources.Load<Sprite>("BeePics/queenSelfie");
-    _babyBee = Resources.Load<Sprite>("BeePics/larvaSelfie");
+    _eggBeeSprite = Resources.Load<Sprite>("BeePics/queenSelfie");
+    _babyBeeSprite = Resources.Load<Sprite>("BeePics/larvaSelfie");
     gameObject.SetActive(false);
   }
 
-  public void Hide() { gameObject.SetActive(false); }
+  void Update() { 
+    if (_babyBee != null)
+     UpdateProgress(_babyBee.AgeInMinutes/(5.0f*25*60)); 
+    }
+
+  /**
+   * Used to update the current progress of the building
+   * shown in the menu
+   * @param progress a percent as a float which should be clamped 0-1
+   */
+  private void UpdateProgress(float progress) {
+    var oldPos = progressBar.anchoredPosition;
+    progressBar.SetInsetAndSizeFromParentEdge(
+        RectTransform.Edge.Left, 0, progressBarLimit.sizeDelta.x * (progress));
+    progressBar.ForceUpdateRectTransforms();
+  }
+
+  public void Hide() { gameObject.SetActive(false); 
+  _babyBee = null;}
 
   public void Show(BabyBee bee) {
+    _babyBee = bee;
     beeName.text = bee.beeName;
     beeAge.text = bee.AgeInDays + " day";
     if (bee.AgeInDays != 1)
@@ -35,10 +65,10 @@ public class BabyProfileController : MonoBehaviour {
     if (bee.isEgg) {
       // TODO this job title sucks
       beeJob.text = "Professional Napper";
-      beeSelfie.sprite = _eggBee;
+      beeSelfie.sprite = _eggBeeSprite;
     } else {
       beeJob.text = "Troublemaker";
-      beeSelfie.sprite = _babyBee;
+      beeSelfie.sprite = _babyBeeSprite;
     }
     if (bee.isQueen) {
       // Overwrite baby job with queen
