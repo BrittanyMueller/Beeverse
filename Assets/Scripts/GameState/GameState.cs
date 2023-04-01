@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
 
+
+  // A bool to notify we aren't actually playing the game
+  public bool inMenu = false;
   // Audio stuff
   public AudioSource backgroundMusic;
 
@@ -105,6 +108,8 @@ public class GameState : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
+    if (inMenu) return;
+
     _paused = false;
 
     _secondTimer = 1 / minutesPerSecond;
@@ -130,6 +135,7 @@ public class GameState : MonoBehaviour {
 
   // Update is called once per frame
   void FixedUpdate() {
+    if (inMenu) return;
     _secondTimer -= Time.deltaTime;
     if (_secondTimer <= 0) {
       _secondTimer = 5.0f / minutesPerSecond;
