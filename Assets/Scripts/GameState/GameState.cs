@@ -118,7 +118,7 @@ public class GameState : MonoBehaviour {
 
     // Might change when saving comes in
     _currentTime = new TimeTracker(1, 6, 55);
-    _day = 0;
+    _day = 1;
 
     // Set default resources count
     resources = new BeeResources {
