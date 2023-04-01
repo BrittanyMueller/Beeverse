@@ -31,8 +31,9 @@ public class BabyProfileController : MonoBehaviour {
   }
 
   private void Update() {
-    if (_babyBee)
-      UpdateProgress(_babyBee.AgeInMinutes / (5.0f * 25 * 60));
+    if (_babyBee) {
+      Show(_babyBee);
+    }
   }
 
   /**
@@ -70,6 +71,8 @@ public class BabyProfileController : MonoBehaviour {
       // Overwrite baby job with queen
       beeJob.text = "Future Queen";
     }
+    UpdateProgress(_babyBee.AgeInMinutes / (5.0f * 25 * 60));
+    
     gameObject.SetActive(true);
   }
 }

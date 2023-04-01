@@ -15,6 +15,8 @@ public class BeeProfileController : MonoBehaviour {
   private Sprite _queenBee;
   private Sprite _workerBee;
 
+  private Bee _bee;
+
   // Start is called before the first frame update
   private void Awake() {
     // Load images of bees for sprite swapping
@@ -23,11 +25,19 @@ public class BeeProfileController : MonoBehaviour {
     gameObject.SetActive(false);
   }
 
+  private void Update() {
+    if (_bee) {
+      Show(_bee);
+    }
+  }
+
   public void Hide() {
     gameObject.SetActive(false);
+    _bee = null;
   }
 
   public void Show(Bee bee) {
+    _bee = bee;
     beeName.text = bee.beeName;
     beeAge.text = bee.AgeInDays + " day";
     if (bee.AgeInDays != 1)
