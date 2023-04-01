@@ -236,9 +236,12 @@ public class WorkerBee : Bee {
     _anim.SetBool("Flying", false);
     _anim.SetBool("Working", true);
 
-    // Make sure we are touching the floor
-    if (!_controller.isGrounded && Task.taskType != WorkerBeeTask.TaskType.Forager)
-      _controller.Move(new Vector3(0, -_flySpeed * Time.deltaTime, 0));
+    
+    // snap them to the work spot
+    _controller.enabled = false;
+    _controller.transform.position = Task.taskLocation;
+    _controller.enabled = true;
+    
 
     switch (_task.taskType) {
       case WorkerBeeTask.TaskType.Forager:

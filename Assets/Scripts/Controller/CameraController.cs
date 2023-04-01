@@ -11,6 +11,15 @@ public class CameraController : MonoBehaviour {
 
   public float minFOV = 3;
   public float maxFOV = 40;
+
+  public float minXRotation = 360 - 30; // Not this is because angles or stored [0,360]
+  public float maxXRotation = 90;
+
+  public float minXTravel = 100;
+  public float maxXTravel = 900;
+  public float minZTravel = 0;
+  public float maxZTravel = 750;
+
   private float _targetFOV;
 
   [SerializeField]
@@ -45,7 +54,13 @@ public class CameraController : MonoBehaviour {
     // Move direction relative to camera position
     var moveDirection = transform.forward * input.z + transform.right * input.x;
     moveDirection.y = 0;  // Lock y-axis when moving
-    transform.position += moveDirection.normalized * (cameraSpeed * Time.deltaTime);
+
+    // Prevent the camera from moving off the terrain
+    var newPosition = transform.position + moveDirection.normalized * (cameraSpeed * Time.deltaTime);
+    if (newPosition.x < minXTravel || newPosition.x > maxXTravel || newPosition.z < minZTravel || newPosition.z > maxZTravel) {
+      return;
+    }
+    transform.position = newPosition;
   }
 
   private void RotateCamera() {
@@ -58,6 +73,10 @@ public class CameraController : MonoBehaviour {
     // Adjust rotate speed relative to how zoomed out
     var rotateSpeed = maxRotateSpeed * _targetFOV / maxFOV;
     if (Input.GetMouseButton(1)) {
+      var newAngle = transform.eulerAngles.x + rotateDirection * rotateSpeed * Time.deltaTime;
+      if (!( newAngle < maxXRotation || newAngle > minXRotation)) {
+        return;
+      }
       transform.eulerAngles += new Vector3(rotateDirection * rotateSpeed * Time.deltaTime, 0, 0);
     } else {
       transform.eulerAngles += new Vector3(0, -rotateDirection * rotateSpeed * Time.deltaTime, 0);

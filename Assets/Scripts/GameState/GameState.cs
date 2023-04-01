@@ -105,6 +105,8 @@ public class GameState : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
+    // Make bees ignore collision for other bees
+    Physics.IgnoreLayerCollision(6,6);
     if (inMenu)
       return;
 
