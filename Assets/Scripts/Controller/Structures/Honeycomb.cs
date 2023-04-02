@@ -88,7 +88,7 @@ public class Honeycomb : MonoBehaviour {
    */
   public void SetWorker(WorkerBee bee, int index) {
     var oldBee = bees[index];
-    if (oldBee != null) {
+    if (oldBee) {
       oldBee.Task = null;
       oldBee.honeycomb = null;
     }
@@ -122,7 +122,7 @@ public class Honeycomb : MonoBehaviour {
     if (!structure)
       return;
     structure.SetActive(true);
-    _state.UpdateLog("The " + Name + " has finished building!");
+    _state.UpdateLog("> The " + Name + " has finished building!");
     if (honeycombType == StructureType.BroodNest) {
       // Add the egg slots to the GameState so Queen knows to lay eggs
       foreach (Transform child in this.transform) {

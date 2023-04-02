@@ -308,9 +308,8 @@ public class WorkerBee : Bee {
       ((HoneycombFactory)honeycomb).AddResource(_state);
       _workTimerSet = false;
     }
-    if (!_workTimerSet) {
-      // see if we can afford to start working
-      ((HoneycombFactory)honeycomb).ConsumeResources(_state);
+    // see if we can afford to start working
+    if (!_workTimerSet && ((HoneycombFactory)honeycomb).ConsumeResources(_state)) {
       _workTimer = ((HoneycombFactory)honeycomb).conversionTimeMinutes;
       _workTimerSet = true;
     }

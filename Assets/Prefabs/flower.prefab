@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6301513657778299025}
   m_Layer: 0
   m_Name: flower
-  m_TagString: Untagged
+  m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,7 +164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8162638935499966703}
   m_LocalRotation: {x: 0.08412332, y: -0.5998955, z: -0.053629562, w: 0.7938341}
-  m_LocalPosition: {x: 0.0112, y: 0.3838, z: 0.1218}
+  m_LocalPosition: {x: 0.0105, y: 0.3867, z: 0.1273}
   m_LocalScale: {x: 0.06666667, y: 0.06666667, z: 0.06666667}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -195,7 +195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8460787730335009950}
   m_LocalRotation: {x: 0.06574011, y: -0.4053584, z: -0.06871069, w: 0.90919834}
-  m_LocalPosition: {x: 0.0117, y: 0.3854, z: 0.1244}
+  m_LocalPosition: {x: 0.0104, y: 0.3869, z: 0.1246}
   m_LocalScale: {x: 0.061111122, y: 0.061111104, z: 0.06111112}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -226,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9012099824816769872}
   m_LocalRotation: {x: 0.06574011, y: -0.4053584, z: -0.06871069, w: 0.90919834}
-  m_LocalPosition: {x: 0.0104, y: 0.3829, z: 0.1262}
+  m_LocalPosition: {x: 0.0104, y: 0.3873, z: 0.1269}
   m_LocalScale: {x: 0.061111122, y: 0.061111104, z: 0.06111112}
   m_ConstrainProportionsScale: 0
   m_Children: []

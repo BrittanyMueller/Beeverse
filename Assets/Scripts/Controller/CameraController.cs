@@ -7,13 +7,13 @@ public class CameraController : MonoBehaviour {
   // but allow full rotation on x axis
 
   public float maxCameraSpeed = 300f;
-  public float maxRotateSpeed = 100f;
+  private float maxRotateSpeed = 75f;
 
   public float minFOV = 3;
   public float maxFOV = 40;
 
-  public float minXRotation = 360 - 30;  // Not this is because angles or stored [0,360]
-  public float maxXRotation = 90;
+  public float minXRotation = 360 - 60;  // Note: this is because angles or stored [0,360]
+  public float maxXRotation = 50;
 
   public float minXTravel = 100;
   public float maxXTravel = 900;
@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour {
       rotateDirection = 1f;
     if (Input.GetKey(KeyCode.E))
       rotateDirection = -1f;
-
+    
     // Adjust rotate speed relative to how zoomed out
     var rotateSpeed = maxRotateSpeed * _targetFOV / maxFOV;
     if (Input.GetMouseButton(1)) {
@@ -86,8 +86,7 @@ public class CameraController : MonoBehaviour {
   }
 
   private void ZoomCamera() {
-    // TODO adjust zoom amount based on current FOV (zoom feels slow when
-    // near/at maxFOV)
+
     var zoomAmount = 2;
     if (_targetFOV > 15) {
       // Adjust zoom amount to decrement faster when far away
@@ -116,12 +115,8 @@ public class CameraController : MonoBehaviour {
 
   private void RecentreCamera() {
     if (Input.GetKey(KeyCode.Space)) {
-      var target = new Vector3(500, 250, 80);
       transform.eulerAngles = new Vector3(30, 0, 0);
-      // transform.rotation = new Quaternion(0,0,0);
-      // transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(), Time.time *
-      // rotationResetSpeed);
-      transform.position = target;
+      transform.position = new Vector3(500, 250, 80);;
     }
   }
 }
