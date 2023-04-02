@@ -3,22 +3,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour {
-  // TODO create limits for x/z movement, rotate limits
-  // but allow full rotation on x axis
 
-  public float maxCameraSpeed = 300f;
+  private float maxCameraSpeed = 325f;
   private float maxRotateSpeed = 75f;
 
-  public float minFOV = 3;
-  public float maxFOV = 40;
+  private float minFOV = 3;
+  private float maxFOV = 40;
 
-  public float minXRotation = 360 - 60;  // Note: this is because angles or stored [0,360]
-  public float maxXRotation = 50;
+  private float minXRotation = 360 - 30;  // Note: this is because angles or stored [0,360]
+  private float maxXRotation = 85;
 
-  public float minXTravel = -1000;
-  public float maxXTravel = 2000;
-  public float minZTravel = -500;
-  public float maxZTravel = 1500;
+  private float minXTravel = 50;
+  private float maxXTravel = 950;
+  private float minZTravel = 50;
+  private float maxZTravel = 950;
 
   private float _targetFOV;
 
@@ -50,19 +48,24 @@ public class CameraController : MonoBehaviour {
 
     // Adjust camera speed based on FOV
     var cameraSpeed = maxCameraSpeed * _targetFOV / maxFOV;
-
+    if (cameraSpeed < 120) {
+      // Don't let camera speed fall below certain amount
+      cameraSpeed += 15;
+    }
     // Move direction relative to camera position
     var moveDirection = transform.forward * input.z + transform.right * input.x;
     moveDirection.y = 0;  // Lock y-axis when moving
 
     // Prevent the camera from moving off the terrain
-    var newPosition =
-        transform.position + moveDirection.normalized * (cameraSpeed * Time.deltaTime);
-    // if (newPosition.x < minXTravel || newPosition.x > maxXTravel || newPosition.z < minZTravel ||
-    //     newPosition.z > maxZTravel) {
-    //   return;
-    // }
-    transform.position = newPosition;
+    var deltaPos = moveDirection.normalized * (cameraSpeed * Time.deltaTime);
+    var newPosition = transform.position + deltaPos;
+    
+    if (newPosition.x >= minXTravel && newPosition.x <= maxXTravel) {
+      transform.position += new Vector3(deltaPos.x, 0,0);
+    }
+    if (newPosition.z >= minZTravel && newPosition.z <= maxZTravel) {
+      transform.position +=  new Vector3(0, 0, deltaPos.z);
+    }
   }
 
   private void RotateCamera() {
@@ -71,9 +74,18 @@ public class CameraController : MonoBehaviour {
       rotateDirection = 1f;
     if (Input.GetKey(KeyCode.E))
       rotateDirection = -1f;
-    
+
     // Adjust rotate speed relative to how zoomed out
     var rotateSpeed = maxRotateSpeed * _targetFOV / maxFOV;
+    switch (rotateSpeed) {
+      // Further adjust for certain low thresholds
+      case < 20:
+        rotateSpeed += 5;
+        break;
+      case < 45:
+        rotateSpeed += 10;
+        break;
+    }
     if (Input.GetMouseButton(1)) {
       var newAngle = transform.eulerAngles.x + rotateDirection * rotateSpeed * Time.deltaTime;
       if (!(newAngle < maxXRotation || newAngle > minXRotation)) {
