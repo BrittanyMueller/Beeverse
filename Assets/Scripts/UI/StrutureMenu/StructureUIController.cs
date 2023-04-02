@@ -57,7 +57,7 @@ public class StructureUIController : MonoBehaviour {
       if (bees[index] == null)
         continue;
       GameObject obj = Instantiate(beeSlot, new Vector3(0, 0, 0), Quaternion.identity);
-      obj.transform.SetParent(beeList.transform);
+      obj.transform.SetParent(beeList.transform, false);
 
       // Set bee name and active profile pic
       obj.GetComponentsInChildren<TMP_Text>()[0].text = bees[index].beeName;
@@ -72,6 +72,7 @@ public class StructureUIController : MonoBehaviour {
 
       // callback for close button
       obj.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => { RemoveBee(tmpIndex); });
+
     }
 
     // add empty spots to the bottom
@@ -79,7 +80,7 @@ public class StructureUIController : MonoBehaviour {
       if (bees[index] != null)
         continue;
       GameObject obj = Instantiate(beeSlot, new Vector3(0, 0, 0), Quaternion.identity);
-      obj.transform.SetParent(beeList.transform);
+      obj.transform.SetParent(beeList.transform, false);
 
       // set info about the bee. If the spot is empty just make the text <EMPTY>
       // obj.GetComponentsInChildren<Image>()[0].sprite = _beeShadow;
@@ -93,6 +94,8 @@ public class StructureUIController : MonoBehaviour {
 
       // disable the button no bee is assigned
       obj.GetComponentsInChildren<Button>()[1].gameObject.SetActive(false);
+
+      // obj.GetComponent<RectTransform>().localScale = new Vector3(1, 1f, 1f);
     }
 
     gameObject.SetActive(true);

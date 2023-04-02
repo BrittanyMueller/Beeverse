@@ -38,7 +38,7 @@ public class SelectBee : MonoBehaviour {
       if (bee.HasTask)
         continue;
       GameObject obj = Instantiate(beeDetails, new Vector3(0, 0, 0), Quaternion.identity);
-      obj.transform.SetParent(beeList.transform);
+      obj.transform.SetParent(beeList.transform, false);
 
       // Set the bee and select
       var info = obj.GetComponent<SelectBeeInfo>();
