@@ -122,11 +122,24 @@ public class QueenBee : Bee {
                        (_flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
     }
 
+    CorrectHeight(_flyHeight);
+  }
+
+  public void CorrectHeight(float height) {
     // check if they are at the correct height
-    if (Mathf.Abs(transform.position.y - _flyHeight) > 0.05) {
-      var dir = (transform.position.y < _flyHeight) ? 1 : -1;
-      _controller.Move(transform.TransformDirection(Vector3.up) *
-                       (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+    var heightDiff = Mathf.Abs(transform.position.y - height);
+    if ( heightDiff > 0.05) {
+      // set to the correct height
+      if (heightDiff < _flySpeed * Time.deltaTime * GameState.GetGameSpeed()) {
+        _controller.enabled = false;
+        _controller.transform.position = new Vector3(transform.position.x, height, transform.position.z) ;
+        _controller.enabled = true;
+      }
+      else {
+        var dir = (transform.position.y < height) ? 1 : -1;
+        _controller.Move(transform.TransformDirection(Vector3.up) *
+                         (dir * _flySpeed * Time.deltaTime * GameState.GetGameSpeed()));
+      }
     }
   }
 
