@@ -19,7 +19,7 @@ public class FlowerUIController : StructureUIController {
     refreshCallback = Refresh;
 
     // Set text for resource collection speeds
-    conversionText.text = (_curPatch.conversionTimeMinutes).ToString();
+    conversionText.text = (_curPatch.conversionTimeMinutes) + " min";;
 
     base.Show(patch.bees);
   }

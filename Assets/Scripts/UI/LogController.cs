@@ -7,7 +7,6 @@ using TMPro;
 
 public class LogController : MonoBehaviour {
   public TMP_Text LogContent;
-  public RectTransform LogRect;
   public ScrollRect logScroll;
 
   // Borrowed from
@@ -23,7 +22,7 @@ public class LogController : MonoBehaviour {
     LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)sr.transform);
   }
 
-  public void UpdateLog(String update) {
+  public void UpdateLog(string update) {
     // New line to setup for next update message
     LogContent.text += update + "\n";
 

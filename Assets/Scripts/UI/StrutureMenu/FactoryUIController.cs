@@ -18,7 +18,7 @@ public class FactoryUIController : StructureUIController {
     factoryNameText.text = _curFactory.Name;
 
     costText.text = _curFactory.CostToString();
-    minutesPerResourceText.text = _curFactory.conversionTimeMinutes.ToString();
+    minutesPerResourceText.text = _curFactory.conversionTimeMinutes.ToString() + " min";
 
     base.Show(factory.bees);
   }
