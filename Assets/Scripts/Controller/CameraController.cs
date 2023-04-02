@@ -15,10 +15,10 @@ public class CameraController : MonoBehaviour {
   public float minXRotation = 360 - 60;  // Note: this is because angles or stored [0,360]
   public float maxXRotation = 50;
 
-  public float minXTravel = 100;
-  public float maxXTravel = 900;
-  public float minZTravel = 0;
-  public float maxZTravel = 750;
+  public float minXTravel = -1000;
+  public float maxXTravel = 2000;
+  public float minZTravel = -500;
+  public float maxZTravel = 1500;
 
   private float _targetFOV;
 
