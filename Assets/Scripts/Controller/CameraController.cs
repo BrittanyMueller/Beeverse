@@ -58,10 +58,10 @@ public class CameraController : MonoBehaviour {
     // Prevent the camera from moving off the terrain
     var newPosition =
         transform.position + moveDirection.normalized * (cameraSpeed * Time.deltaTime);
-    if (newPosition.x < minXTravel || newPosition.x > maxXTravel || newPosition.z < minZTravel ||
-        newPosition.z > maxZTravel) {
-      return;
-    }
+    // if (newPosition.x < minXTravel || newPosition.x > maxXTravel || newPosition.z < minZTravel ||
+    //     newPosition.z > maxZTravel) {
+    //   return;
+    // }
     transform.position = newPosition;
   }
 
