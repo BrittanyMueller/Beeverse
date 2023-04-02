@@ -93,6 +93,7 @@ public class QueenBee : Bee {
 
   public void DieState() {
     if (!isDead) {
+      GetComponent<AudioSource>().Play(0);
       isDead = true;
       _anim.SetBool("Flying", false);
       _anim.SetBool("Idle", true);
