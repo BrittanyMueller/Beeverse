@@ -109,8 +109,7 @@ public class GameState : MonoBehaviour {
 
     // Set default resources count
     resources = new BeeResources {
-      // TODO revert resources when done debugging (leave till after demo)
-      Beeswax = 2000, Honey = 2000, Nectar = 2000, Pollen = 2000, RoyalJelly = 2000
+      Beeswax = 0, Honey = 0, Nectar = 0, Pollen = 0, RoyalJelly = 0
     };
     resourceController.UpdateResources(resources);
 
